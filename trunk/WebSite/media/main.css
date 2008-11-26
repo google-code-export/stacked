@@ -1,0 +1,366 @@
+﻿
+
+/* General stuff */
+
+html, body
+{
+	text-align:left;
+	height:100%;
+}
+
+.mainContent
+{
+	width:980px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+table
+{
+	border-collapse:collapse;
+}
+
+table tr td
+{
+	border:none 0;
+}
+
+
+/* Login form */
+.login
+{
+	width:70%;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.login tr td
+{
+	white-space:nowrap;
+}
+
+.login input[type=text]
+{
+	width:150px;
+}
+
+.login .btn
+{
+	position:absolute;
+	right:15px;
+	bottom:15px;
+}
+
+.login input[type=password]
+{
+	width:150px;
+}
+
+
+
+/* Login panel - up right corner */
+.loginPnl
+{
+	position:absolute;
+	top:5px;
+	right:5px;
+	width:150px;
+	min-height:50px;
+	border:dotted 1px #999;
+	background-color:#fdfdfd;
+	padding:5px;
+}
+
+.loginPnl a
+{
+	display:block;
+	text-decoration:none;
+	border:solid 1px #999;
+	background-color:#efefef;
+	margin:5px;
+	padding:5px;
+}
+
+.loginPnl a:hover
+{
+	background-color:#efefab;
+}
+
+/* Master page common stuff */
+.logo
+{
+	margin:20px 0 0 100px;
+	color:#333;
+	margin-bottom:50px;
+}
+
+.askQuestion
+{
+	position:relative;
+}
+
+.askQuestion input[type=text]
+{
+	width:90%;
+	margin:5%;
+}
+
+.askQuestion input[type=button]
+{
+	position:absolute;
+	left:15px;
+	bottom:15px;
+}
+
+.askQuestion textarea
+{
+	width:90%;
+	height:250px;
+	margin:0 5% 10% 5%;
+}
+
+.question
+{
+	background-color:#fefefe;
+	border:dotted 1px #999;
+	width:95%;
+	height:50px;
+	margin-left:auto;
+	margin-right:auto;
+	padding:15px;
+	margin:10px;
+	overflow:auto;
+	clear:both;
+}
+
+.question div
+{
+	padding:5px 15px 5px 15px;
+	height:40px;
+	line-height:40px;
+	border:solid 1px #eee;
+	color:#33a;
+}
+
+.question .count
+{
+	padding-left:10px;
+	font-size:0.8em;
+	width:70px;
+	float:left;
+	font-size:1.9em;
+	text-align:center;
+}
+
+.really-bad
+{
+	background-color:#a00;
+}
+
+.bad
+{
+	background-color:#a77;
+}
+
+.neutral
+{
+	background-color:#fafafa;
+}
+
+.good
+{
+	background-color:#7a7;
+}
+
+.great
+{
+	background-color:#0d0;
+}
+
+.question .answers-count
+{
+	padding-left:10px;
+	font-size:0.8em;
+	width:70px;
+	float:left;
+	font-size:1.9em;
+	text-align:center;
+	margin-left:15px;
+}
+
+.question .date
+{
+	background-color:#fafafa;
+	font-size:0.8em;
+	width:80px;
+	float:left;
+	margin-left:15px;
+}
+
+.question .operator
+{
+	background-color:#fafafa;
+	font-size:0.8em;
+	width:80px;
+	float:left;
+	margin-left:15px;
+}
+
+.question .header
+{
+	background-color:#fafafa;
+	font-size:0.8em;
+	margin-left:480px;
+}
+
+.question .top
+{
+	font-size:1.2em;
+	background-color:#f0f0f0;
+}
+
+.star
+{
+	float:left;
+	width:32px;
+	margin:20px 5px 0 5px;
+}
+
+.starNone
+{
+	background:url('sprite.png') no-repeat 0 -103px;
+	width:32px;
+	height:31px;
+	display:block;
+	color:White;
+}
+
+.starFavored
+{
+	background:url('sprite.png') no-repeat 0 -72px;
+	width:32px;
+	height:31px;
+	display:block;
+	color:White;
+}
+
+.vote
+{
+	float:left;
+	width:80px;
+	padding:15px;
+}
+
+.quizContent
+{
+	border-left:dotted 1px #999;
+	margin-left:131px;
+	padding:15px;
+}
+
+.up
+{
+	background:url('sprite.png') no-repeat 0 0;
+	width:24px;
+	height:12px;
+	display:block;
+	color:White;
+}
+
+.up:hover
+{
+	background:url('sprite.png') no-repeat 0 -24px;
+}
+
+.upVoted
+{
+	background:url('sprite.png') no-repeat 0 -48px;
+	width:24px;
+	height:12px;
+	display:block;
+	color:White;
+}
+
+.down
+{
+	background:url('sprite.png') no-repeat 0 -12px;
+	width:24px;
+	height:12px;
+	display:block;
+	color:White;
+}
+
+.down:hover
+{
+	background:url('sprite.png') no-repeat 0 -36px;
+}
+
+.downVoted
+{
+	background:url('sprite.png') no-repeat 0 -60px;
+	width:24px;
+	height:12px;
+	display:block;
+	color:White;
+}
+
+.votes
+{
+	font-size:1.6em;
+	margin:3px 0 3px 0;
+	display:block;
+}
+
+.answer
+{
+	width:100%;
+	border:dotted 1px #999;
+	background-color:#fefefe;
+	padding:15px;
+	margin-top:25px;
+	clear:both;
+	overflow:auto;
+}
+
+.answer input[type=text]
+{
+	width:400px;
+	display:block;
+	margin:15px;
+}
+
+.answer textarea
+{
+	width:400px;
+	display:block;
+	margin:15px;
+	height:250px;
+}
+
+.answer input[type=button]
+{
+	margin-left:300px;
+	width:100px;
+}
+
+.answerContent
+{
+	float:left;
+}
+
+.error
+{
+	color:Black;
+	background-color:Red;
+	border:solid 2px Black;
+	position:absolute;
+	top:0px;
+	left:0px;
+	padding:15px;
+	font-size:1.6em;
+}
+
+
+
+
+

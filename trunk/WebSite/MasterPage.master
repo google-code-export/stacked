@@ -1,0 +1,86 @@
+﻿<%@ Master 
+    Language="C#" 
+    AutoEventWireup="true" 
+    CodeFile="MasterPage.master.cs" 
+    Inherits="MasterPage" %>
+
+<%@ Register 
+    Assembly="Ra" 
+    Namespace="Ra.Widgets" 
+    TagPrefix="ra" %>
+
+<%@ Register 
+    Assembly="Extensions" 
+    Namespace="Ra.Extensions" 
+    TagPrefix="ext" %>
+
+<%@ Register 
+    src="UserControls/Login.ascx" 
+    tagname="Login" 
+    tagprefix="uc1" %>
+
+<%@ Register 
+    src="UserControls/AskQuestion.ascx" 
+    tagname="AskQuestion" 
+    tagprefix="uc2" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Stacked - Questions and Answer done right!</title>
+    <link href="media/Sapphire/Sapphire-0.8.5.css" rel="stylesheet" type="text/css" />
+    <link href="media/main.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="mainContent">
+
+            <uc2:AskQuestion 
+                ID="ask" 
+                OnQuestionAsked="ask_QuestionAsked"
+                runat="server" />
+
+            <a runat="server" href="~/"><h1 class="logo">Stacked - Questions and Answers done right</h1></a>
+
+            <div style="margin-top:100px;">
+                <asp:ContentPlaceHolder 
+                    id="body" 
+                    runat="server" />
+            </div>
+
+            <ra:Panel 
+                runat="server" 
+                ID="loginPnl" 
+                CssClass="loginPnl">
+                <ra:LinkButton 
+                    runat="server" 
+                    ID="goToProfile" 
+                    Visible="false"
+                    OnClick="goToProfile_Click" />
+                <ra:LinkButton 
+                    runat="server" 
+                    ID="loginBtn" 
+                    OnClick="loginBtn_Click"
+                    Text="Login" />
+                <ra:LinkButton 
+                    runat="server" 
+                    ID="logouBtn" 
+                    Visible="false"
+                    OnClick="logouBtn_Click"
+                    Text="Logout" />
+                <ra:LinkButton 
+                    runat="server" 
+                    ID="askQuestion" 
+                    Visible="false"
+                    OnClick="askQuestion_Click"
+                    Text="Ask question" />
+            </ra:Panel>
+            <uc1:Login 
+                ID="login" 
+                OnLoggedIn="login_LoggedIn"
+                runat="server" />
+        </div>
+    </form>
+</body>
+</html>
