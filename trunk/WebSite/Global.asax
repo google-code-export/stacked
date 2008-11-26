@@ -31,6 +31,7 @@
             Entities.Operator oper = new Entities.Operator();
             oper.Username = "admin";
             oper.Password = "admin";
+            oper.IsAdmin = true;
             oper.Create();
         }
     }

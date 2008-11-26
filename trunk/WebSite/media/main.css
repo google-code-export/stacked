@@ -251,6 +251,7 @@ table tr td
 	float:left;
 	width:80px;
 	padding:15px;
+	position:relative;
 }
 
 .quizContent
@@ -330,6 +331,25 @@ table tr td
 }
 
 .operator:hover
+{
+	background-color:#efefab;
+}
+
+.deleteQuestion
+{
+	position:absolute;
+	top:5px;
+	right:25px;
+	display:block;
+	text-decoration:none;
+	border:solid 1px #999;
+	background-color:#efefef;
+	margin:5px;
+	padding:5px;
+	text-align:center;
+}
+
+.deleteQuestion:hover
 {
 	background-color:#efefab;
 }

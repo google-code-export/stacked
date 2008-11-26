@@ -21,7 +21,28 @@
     ContentPlaceHolderID="body" 
     Runat="Server">
 
-    <ra:Label runat="server" ID="header" Tag="h2" />
+    <ext:Window 
+        runat="server" 
+        ID="wndDelete" 
+        Caption="You SURE? There's no rollback for this..."
+        Visible="false" 
+        style="width:300px;position:absolute;top:100px;left:100px;z-index:5000;"
+        CssClass="window">
+        <div style="padding:100px;">
+            <ra:Button 
+                runat="server" 
+                ID="deleteBtn" 
+                OnClick="deleteBtn_Click"
+                Text="Yes I am sure!" />
+        </div>
+        <ra:BehaviorObscurable runat="server" ID="deleteObscurer" />
+    </ext:Window>
+
+
+    <ra:Label 
+        runat="server" 
+        ID="header" 
+        Tag="h2" />
     <ra:Label 
         runat="server" 
         ID="errorLabel" 
@@ -56,6 +77,12 @@
             ID="down" 
             Text="&nbsp;"
             OnClick="down_Click" />
+        <ra:LinkButton 
+            runat="server" 
+            ID="deleteQuestion"
+            OnClick="deleteQuestion_Click"
+            CssClass="deleteQuestion"
+            Text="X" />
     </div>
     <div class="quizContent">
         <ra:Label 

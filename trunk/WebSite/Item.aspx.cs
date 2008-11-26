@@ -67,6 +67,20 @@ public partial class Item : System.Web.UI.Page
         askedBy.InnerHtml = _question.CreatedBy.Username;
         askedBy.HRef = _question.CreatedBy.Username + ".user";
         Title = _question.Header;
+
+        deleteQuestion.Visible = Operator.Current != null && Operator.Current.IsAdmin;
+    }
+
+    protected void deleteQuestion_Click(object sender, EventArgs e)
+    {
+        wndDelete.Visible = true;
+        deleteBtn.Focus();
+    }
+
+    protected void deleteBtn_Click(object sender, EventArgs e)
+    {
+        _question.Delete();
+        AjaxManager.Instance.Redirect("~/");
     }
 
     private void SetCssClassIfCurrentOperatorHasVoted()
