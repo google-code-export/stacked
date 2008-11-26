@@ -8,7 +8,7 @@ public partial class _Default : System.Web.UI.Page, IDefault
 
     protected override void OnInit(EventArgs e)
     {
-        string id = Request["userId"];
+        string id = Request["operatorProfile"];
         if (id != null)
         {
             _questionsForOperator = Operator.FindOne(Expression.Eq("Username", id));

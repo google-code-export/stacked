@@ -12,12 +12,20 @@ namespace Entities
         private DateTime _created;
         private string _username;
         private string _password;
+        private bool _isAdmin;
 
         [PrimaryKey]
         public int ID
         {
             get { return _id; }
             set { _id = value; }
+        }
+
+        [Property]
+        public bool IsAdmin
+        {
+            get { return _isAdmin; }
+            set { _isAdmin = value; }
         }
 
         [Property]
