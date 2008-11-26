@@ -1,8 +1,8 @@
 ﻿<%@ Control 
     Language="C#" 
     AutoEventWireup="true" 
-    CodeFile="Login.ascx.cs" 
-    Inherits="UserControls_Login" %>
+    CodeFile="Register.ascx.cs" 
+    Inherits="UserControls_Register" %>
 
 <%@ Register 
     Assembly="Ra" 
@@ -16,39 +16,46 @@
 
 <ext:Window 
     runat="server" 
-    ID="login" 
+    ID="register" 
     CssClass="window" 
+    DefaultWidget="registerBtn"
     Visible="false" 
-    DefaultWidget="loginBtn"
     style="width:350px;top:10px;right:10px;position:absolute;z-index:5000;"
-    Caption="Please login">
-    <div style="position:relative;height:120px;">
+    Caption="Register new profile">
+    <div style="position:relative;height:170px;">
         <table class="login">
             <tr>
-                <td>Username: </td>
+                <td>Username</td>
                 <td>
                     <ra:TextBox 
                         runat="server" 
-                        OnEscPressed="CloseLogin"
-                        ID="username" />
+                        id="username" />
                 </td>
             </tr>
             <tr>
-                <td>Password: </td>
+                <td>Password</td>
                 <td>
                     <ra:TextBox 
                         runat="server" 
-                        ID="password" 
-                        OnEscPressed="CloseLogin"
-                        TextMode="Password" />
+                        TextMode="Password"
+                        id="password" />
                 </td>
             </tr>
             <tr>
-                <td>Public terminal</td>
+                <td>Repeat password</td>
                 <td>
-                    <ra:CheckBox 
+                    <ra:TextBox 
                         runat="server" 
-                        ID="publicTerminale" />
+                        TextMode="Password"
+                        id="repeatPassword" />
+                </td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>
+                    <ra:TextBox 
+                        runat="server" 
+                        id="email" />
                 </td>
             </tr>
             <tr>
@@ -62,13 +69,16 @@
         </table>
         <ra:Button 
             runat="server" 
-            ID="loginBtn" 
+            ID="registerBtn" 
             CssClass="loginBtn"
-            OnClick="loginBtn_Click"
-            Text="Login" />
+            OnClick="registerBtn_Click"
+            Text="Register" />
     </div>
     <ra:BehaviorObscurable runat="server" ID="obscurer" />
 </ext:Window>
+
+
+
 
 
 

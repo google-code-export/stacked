@@ -44,11 +44,11 @@ table tr td
 	width:150px;
 }
 
-.login .btn
+.loginBtn
 {
 	position:absolute;
-	right:15px;
-	bottom:15px;
+	right:5px;
+	bottom:5px;
 }
 
 .login input[type=password]
@@ -396,6 +396,18 @@ table tr td
 {
 	color:Black;
 	background-color:Red;
+	border:solid 2px Black;
+	position:fixed;
+	top:0px;
+	left:0px;
+	padding:15px;
+	font-size:1.6em;
+}
+
+.info
+{
+	color:Black;
+	background-color:#9f9;
 	border:solid 2px Black;
 	position:fixed;
 	top:0px;
