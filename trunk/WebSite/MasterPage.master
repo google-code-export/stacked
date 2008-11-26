@@ -24,6 +24,8 @@
     tagname="AskQuestion" 
     tagprefix="uc2" %>
 
+<%@ Register src="UserControls/Register.ascx" tagname="Register" tagprefix="uc3" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -36,6 +38,21 @@
     <form id="form1" runat="server">
         <div class="mainContent">
 
+            <ra:Label 
+                runat="server" 
+                ID="infoLabel" 
+                Visible="false"
+                CssClass="info" />
+            <ext:Timer 
+                runat="server" 
+                ID="infoTimer" 
+                OnTick="infoTimer_Tick"
+                Enabled="false" 
+                Duration="5000" />
+            <uc3:Register 
+                ID="register" 
+                OnUserRegistered="register_UserRegistered"
+                runat="server" />
             <uc2:AskQuestion 
                 ID="ask" 
                 OnQuestionAsked="ask_QuestionAsked"
@@ -63,6 +80,11 @@
                     ID="loginBtn" 
                     OnClick="loginBtn_Click"
                     Text="Login" />
+                <ra:LinkButton 
+                    runat="server" 
+                    ID="registerBtn" 
+                    OnClick="registerBtn_Click"
+                    Text="Register" />
                 <ra:LinkButton 
                     runat="server" 
                     ID="logouBtn" 
