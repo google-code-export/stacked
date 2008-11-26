@@ -67,6 +67,7 @@
                             </a>
                         </div>
                         <div class="header">
+                            <span class="viewCount"><%# Eval("Views") %> views</span>
                             <a href='<%# Eval("Url") %>'>
                                 <%# Eval("Header") %>
                             </a>

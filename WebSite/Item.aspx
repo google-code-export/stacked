@@ -28,7 +28,7 @@
         Visible="false" 
         style="width:300px;position:absolute;top:100px;left:100px;z-index:5000;"
         CssClass="window">
-        <div style="padding:100px;">
+        <div style="padding:70px;">
             <ra:Button 
                 runat="server" 
                 ID="deleteBtn" 

@@ -350,5 +350,11 @@ public partial class Item : System.Web.UI.Page
         _question = QuizItem.FindOne(Expression.Eq("Url", id + ".quiz"));
         if (_question == null)
             Response.Redirect("~/", true);
+
+        // Checking to see if we should increase the "view count" of this question
+        if (!IsPostBack)
+        {
+            _question.IncreaseViewCount();
+        }
     }
 }
