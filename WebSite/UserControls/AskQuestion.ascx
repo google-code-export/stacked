@@ -18,16 +18,19 @@
     runat="server" 
     ID="wndAsk" 
     Caption="Ask a question..."
-    Visible="false"
+    Visible="false" 
     style="width:500px;position:absolute;top:100px;left:100px;z-index:5000;"
     CssClass="window">
     <div class="askQuestion">
         <ra:TextBox 
             runat="server" 
+            OnEscPressed="EscPressed" 
+            OnEnterPressed="EnterPressed"
             ID="header" />
 
         <ra:TextArea 
             runat="server" 
+            OnEscPressed="EscPressed"
             ID="body" />
 
         <ra:Button 

@@ -42,7 +42,7 @@
                 <div class="date top">
                     Date
                 </div>
-                <div class="operator top">
+                <div class="operatorAsked top">
                     User
                 </div>
                 <div class="header top">
@@ -61,7 +61,7 @@
                         <div class="date">
                             <%# GetTime((DateTime)Eval("Created")) %>
                         </div>
-                        <div class="operator">
+                        <div class="operatorAsked">
                             <a href='<%# ((Entities.Operator)Eval("CreatedBy")).Username + ".user" %>'>
                                 <%# ((Entities.Operator)Eval("CreatedBy")).Username%>
                             </a>

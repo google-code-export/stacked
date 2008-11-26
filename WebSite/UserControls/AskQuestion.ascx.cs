@@ -13,6 +13,17 @@ public partial class UserControls_AskQuestion : System.Web.UI.UserControl
         header.Focus();
     }
 
+    protected void EscPressed(object sender, EventArgs e)
+    {
+        wndAsk.Visible = false;
+    }
+
+    protected void EnterPressed(object sender, EventArgs e)
+    {
+        body.Select();
+        body.Focus();
+    }
+
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         wndAsk.Visible = false;

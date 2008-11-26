@@ -197,7 +197,7 @@ table tr td
 	margin-left:15px;
 }
 
-.question .operator
+.question .operatorAsked
 {
 	background-color:#fafafa;
 	font-size:0.8em;
@@ -232,6 +232,7 @@ table tr td
 	width:32px;
 	height:31px;
 	display:block;
+	margin-top:6px;
 	color:White;
 }
 
@@ -242,6 +243,7 @@ table tr td
 	height:31px;
 	display:block;
 	color:White;
+	margin-top:6px;
 }
 
 .vote
@@ -256,6 +258,7 @@ table tr td
 	border-left:dotted 1px #999;
 	margin-left:131px;
 	padding:15px;
+	position:relative;
 }
 
 .up
@@ -307,8 +310,28 @@ table tr td
 .votes
 {
 	font-size:1.6em;
-	margin:3px 0 3px 0;
+	margin:3px 0 3px 6px;
 	display:block;
+}
+
+.operator
+{
+	position:absolute;
+	top:5px;
+	right:5px;
+	display:block;
+	text-decoration:none;
+	border:solid 1px #999;
+	background-color:#efefef;
+	margin:5px;
+	padding:5px;
+	min-width:100px;
+	text-align:center;
+}
+
+.operator:hover
+{
+	background-color:#efefab;
 }
 
 .answer
@@ -320,6 +343,7 @@ table tr td
 	margin-top:25px;
 	clear:both;
 	overflow:auto;
+	position:relative;
 }
 
 .answer input[type=text]
@@ -353,7 +377,7 @@ table tr td
 	color:Black;
 	background-color:Red;
 	border:solid 2px Black;
-	position:absolute;
+	position:fixed;
 	top:0px;
 	left:0px;
 	padding:15px;

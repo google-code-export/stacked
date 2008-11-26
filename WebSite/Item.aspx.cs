@@ -64,6 +64,9 @@ public partial class Item : System.Web.UI.Page
         header.Text = _question.Header;
         body.Text = _question.Body;
         count.Text = _question.GetScore().ToString();
+        askedBy.InnerHtml = _question.CreatedBy.Username;
+        askedBy.HRef = _question.CreatedBy.Username + ".user";
+        Title = _question.Header;
     }
 
     private void SetCssClassIfCurrentOperatorHasVoted()
