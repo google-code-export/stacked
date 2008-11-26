@@ -97,6 +97,8 @@ table tr td
 .askQuestion
 {
 	position:relative;
+	width:100%;
+	height:370px;
 }
 
 .askQuestion input[type=text]
@@ -105,11 +107,17 @@ table tr td
 	margin:5%;
 }
 
-.askQuestion input[type=button]
+.askQuestionLeft
 {
-	position:absolute;
-	left:15px;
-	bottom:15px;
+	float:left;
+	width:70%;
+}
+
+.askQuestionRight
+{
+	float:left;
+	width:25%;
+	margin-top:15px;
 }
 
 .askQuestion textarea
@@ -124,7 +132,6 @@ table tr td
 	background-color:#fefefe;
 	border:dotted 1px #999;
 	width:95%;
-	height:50px;
 	margin-left:auto;
 	margin-right:auto;
 	padding:15px;
@@ -135,21 +142,19 @@ table tr td
 
 .question div
 {
-	padding:5px 15px 5px 15px;
 	height:40px;
 	line-height:40px;
 	border:solid 1px #eee;
 	color:#33a;
+	text-align:center;
 }
 
 .question .count
 {
-	padding-left:10px;
 	font-size:0.8em;
 	width:70px;
 	float:left;
 	font-size:1.9em;
-	text-align:center;
 }
 
 .really-bad
@@ -177,9 +182,24 @@ table tr td
 	background-color:#0d0;
 }
 
+.question a:hover
+{
+	background-color:#eee;
+}
+
+.question a
+{
+	height:100%;
+	text-decoration:none;
+	color:Blue;
+	display:block;
+	margin:0;
+	text-align:left;
+	padding-left:15px;
+}
+
 .question .answers-count
 {
-	padding-left:10px;
 	font-size:0.8em;
 	width:70px;
 	float:left;
@@ -200,7 +220,7 @@ table tr td
 .question .operatorAsked
 {
 	background-color:#fafafa;
-	font-size:0.8em;
+	font-size:1.0em;
 	width:80px;
 	float:left;
 	margin-left:15px;
@@ -209,8 +229,19 @@ table tr td
 .question .header
 {
 	background-color:#fafafa;
-	font-size:0.8em;
-	margin-left:480px;
+	font-size:1.0em;
+	margin-left:370px;
+	position:relative;
+}
+
+.viewCount
+{
+	position:absolute;
+	top:5px;
+	right:5px;
+	margin-top:-15px;
+	font-size:0.9em;
+	color:#999;
 }
 
 .question .top
@@ -306,6 +337,14 @@ table tr td
 	height:12px;
 	display:block;
 	color:White;
+}
+
+.questionSubmit
+{
+	position:absolute;
+	right:5px;
+	bottom:5px;
+	width:100px;
 }
 
 .votes

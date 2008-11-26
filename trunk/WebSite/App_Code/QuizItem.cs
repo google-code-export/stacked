@@ -10,6 +10,7 @@ namespace Entities
     public class QuizItem : ActiveRecordBase<QuizItem>
     {
         private int _id;
+        private int _views;
         private DateTime _created;
         private string _header;
         private string _body;
@@ -24,7 +25,14 @@ namespace Entities
             set { _id = value; }
         }
 
-        [Property(Unique=true)]
+        [Property]
+        public int Views
+        {
+            get { return _views; }
+            set { _views = value; }
+        }
+
+        [Property(Unique = true)]
         public string Url
         {
             get { return _url; }
@@ -164,6 +172,12 @@ namespace Entities
             {
                 return Favorite.Count(Expression.Eq("Question", this), Expression.Not(Expression.Eq("FavoredBy", exclude)));
             }
+        }
+
+        public void IncreaseViewCount()
+        {
+            _views += 1;
+            this.Save();
         }
     }
 }

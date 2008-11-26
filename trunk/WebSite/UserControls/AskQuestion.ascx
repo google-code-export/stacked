@@ -19,25 +19,42 @@
     ID="wndAsk" 
     Caption="Ask a question..."
     Visible="false" 
-    style="width:500px;position:absolute;top:100px;left:100px;z-index:5000;"
+    style="width:600px;position:absolute;top:100px;left:100px;z-index:5000;"
     CssClass="window">
     <div class="askQuestion">
-        <ra:TextBox 
-            runat="server" 
-            OnEscPressed="EscPressed" 
-            OnEnterPressed="EnterPressed"
-            ID="header" />
+        <div class="askQuestionLeft">
+            <ra:TextBox 
+                runat="server" 
+                OnEscPressed="EscPressed" 
+                OnEnterPressed="EnterPressed"
+                ID="header" />
 
-        <ra:TextArea 
-            runat="server" 
-            OnEscPressed="EscPressed"
-            ID="body" />
+            <ra:TextArea 
+                runat="server" 
+                OnEscPressed="EscPressed"
+                ID="body" />
 
-        <ra:Button 
-            runat="server" 
-            ID="btnSubmit" 
-            OnClick="btnSubmit_Click"
-            Text="Ask" />
+            <ra:Button 
+                runat="server" 
+                ID="btnSubmit" 
+                CssClass="questionSubmit"
+                OnClick="btnSubmit_Click"
+                Text="Ask" />
+        </div>
+        <div class="askQuestionRight">
+<pre style="font-size:0.9em;">
+Link;
+[http://x.com text]
+
+-bold-
+
+_italic_
+
+* Listitem 1
+* Listitem 2
+* Listitem 3
+</pre>
+        </div>
     </div>
     <ra:BehaviorObscurable runat="server" ID="obscurerAsk" />
 </ext:Window>
