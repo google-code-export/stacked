@@ -37,7 +37,6 @@
     <div class="star">
         <ra:LinkButton 
             runat="server" 
-            Text="&nbsp;" 
             OnClick="star_Click"
             ID="star" />
     </div>
@@ -63,6 +62,10 @@
             runat="server" 
             ID="body" 
             Tag="p" />
+        <a 
+            runat="server" 
+            id="askedBy" 
+            class="operator" />
     </div>
     <br style="clear:both;" />
     <ra:Panel 
@@ -72,6 +75,9 @@
         <asp:Repeater runat="server" ID="answers">
             <ItemTemplate>
                 <div class="answer">
+                    <a class="operator" href='<%#Eval("CreatedBy.Username") + ".user" %>'>
+                        <%#Eval("CreatedBy.Username")%>
+                    </a>
                     <div class="vote">
                         <ra:HiddenField 
                             runat="server" 
