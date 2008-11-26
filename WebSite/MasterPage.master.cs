@@ -25,6 +25,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
             .ChainThese(new EffectHighlight(infoLabel, 500))
             .Render();
         infoTimer.Enabled = true;
+        Login();
     }
 
     protected void infoTimer_Tick(object sender, EventArgs e)

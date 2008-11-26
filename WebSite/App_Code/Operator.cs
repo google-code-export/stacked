@@ -100,6 +100,8 @@ namespace Entities
 
         public static bool TryLoginFromCookie()
         {
+            if (Current != null)
+                return true;
             if (HttpContext.Current.Request.Cookies["username"] != null)
             {
                 HttpCookie creds = HttpContext.Current.Request.Cookies["username"];

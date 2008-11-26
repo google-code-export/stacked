@@ -103,7 +103,7 @@
             <ItemTemplate>
                 <div class="answer">
                     <a class="operator" href='<%#Eval("CreatedBy.Username") + ".user" %>'>
-                        <%#Eval("CreatedBy.Username")%>
+                        <%#Eval("CreatedBy.Username")%> - <%#((Entities.Operator)Eval("CreatedBy")).GetCreds()%>
                     </a>
                     <div class="vote">
                         <ra:HiddenField 
