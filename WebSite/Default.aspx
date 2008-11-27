@@ -1,4 +1,5 @@
 ﻿<%@ Page 
+    ValidateRequest="false"
     Language="C#" 
     MasterPageFile="~/MasterPage.master" 
     AutoEventWireup="true" 
@@ -24,65 +25,115 @@
     <ext:TabControl 
         runat="server" 
         ID="tabContent" 
+        OnActiveTabViewChanged="tabContent_ActiveTabViewChanged"
         CssClass="tab">
 
         <ext:TabView 
-            Caption="New" 
+            Caption="Fresh" 
             runat="server" 
             ID="newQuiz" 
             CssClass="content">
 
-            <div class="question">
-                <div class="count top">
-                    Score
-                </div>
-                <div class="answers-count top">
-                    Answers
-                </div>
-                <div class="date top">
-                    Date
-                </div>
-                <div class="operatorAsked top">
-                    User
-                </div>
-                <div class="header top">
-                    Question
-                </div>
-            </div>
-            <asp:Repeater runat="server" ID="newRep">
-                <ItemTemplate>
-                    <div class="question">
-                        <div class='<%# "count " + GetCssClass((int)Eval("Score")) %>'>
-                            <%# Eval("Score") %>
-                        </div>
-                        <div class='<%# "answers-count " + GetCssClass((int)Eval("AnswersCount")) %>'>
-                            <%# Eval("AnswersCount") %>
-                        </div>
-                        <div class="date">
-                            <%# GetTime((DateTime)Eval("Created")) %>
-                        </div>
-                        <div class="operatorAsked">
-                            <a href='<%# ((Entities.Operator)Eval("CreatedBy")).Username + ".user" %>'>
-                                <%# ((Entities.Operator)Eval("CreatedBy")).Username%>
-                            </a>
-                        </div>
-                        <div class="header">
-                            <span class="viewCount"><%# Eval("Views") %> views</span>
-                            <a href='<%# Eval("Url") %>'>
-                                <%# Eval("Header") %>
-                            </a>
-                        </div>
+            <ra:Panel runat="server" ID="newQuestionsPanel">
+                <div class="question">
+                    <div class="count top">
+                        Score
                     </div>
-                </ItemTemplate>
-            </asp:Repeater>
+                    <div class="answers-count top">
+                        Answers
+                    </div>
+                    <div class="date top">
+                        Date
+                    </div>
+                    <div class="operatorAsked top">
+                        User
+                    </div>
+                    <div class="header top">
+                        Question
+                    </div>
+                </div>
+                <asp:Repeater runat="server" ID="newRep">
+                    <ItemTemplate>
+                        <div class="question">
+                            <div class='<%# "count " + GetCssClass((int)Eval("Score")) %>'>
+                                <%# Eval("Score") %>
+                            </div>
+                            <div class='<%# "answers-count " + GetCssClass((int)Eval("AnswersCount")) %>'>
+                                <%# Eval("AnswersCount") %>
+                            </div>
+                            <div class="date">
+                                <%# GetTime((DateTime)Eval("Created")) %>
+                            </div>
+                            <div class="operatorAsked">
+                                <a href='<%# ((Entities.Operator)Eval("CreatedBy")).Username + ".user" %>'>
+                                    <%# ((Entities.Operator)Eval("CreatedBy")).Username%>
+                                </a>
+                            </div>
+                            <div class="header">
+                                <span class="viewCount"><%# Eval("Views") %> views</span>
+                                <a href='<%# Eval("Url") %>'>
+                                    <%# Eval("Header") %>
+                                </a>
+                            </div>
+                        </div>
+                    </ItemTemplate>
+                </asp:Repeater>
+            </ra:Panel>
 
         </ext:TabView>
 
         <ext:TabView 
-            Caption="Top" 
+            Caption="Most answers" 
             runat="server" 
             ID="topQuestions" 
             CssClass="content">
+            
+            <ra:Panel runat="server" ID="topQuestionsPanel">
+                <div class="question">
+                    <div class="count top">
+                        Score
+                    </div>
+                    <div class="answers-count top">
+                        Answers
+                    </div>
+                    <div class="date top">
+                        Date
+                    </div>
+                    <div class="operatorAsked top">
+                        User
+                    </div>
+                    <div class="header top">
+                        Question
+                    </div>
+                </div>
+                <asp:Repeater runat="server" ID="repTopQuestions">
+                    <ItemTemplate>
+                        <div class="question">
+                            <div class='<%# "count " + GetCssClass((int)Eval("Score")) %>'>
+                                <%# Eval("Score") %>
+                            </div>
+                            <div class='<%# "answers-count " + GetCssClass((int)Eval("AnswersCount")) %>'>
+                                <%# Eval("AnswersCount") %>
+                            </div>
+                            <div class="date">
+                                <%# GetTime((DateTime)Eval("Created")) %>
+                            </div>
+                            <div class="operatorAsked">
+                                <a href='<%# ((Entities.Operator)Eval("CreatedBy")).Username + ".user" %>'>
+                                    <%# ((Entities.Operator)Eval("CreatedBy")).Username%>
+                                </a>
+                            </div>
+                            <div class="header">
+                                <span class="viewCount"><%# Eval("Views") %> views</span>
+                                <a href='<%# Eval("Url") %>'>
+                                    <%# Eval("Header") %>
+                                </a>
+                            </div>
+                        </div>
+                    </ItemTemplate>
+                </asp:Repeater>
+            </ra:Panel>
+
         </ext:TabView>
 
         <ext:TabView 
@@ -90,6 +141,54 @@
             runat="server" 
             ID="unanswered" 
             CssClass="content">
+
+
+            <ra:Panel runat="server" ID="unansweredQuestionsPanel">
+                <div class="question">
+                    <div class="count top">
+                        Score
+                    </div>
+                    <div class="answers-count top">
+                        Answers
+                    </div>
+                    <div class="date top">
+                        Date
+                    </div>
+                    <div class="operatorAsked top">
+                        User
+                    </div>
+                    <div class="header top">
+                        Question
+                    </div>
+                </div>
+                <asp:Repeater runat="server" ID="repUnansweredQuestions">
+                    <ItemTemplate>
+                        <div class="question">
+                            <div class='<%# "count " + GetCssClass((int)Eval("Score")) %>'>
+                                <%# Eval("Score") %>
+                            </div>
+                            <div class='<%# "answers-count " + GetCssClass((int)Eval("AnswersCount")) %>'>
+                                <%# Eval("AnswersCount") %>
+                            </div>
+                            <div class="date">
+                                <%# GetTime((DateTime)Eval("Created")) %>
+                            </div>
+                            <div class="operatorAsked">
+                                <a href='<%# ((Entities.Operator)Eval("CreatedBy")).Username + ".user" %>'>
+                                    <%# ((Entities.Operator)Eval("CreatedBy")).Username%>
+                                </a>
+                            </div>
+                            <div class="header">
+                                <span class="viewCount"><%# Eval("Views") %> views</span>
+                                <a href='<%# Eval("Url") %>'>
+                                    <%# Eval("Header") %>
+                                </a>
+                            </div>
+                        </div>
+                    </ItemTemplate>
+                </asp:Repeater>
+            </ra:Panel>
+
         </ext:TabView>
 
     </ext:TabControl>

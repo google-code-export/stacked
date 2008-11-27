@@ -66,6 +66,7 @@ if( YouDoThis )
   YouCanWriteCode();
 [/code]
 </pre>
+All HTML will be escaped
         </div>
     </div>
     <ra:BehaviorObscurable runat="server" ID="obscurerAsk" />

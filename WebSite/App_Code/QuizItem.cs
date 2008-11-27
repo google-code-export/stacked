@@ -5,6 +5,7 @@ using System.Web;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Configuration;
+using Castle.ActiveRecord.Queries;
 
 namespace Entities
 {
@@ -80,7 +81,7 @@ namespace Entities
         {
             get
             {
-                string tmp = Body;
+                string tmp = Body.Replace("<", "&lt;").Replace(">", "&gt;");
 
                 string nofollow = ConfigurationManager.AppSettings["nofollow"] == "true" ? " rel=\"nofollow\"" : "";
 
@@ -155,22 +156,41 @@ namespace Entities
             }
         }
 
-        public static IEnumerable<QuizItem> GetQuestions(Operator oper)
+        public enum OrderBy { New, Unanswered, Top };
+
+        public static IEnumerable<QuizItem> GetQuestions(Operator oper, OrderBy order)
         {
             if (oper == null)
-                return GetNewQuestions();
+                return GetQuestions(order);
             else
-                return GetQuestionsForUser(oper);
+                return GetQuestionsForUser(oper, order);
         }
 
-        public static IEnumerable<QuizItem> GetNewQuestions()
+        private static IEnumerable<QuizItem> GetQuestions(OrderBy order)
         {
-            return QuizItem.SlicedFindAll(0, 50, 
-                new Order[] { Order.Desc("Created") },
-                Expression.IsNull("Parent"));
+            switch (order)
+            {
+                case OrderBy.New:
+                    return QuizItem.SlicedFindAll(0, 20,
+                        new Order[] { Order.Desc("Created") },
+                        Expression.IsNull("Parent"));
+                case OrderBy.Top:
+                    SimpleQuery<QuizItem> retVal = new SimpleQuery<QuizItem>(QueryLanguage.Sql,
+                        "select this_.* from QuizItems this_, QuizItems c2 where this_.ID = c2.FK_Parent group by c2.FK_Parent order by count(c2.FK_Parent) desc, this_.Created desc");
+                    retVal.SetQueryRange(20);
+                    retVal.AddSqlReturnDefinition(typeof(QuizItem), "this_");
+                    return retVal.Execute();
+                case OrderBy.Unanswered:
+                    return QuizItem.SlicedFindAll(0, 20,
+                        new Order[] { Order.Desc("Created") },
+                        Expression.IsNull("Parent"),
+                        Expression.Sql("not exists(select * from QuizItems where FK_Parent=this_.ID)"));
+                default:
+                    throw new ApplicationException("Not implemented OrderBy");
+            }
         }
 
-        private static IEnumerable<QuizItem> GetQuestionsForUser(Operator oper)
+        private static IEnumerable<QuizItem> GetQuestionsForUser(Operator oper, OrderBy order)
         {
             return QuizItem.FindAll(
                 new Order[] { Order.Desc("Created") }, 
