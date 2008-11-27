@@ -93,7 +93,7 @@
         <a 
             runat="server" 
             id="askedBy" 
-            class="operator" />
+            class="operator operatorAskedQuestion" />
     </div>
     <br style="clear:both;" />
     <ra:Panel 

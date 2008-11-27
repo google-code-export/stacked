@@ -394,6 +394,11 @@ table tr td
 	text-align:center;
 }
 
+.operatorAskedQuestion
+{
+	margin:5px -150px 5px 5px;
+}
+
 .operator:hover
 {
 	background-color:#efefab;
