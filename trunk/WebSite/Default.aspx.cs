@@ -15,6 +15,8 @@ public partial class _Default : System.Web.UI.Page, IDefault
             Title = "Profile of " + _questionsForOperator.Username;
             topQuestions.Visible = false;
             unanswered.Visible = false;
+            tabFavored.Visible = true;
+            tabFavored.Caption += _questionsForOperator.Username;
             newQuiz.Caption = "Questions asked by; " + _questionsForOperator.Username;
         }
         base.OnInit(e);
@@ -63,6 +65,12 @@ public partial class _Default : System.Web.UI.Page, IDefault
             repUnansweredQuestions.DataSource = QuizItem.GetQuestions(_questionsForOperator, QuizItem.OrderBy.Unanswered);
             repUnansweredQuestions.DataBind();
             unansweredQuestionsPanel.ReRender();
+        }
+        else if (tabContent.ActiveTabViewIndex == 3 && repFavoredBy.DataSource == null)
+        {
+            repFavoredBy.DataSource = QuizItem.GetFavoredQuestions(_questionsForOperator);
+            repFavoredBy.DataBind();
+            panelFavoredBy.ReRender();
         }
     }
 

@@ -163,7 +163,12 @@ namespace Entities
             if (oper == null)
                 return GetQuestions(order);
             else
-                return GetQuestionsForUser(oper, order);
+                return GetQuestionsForUser(oper, order, false);
+        }
+
+        public static IEnumerable<QuizItem> GetFavoredQuestions(Operator oper)
+        {
+            return GetQuestionsForUser(oper, OrderBy.New, true);
         }
 
         private static IEnumerable<QuizItem> GetQuestions(OrderBy order)
@@ -190,12 +195,23 @@ namespace Entities
             }
         }
 
-        private static IEnumerable<QuizItem> GetQuestionsForUser(Operator oper, OrderBy order)
+        private static IEnumerable<QuizItem> GetQuestionsForUser(Operator oper, OrderBy order, bool onlyFavored)
         {
-            return QuizItem.FindAll(
-                new Order[] { Order.Desc("Created") }, 
-                Expression.Eq("CreatedBy", oper), 
-                Expression.IsNull("Parent"));
+            if (onlyFavored)
+            {
+                return QuizItem.FindAll(
+                    new Order[] { Order.Desc("Created") },
+                    Expression.IsNull("Parent"),
+                    Expression.Sql(
+                    string.Format("exists(select * from Favorites f where f.FK_FavoredBy={0} and this_.ID = f.FK_Question)", oper.ID)));
+            }
+            else
+            {
+                return QuizItem.FindAll(
+                    new Order[] { Order.Desc("Created") },
+                    Expression.Eq("CreatedBy", oper),
+                    Expression.IsNull("Parent"));
+            }
         }
 
         public override void Save()
