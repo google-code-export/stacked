@@ -4,6 +4,7 @@ using NHibernate.Expression;
 using System.Web;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Configuration;
 
 namespace Entities
 {
@@ -81,16 +82,18 @@ namespace Entities
             {
                 string tmp = Body;
 
+                string nofollow = ConfigurationManager.AppSettings["nofollow"] == "true" ? " rel=\"nofollow\"" : "";
+
                 // Replacing dummy links...
                 tmp = Regex.Replace(
                     " " + tmp,
                     "(?<spaceChar>\\s+)(?<linkType>http://|https://)(?<link>\\S+)",
-                    "${spaceChar}<a href=\"${linkType}${link}\" rel=\"nofollow\">${link}</a>").Trim();
+                    "${spaceChar}<a href=\"${linkType}${link}\"" + nofollow + ">${link}</a>").Trim();
 
                 // Replacing wiki links
                 tmp = Regex.Replace(tmp,
                     "(?<begin>\\[{1})(?<linkType>http://|https://)(?<link>\\S+)\\s+(?<content>[^\\]]+)(?<end>[\\]]{1})",
-                    "<a href=\"${linkType}${link}\" rel=\"nofollow\">${content}</a>");
+                    "<a href=\"${linkType}${link}\"" + nofollow + ">${content}</a>");
 
                 // Replacing bolds
                 tmp = Regex.Replace(tmp,
@@ -114,6 +117,16 @@ namespace Entities
                 tmp = Regex.Replace(tmp,
                     "(?<content>)\\n{2}",
                     "${content}</p><p>");
+
+                // Breaks
+                tmp = Regex.Replace(tmp,
+                    "(?<content>)\\n{1}",
+                    "${content}<br />");
+
+                // Code
+                tmp = Regex.Replace(tmp,
+                    "(?<begin>\\[code\\])(?<content>[^$]+)(?<end>\\[/code\\])",
+                    "<pre>${content}</pre>");
 
                 // Returning
                 return "<p>" + tmp + "</p>";

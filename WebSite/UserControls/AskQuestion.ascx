@@ -54,7 +54,18 @@ _italic_
 * Listitem 2
 * Listitem 3
 </pre>
+<p>
 2 x Carriage Return is opening a new paragraph
+</p>
+<p>
+1 x Carriage Return is break; &lt;br /&gt;
+</p>
+<pre>
+[code]
+if( YouDoThis )
+  YouCanWriteCode();
+[/code]
+</pre>
         </div>
     </div>
     <ra:BehaviorObscurable runat="server" ID="obscurerAsk" />

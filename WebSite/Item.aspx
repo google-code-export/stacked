@@ -103,7 +103,7 @@
             <ItemTemplate>
                 <div class="answer">
                     <a class="operator" href='<%#Eval("CreatedBy.Username") + ".user" %>'>
-                        <%#Eval("CreatedBy.Username")%> - <%#((Entities.Operator)Eval("CreatedBy")).GetCreds()%>
+                        <%#Eval("CreatedBy.Username")%> - <%#((Entities.Operator)Eval("CreatedBy")).GetCreds()%> creds
                     </a>
                     <div class="vote">
                         <ra:HiddenField 
@@ -125,7 +125,6 @@
                             CssClass='<%#GetDownCssClassIfVoted((int)Eval("Id")) %>' />
                     </div>
                     <div class="answerContent">
-                        <h3><%#Eval("Header") %></h3>
                         <p>
                             <%#Eval("BodyFormated")%>
                         </p>
@@ -138,10 +137,6 @@
     </ra:Panel>
 
     <div class="answer">
-        <ra:TextBox 
-            runat="server" 
-            ID="answerHeader" />
-
         <ra:TextArea 
             runat="server" 
             ID="answerBody" />

@@ -2,6 +2,7 @@
 using Castle.ActiveRecord;
 using NHibernate.Expression;
 using System.Web;
+using System.Web.Caching;
 
 namespace Entities
 {
@@ -118,8 +119,12 @@ namespace Entities
             return false;
         }
 
+        private int? _creds;
         public int GetCreds()
         {
+            if (HttpContext.Current.Cache["operatorCreds" + this.ID] != null)
+                return (int)HttpContext.Current.Cache["operatorCreds" + this.ID];
+
             // Figuring out how many points the user have
             int questionsAsked = QuizItem.Count(
                 Expression.Eq("CreatedBy", this),
@@ -145,6 +150,8 @@ namespace Entities
             creds += (upVotesGivenForQuestions * 5);
             creds += (upVotesGivenForAnswers * 10);
             creds += (numberOfFavoritesForQuestions * 20);
+
+            HttpContext.Current.Cache.Insert("operatorCreds" + this.ID, creds, null, DateTime.Now.AddMinutes(5), Cache.NoSlidingExpiration);
             return creds;
         }
     }
