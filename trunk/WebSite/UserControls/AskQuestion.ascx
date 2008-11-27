@@ -22,6 +22,12 @@
     style="width:600px;position:absolute;top:100px;left:100px;z-index:5000;"
     CssClass="window">
     <div class="askQuestion">
+        <ext:Timer 
+            runat="server" 
+            ID="timerUpdatePreview" 
+            Enabled="true" 
+            Duration="5000" 
+            OnTick="timerUpdatePreview_Tick" />
         <div class="askQuestionLeft">
             <div style="margin:15px;">
                 Append; 
@@ -100,6 +106,12 @@ if( YouDoThis )
 [/code]
 </pre>
 All HTML will be escaped
+        </div>
+        <div style="clear:both;margin-left:0;border:none;width:80%;overflow:auto;" class="quizContent">
+            <ra:Label 
+                runat="server" 
+                ID="preview" 
+                Tag="div" />
         </div>
     </div>
     <ra:BehaviorObscurable runat="server" ID="obscurerAsk" />

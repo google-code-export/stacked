@@ -1,6 +1,7 @@
 ﻿using System;
 using Entities;
 using NHibernate.Expression;
+using Ra.Widgets;
 
 public partial class _Default : System.Web.UI.Page, IDefault
 {
@@ -54,23 +55,43 @@ public partial class _Default : System.Web.UI.Page, IDefault
 
     protected void tabContent_ActiveTabViewChanged(object sender, EventArgs e)
     {
-        if (tabContent.ActiveTabViewIndex == 1 && repTopQuestions.DataSource == null)
+        if (tabContent.ActiveTabViewIndex == 0)
         {
-            repTopQuestions.DataSource = QuizItem.GetQuestions(_questionsForOperator, QuizItem.OrderBy.Top);
-            repTopQuestions.DataBind();
-            topQuestionsPanel.ReRender();
+            newQuiz.Style["display"] = "none";
+            new EffectFadeIn(newQuiz, 500).Render();
         }
-        else if (tabContent.ActiveTabViewIndex == 2 && repUnansweredQuestions.DataSource == null)
+        if (tabContent.ActiveTabViewIndex == 1)
         {
-            repUnansweredQuestions.DataSource = QuizItem.GetQuestions(_questionsForOperator, QuizItem.OrderBy.Unanswered);
-            repUnansweredQuestions.DataBind();
-            unansweredQuestionsPanel.ReRender();
+            if (repTopQuestions.DataSource == null)
+            {
+                repTopQuestions.DataSource = QuizItem.GetQuestions(_questionsForOperator, QuizItem.OrderBy.Top);
+                repTopQuestions.DataBind();
+                topQuestionsPanel.ReRender();
+            }
+            topQuestionsPanel.Style["display"] = "none";
+            new EffectFadeIn(topQuestionsPanel, 500).Render();
         }
-        else if (tabContent.ActiveTabViewIndex == 3 && repFavoredBy.DataSource == null)
+        else if (tabContent.ActiveTabViewIndex == 2)
         {
-            repFavoredBy.DataSource = QuizItem.GetFavoredQuestions(_questionsForOperator);
-            repFavoredBy.DataBind();
-            panelFavoredBy.ReRender();
+            if (repUnansweredQuestions.DataSource == null)
+            {
+                repUnansweredQuestions.DataSource = QuizItem.GetQuestions(_questionsForOperator, QuizItem.OrderBy.Unanswered);
+                repUnansweredQuestions.DataBind();
+                unansweredQuestionsPanel.ReRender();
+            }
+            unansweredQuestionsPanel.Style["display"] = "none";
+            new EffectFadeIn(unansweredQuestionsPanel, 500).Render();
+        }
+        else if (tabContent.ActiveTabViewIndex == 3)
+        {
+            if (repFavoredBy.DataSource == null)
+            {
+                repFavoredBy.DataSource = QuizItem.GetFavoredQuestions(_questionsForOperator);
+                repFavoredBy.DataBind();
+                panelFavoredBy.ReRender();
+            }
+            panelFavoredBy.Style["display"] = "none";
+            new EffectFadeIn(panelFavoredBy, 500).Render();
         }
     }
 
