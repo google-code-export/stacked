@@ -3,6 +3,7 @@ using Castle.ActiveRecord;
 using NHibernate.Expression;
 using System.Web;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Entities
 {
@@ -72,6 +73,51 @@ namespace Entities
         {
             get { return _body; }
             set { _body = value; }
+        }
+
+        public string BodyFormated
+        {
+            get
+            {
+                string tmp = Body;
+
+                // Replacing dummy links...
+                tmp = Regex.Replace(
+                    " " + tmp,
+                    "(?<spaceChar>\\s+)(?<linkType>http://|https://)(?<link>\\S+)",
+                    "${spaceChar}<a href=\"${linkType}${link}\" rel=\"nofollow\">${link}</a>").Trim();
+
+                // Replacing wiki links
+                tmp = Regex.Replace(tmp,
+                    "(?<begin>\\[{1})(?<linkType>http://|https://)(?<link>\\S+)\\s+(?<content>[^\\]]+)(?<end>[\\]]{1})",
+                    "<a href=\"${linkType}${link}\" rel=\"nofollow\">${content}</a>");
+
+                // Replacing bolds
+                tmp = Regex.Replace(tmp,
+                    "(?<begin>\\*{1})(?<content>.+?)(?<end>\\*{1})",
+                    "<strong>${content}</strong>");
+
+                // Replacing italics
+                tmp = Regex.Replace(tmp,
+                    "(?<begin>_{1})(?<content>.+?)(?<end>_{1})",
+                    "<em>${content}</em>");
+
+                // Replacing lists
+                tmp = Regex.Replace(tmp,
+                    "(?<begin>\\*{1}[ ]{1})(?<content>.+)(?<end>[^*])",
+                    "<li>${content}</li>");
+                tmp = Regex.Replace(tmp,
+                    "(?<content>\\<li\\>{1}.+\\<\\/li\\>)",
+                    "<ul>${content}</ul>");
+
+                // Paragraphs
+                tmp = Regex.Replace(tmp,
+                    "(?<content>)\\n{2}",
+                    "${content}</p><p>");
+
+                // Returning
+                return "<p>" + tmp + "</p>";
+            }
         }
 
         public int Score

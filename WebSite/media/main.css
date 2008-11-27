@@ -8,6 +8,17 @@ html, body
 	height:100%;
 }
 
+ul
+{
+	margin:10px 0 10px 18px;
+}
+
+li
+{
+	list-style-position:outside;
+	list-style-type:disc;
+}
+
 .mainContent
 {
 	width:980px;

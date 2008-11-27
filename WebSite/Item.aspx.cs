@@ -62,7 +62,7 @@ public partial class Item : System.Web.UI.Page
     private void FillOutContent()
     {
         header.Text = _question.Header;
-        body.Text = _question.Body;
+        body.Text = _question.BodyFormated;
         count.Text = _question.GetScore().ToString();
         askedBy.InnerHtml = _question.CreatedBy.Username + " - " + _question.CreatedBy.GetCreds();
         askedBy.HRef = _question.CreatedBy.Username + ".user";
