@@ -82,65 +82,68 @@ namespace Entities
             get
             {
                 string tmp = Body.Replace("<", "&lt;").Replace(">", "&gt;");
-
-                string nofollow = ConfigurationManager.AppSettings["nofollow"] == "true" ? " rel=\"nofollow\"" : "";
-
-                // Replacing dummy links...
-                tmp = Regex.Replace(
-                    " " + tmp,
-                    "(?<spaceChar>\\s+)(?<linkType>http://|https://)(?<link>\\S+)",
-                    "${spaceChar}<a href=\"${linkType}${link}\"" + nofollow + ">${link}</a>", 
-                    RegexOptions.Compiled).Trim();
-
-                // Replacing wiki links
-                tmp = Regex.Replace(tmp,
-                    "(?<begin>\\[{1})(?<linkType>http://|https://)(?<link>\\S+)\\s+(?<content>[^\\]]+)(?<end>[\\]]{1})",
-                    "<a href=\"${linkType}${link}\"" + nofollow + ">${content}</a>",
-                    RegexOptions.Compiled);
-
-                // Replacing bolds
-                tmp = Regex.Replace(tmp,
-                    "(?<begin>\\*{1})(?<content>.+?)(?<end>\\*{1})",
-                    "<strong>${content}</strong>",
-                    RegexOptions.Compiled);
-
-                // Replacing italics
-                tmp = Regex.Replace(tmp,
-                    "(?<begin>_{1})(?<content>.+?)(?<end>_{1})",
-                    "<em>${content}</em>",
-                    RegexOptions.Compiled);
-
-                // Replacing lists
-                tmp = Regex.Replace(tmp,
-                    "(?<begin>\\*{1}[ ]{1})(?<content>.+)(?<end>[^*])",
-                    "<li>${content}</li>",
-                    RegexOptions.Compiled);
-                tmp = Regex.Replace(tmp,
-                    "(?<content>\\<li\\>{1}.+\\<\\/li\\>)",
-                    "<ul>${content}</ul>",
-                    RegexOptions.Compiled);
-
-                // Paragraphs
-                tmp = Regex.Replace(tmp,
-                    "(?<content>)\\n{2}",
-                    "${content}</p><p>",
-                    RegexOptions.Compiled);
-
-                // Breaks
-                tmp = Regex.Replace(tmp,
-                    "(?<content>)\\n{1}",
-                    "${content}<br />",
-                    RegexOptions.Compiled);
-
-                // Code
-                tmp = Regex.Replace(tmp,
-                    "(?<begin>\\[code\\])(?<content>[^$]+)(?<end>\\[/code\\])",
-                    "<pre class=\"code\">${content}</pre>",
-                    RegexOptions.Compiled);
-
-                // Returning
+                tmp = FormatWiki(tmp);
                 return "<p>" + tmp + "</p>";
             }
+        }
+
+        public static string FormatWiki(string tmp)
+        {
+            string nofollow = ConfigurationManager.AppSettings["nofollow"] == "true" ? " rel=\"nofollow\"" : "";
+
+            // Replacing dummy links...
+            tmp = Regex.Replace(
+                " " + tmp,
+                "(?<spaceChar>\\s+)(?<linkType>http://|https://)(?<link>\\S+)",
+                "${spaceChar}<a href=\"${linkType}${link}\"" + nofollow + ">${link}</a>",
+                RegexOptions.Compiled).Trim();
+
+            // Replacing wiki links
+            tmp = Regex.Replace(tmp,
+                "(?<begin>\\[{1})(?<linkType>http://|https://)(?<link>\\S+)\\s+(?<content>[^\\]]+)(?<end>[\\]]{1})",
+                "<a href=\"${linkType}${link}\"" + nofollow + ">${content}</a>",
+                RegexOptions.Compiled);
+
+            // Replacing bolds
+            tmp = Regex.Replace(tmp,
+                "(?<begin>\\*{1})(?<content>.+?)(?<end>\\*{1})",
+                "<strong>${content}</strong>",
+                RegexOptions.Compiled);
+
+            // Replacing italics
+            tmp = Regex.Replace(tmp,
+                "(?<begin>_{1})(?<content>.+?)(?<end>_{1})",
+                "<em>${content}</em>",
+                RegexOptions.Compiled);
+
+            // Replacing lists
+            tmp = Regex.Replace(tmp,
+                "(?<begin>\\*{1}[ ]{1})(?<content>.+)(?<end>[^*])",
+                "<li>${content}</li>",
+                RegexOptions.Compiled);
+            tmp = Regex.Replace(tmp,
+                "(?<content>\\<li\\>{1}.+\\<\\/li\\>)",
+                "<ul>${content}</ul>",
+                RegexOptions.Compiled);
+
+            // Paragraphs
+            tmp = Regex.Replace(tmp,
+                "(?<content>)\\n{2}",
+                "${content}</p><p>",
+                RegexOptions.Compiled);
+
+            // Breaks
+            tmp = Regex.Replace(tmp,
+                "(?<content>)\\n{1}",
+                "${content}<br />",
+                RegexOptions.Compiled);
+
+            // Code
+            tmp = Regex.Replace(tmp,
+                "(?<begin>\\[code\\])(?<content>[^$]+)(?<end>\\[/code\\])",
+                "<pre class=\"code\">${content}</pre>",
+                RegexOptions.Compiled);
+            return tmp;
         }
 
         public int Score
