@@ -64,7 +64,7 @@ public partial class Item : System.Web.UI.Page
         header.Text = _question.Header;
         body.Text = _question.BodyFormated;
         count.Text = _question.GetScore().ToString();
-        askedBy.InnerHtml = _question.CreatedBy.Username + " - " + _question.CreatedBy.GetCreds();
+        askedBy.InnerHtml = _question.CreatedBy.Username + " - " + _question.CreatedBy.GetCreds() + " creds";
         askedBy.HRef = _question.CreatedBy.Username + ".user";
         Title = _question.Header;
 
@@ -119,7 +119,7 @@ public partial class Item : System.Web.UI.Page
         QuizItem q = new QuizItem();
         q.Body = answerBody.Text;
         q.CreatedBy = Operator.Current;
-        q.Header = answerHeader.Text;
+        q.Header = "";
         q.Parent = _question;
         q.Save();
 
@@ -129,7 +129,6 @@ public partial class Item : System.Web.UI.Page
         answersWrapper.ReRender();
 
         new EffectHighlight(answersWrapper, 500).Render();
-        answerHeader.Text = "";
         answerBody.Text = "";
     }
 
