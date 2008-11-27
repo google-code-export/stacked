@@ -286,5 +286,12 @@ namespace Entities
             _views += 1;
             this.Save();
         }
+
+        public static IEnumerable<QuizItem> Search(string query)
+        {
+            return FindAll(
+                Expression.Like("Header", "%" + query + "%"), 
+                Expression.IsNull("Parent"));
+        }
     }
 }
