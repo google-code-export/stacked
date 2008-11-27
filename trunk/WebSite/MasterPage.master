@@ -58,7 +58,7 @@
                 OnQuestionAsked="ask_QuestionAsked"
                 runat="server" />
 
-            <a runat="server" href="~/"><h1 class="logo">Stacked - Questions and Answers done right</h1></a>
+            <h1 class="logo"><a id="A1" runat="server" href="~/">Stacked - Questions and Answers done right</a></h1>
 
             <div style="margin-top:100px;">
                 <asp:ContentPlaceHolder 

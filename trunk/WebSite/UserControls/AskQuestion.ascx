@@ -46,7 +46,7 @@
 Link;
 [http://x.com text]
 
--bold-
+*bold*
 
 _italic_
 
@@ -54,6 +54,7 @@ _italic_
 * Listitem 2
 * Listitem 3
 </pre>
+2 x Carriage Return is opening a new paragraph
         </div>
     </div>
     <ra:BehaviorObscurable runat="server" ID="obscurerAsk" />

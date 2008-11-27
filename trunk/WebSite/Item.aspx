@@ -88,7 +88,7 @@
         <ra:Label 
             runat="server" 
             ID="body" 
-            Tag="p" />
+            Tag="div" />
         <a 
             runat="server" 
             id="askedBy" 
@@ -127,7 +127,7 @@
                     <div class="answerContent">
                         <h3><%#Eval("Header") %></h3>
                         <p>
-                            <%#Eval("Body") %>
+                            <%#Eval("BodyFormated")%>
                         </p>
                     </div>
                 </div>
