@@ -74,7 +74,9 @@
                     <ext:AutoCompleter 
                         runat="server" 
                         ID="auto" 
-                        CssClass="auto"
+                        CssClass="auto" 
+                        AccessKey="S" 
+                        Tooltip="Search - Keyboard shortcut; ALT+SHIFT+S"
                         OnRetrieveAutoCompleterItems="auto_RetrieveAutoCompleterItems" />
                 </div>
                 <div style="float:left;width:49%;">
