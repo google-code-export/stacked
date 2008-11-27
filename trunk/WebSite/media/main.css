@@ -89,7 +89,7 @@ table tr td
 	position:absolute;
 	top:5px;
 	right:5px;
-	width:150px;
+	width:300px;
 	min-height:50px;
 	border:dotted 1px #999;
 	background-color:#fdfdfd;
@@ -109,6 +109,26 @@ table tr td
 .loginPnl a:hover
 {
 	background-color:#efefab;
+}
+
+.auto
+{
+	border:none;
+	padding:0;
+	margin:0;
+	display:block;
+	margin:5px;
+	margin-bottom:15px;
+	background-color:Transparent;
+}
+
+.auto input[type=text]
+{
+	padding:5px;
+	display:block;
+	border:solid 1px #999;
+	background-color:#fefefe;
+	width:128px !important;
 }
 
 /* Master page common stuff */

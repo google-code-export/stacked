@@ -1,6 +1,7 @@
 ﻿using System;
 using Ra.Widgets;
 using Entities;
+using Ra.Extensions;
 
 public partial class MasterPage : System.Web.UI.MasterPage
 {
@@ -16,6 +17,21 @@ public partial class MasterPage : System.Web.UI.MasterPage
 
     protected void goToProfile_Click(object sender, EventArgs e)
     {
+        // TODO: Implement...
+    }
+
+    protected void auto_RetrieveAutoCompleterItems(object sender, AutoCompleter.RetrieveAutoCompleterItemsEventArgs e)
+    {
+        if (e.Query.Trim() == string.Empty)
+            return;
+        foreach (QuizItem idx in QuizItem.Search(e.Query))
+        {
+            AutoCompleterItem a = new AutoCompleterItem();
+            System.Web.UI.WebControls.Literal lit = new System.Web.UI.WebControls.Literal();
+            lit.Text = string.Format("<a href=\"{0}\">{1}</a>", idx.Url, idx.Header);
+            a.Controls.Add(lit);
+            e.Controls.Add(a);
+        }
     }
 
     protected void register_UserRegistered(object sender, EventArgs e)

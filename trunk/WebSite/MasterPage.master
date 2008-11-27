@@ -70,33 +70,42 @@
                 runat="server" 
                 ID="loginPnl" 
                 CssClass="loginPnl">
-                <ra:LinkButton 
-                    runat="server" 
-                    ID="goToProfile" 
-                    Visible="false"
-                    OnClick="goToProfile_Click" />
-                <ra:LinkButton 
-                    runat="server" 
-                    ID="loginBtn" 
-                    OnClick="loginBtn_Click"
-                    Text="Login" />
-                <ra:LinkButton 
-                    runat="server" 
-                    ID="registerBtn" 
-                    OnClick="registerBtn_Click"
-                    Text="Register" />
-                <ra:LinkButton 
-                    runat="server" 
-                    ID="logouBtn" 
-                    Visible="false"
-                    OnClick="logouBtn_Click"
-                    Text="Logout" />
-                <ra:LinkButton 
-                    runat="server" 
-                    ID="askQuestion" 
-                    Visible="false"
-                    OnClick="askQuestion_Click"
-                    Text="Ask question" />
+                <div style="float:left;width:49%;">
+                    <ext:AutoCompleter 
+                        runat="server" 
+                        ID="auto" 
+                        CssClass="auto"
+                        OnRetrieveAutoCompleterItems="auto_RetrieveAutoCompleterItems" />
+                </div>
+                <div style="float:left;width:49%;">
+                    <ra:LinkButton 
+                        runat="server" 
+                        ID="goToProfile" 
+                        Visible="false"
+                        OnClick="goToProfile_Click" />
+                    <ra:LinkButton 
+                        runat="server" 
+                        ID="loginBtn" 
+                        OnClick="loginBtn_Click"
+                        Text="Login" />
+                    <ra:LinkButton 
+                        runat="server" 
+                        ID="registerBtn" 
+                        OnClick="registerBtn_Click"
+                        Text="Register" />
+                    <ra:LinkButton 
+                        runat="server" 
+                        ID="logouBtn" 
+                        Visible="false"
+                        OnClick="logouBtn_Click"
+                        Text="Logout" />
+                    <ra:LinkButton 
+                        runat="server" 
+                        ID="askQuestion" 
+                        Visible="false"
+                        OnClick="askQuestion_Click"
+                        Text="Ask question" />
+                </div>
             </ra:Panel>
             <uc1:Login 
                 ID="login" 
