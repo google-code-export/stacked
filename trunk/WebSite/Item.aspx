@@ -1,4 +1,5 @@
 ﻿<%@ Page 
+    ValidateRequest="false"
     Language="C#" 
     MasterPageFile="~/MasterPage.master" 
     AutoEventWireup="true" 

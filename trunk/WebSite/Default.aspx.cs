@@ -45,8 +45,24 @@ public partial class _Default : System.Web.UI.Page, IDefault
 
     private void DataBindNewQuestions()
     {
-        newRep.DataSource = QuizItem.GetQuestions(_questionsForOperator);
+        newRep.DataSource = QuizItem.GetQuestions(_questionsForOperator, QuizItem.OrderBy.New);
         newRep.DataBind();
+    }
+
+    protected void tabContent_ActiveTabViewChanged(object sender, EventArgs e)
+    {
+        if (tabContent.ActiveTabViewIndex == 1 && repTopQuestions.DataSource == null)
+        {
+            repTopQuestions.DataSource = QuizItem.GetQuestions(_questionsForOperator, QuizItem.OrderBy.Top);
+            repTopQuestions.DataBind();
+            topQuestionsPanel.ReRender();
+        }
+        else if (tabContent.ActiveTabViewIndex == 2 && repUnansweredQuestions.DataSource == null)
+        {
+            repUnansweredQuestions.DataSource = QuizItem.GetQuestions(_questionsForOperator, QuizItem.OrderBy.Unanswered);
+            repUnansweredQuestions.DataBind();
+            unansweredQuestionsPanel.ReRender();
+        }
     }
 
     protected string GetTime(DateTime time)
