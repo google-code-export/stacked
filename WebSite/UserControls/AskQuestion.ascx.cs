@@ -18,6 +18,31 @@ public partial class UserControls_AskQuestion : System.Web.UI.UserControl
         wndAsk.Visible = false;
     }
 
+    protected void Link(object sender, EventArgs e)
+    {
+        body.Text += "[http://x.com some acnchor text]";
+    }
+
+    protected void Bold(object sender, EventArgs e)
+    {
+        body.Text += "*some bold text*";
+    }
+
+    protected void Italic(object sender, EventArgs e)
+    {
+        body.Text += "_some italic text_";
+    }
+
+    protected void List(object sender, EventArgs e)
+    {
+        body.Text += "\r\n* list item 1\r\n* list item 2\r\n* list item 3";
+    }
+
+    protected void Code(object sender, EventArgs e)
+    {
+        body.Text += "\r\n[code]\r\n    int x = foo();\r\n    bar(54);\r\n[/code]";
+    }
+
     protected void EnterPressed(object sender, EventArgs e)
     {
         body.Select();

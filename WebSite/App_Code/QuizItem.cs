@@ -135,7 +135,7 @@ namespace Entities
                 // Code
                 tmp = Regex.Replace(tmp,
                     "(?<begin>\\[code\\])(?<content>[^$]+)(?<end>\\[/code\\])",
-                    "<pre>${content}</pre>",
+                    "<pre class=\"code\">${content}</pre>",
                     RegexOptions.Compiled);
 
                 // Returning
