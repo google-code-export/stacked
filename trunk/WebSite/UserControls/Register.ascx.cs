@@ -15,6 +15,11 @@ public partial class UserControls_Register : System.Web.UI.UserControl
         username.Select();
     }
 
+    protected void CloseWindow(object sender, EventArgs e)
+    {
+        register.Visible = false;
+    }
+
     protected void registerBtn_Click(object sender, EventArgs e)
     {
         // Validating data...

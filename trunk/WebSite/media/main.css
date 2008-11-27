@@ -8,9 +8,18 @@ html, body
 	height:100%;
 }
 
+pre.code
+{
+	background-color:#fafafa;
+	padding:15px;
+	margin:15px;
+	border:dotted 1px #ababab;
+}
+
 .quizContent, .answer
 {
 	font-size:1.2em;
+	width:60%;
 }
 
 .quizContent ul, .answer ul
@@ -411,34 +420,31 @@ table tr td
 
 .answer
 {
-	width:100%;
+	width:60%;
 	border:dotted 1px #999;
 	background-color:#fefefe;
 	padding:15px;
 	margin-top:25px;
+	margin-left:150px;
+	margin-bottom:50px;
 	clear:both;
 	overflow:auto;
 	position:relative;
 }
 
-.answer input[type=text]
-{
-	width:400px;
-	display:block;
-	margin:15px;
-}
-
 .answer textarea
 {
-	width:400px;
+	width:95%;
 	display:block;
-	margin:15px;
+	margin:15px 15px 50px 15px;
 	height:250px;
 }
 
 .answer input[type=button]
 {
-	margin-left:300px;
+	position:absolute;
+	right:15px;
+	bottom:15px;
 	width:100px;
 }
 
@@ -471,7 +477,21 @@ table tr td
 	font-size:1.6em;
 }
 
+.appendButton
+{
+	text-decoration:none;
+	border:solid 1px #999;
+	background-color:#efefef;
+	margin:0 0 0 5px;
+	padding:2px 5px 2px 5px;
+	min-width:100px;
+	text-align:center;
+}
 
+.appendButton:hover
+{
+	background-color:#efefab;
+}
 
 
 

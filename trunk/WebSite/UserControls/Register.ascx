@@ -29,6 +29,7 @@
                 <td>
                     <ra:TextBox 
                         runat="server" 
+                        OnEscPressed="CloseWindow"
                         id="username" />
                 </td>
             </tr>
@@ -37,6 +38,7 @@
                 <td>
                     <ra:TextBox 
                         runat="server" 
+                        OnEscPressed="CloseWindow"
                         TextMode="Password"
                         id="password" />
                 </td>
@@ -46,6 +48,7 @@
                 <td>
                     <ra:TextBox 
                         runat="server" 
+                        OnEscPressed="CloseWindow"
                         TextMode="Password"
                         id="repeatPassword" />
                 </td>
@@ -55,6 +58,7 @@
                 <td>
                     <ra:TextBox 
                         runat="server" 
+                        OnEscPressed="CloseWindow"
                         id="email" />
                 </td>
             </tr>

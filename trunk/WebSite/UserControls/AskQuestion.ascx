@@ -23,6 +23,39 @@
     CssClass="window">
     <div class="askQuestion">
         <div class="askQuestionLeft">
+            <div style="margin:15px;">
+                Append; 
+                <ra:LinkButton 
+                    runat="server" 
+                    ID="appendLink" 
+                    CssClass="appendButton" 
+                    OnClick="Link"
+                    Text="Link" />
+                <ra:LinkButton 
+                    runat="server" 
+                    ID="appendBold" 
+                    CssClass="appendButton"
+                    OnClick="Bold"
+                    Text="Bold" />
+                <ra:LinkButton 
+                    runat="server" 
+                    ID="appendItalic" 
+                    CssClass="appendButton"
+                    OnClick="Italic"
+                    Text="Italic" />
+                <ra:LinkButton 
+                    runat="server" 
+                    ID="appendList" 
+                    CssClass="appendButton"
+                    OnClick="List"
+                    Text="List" />
+                <ra:LinkButton 
+                    runat="server" 
+                    ID="appendCode" 
+                    CssClass="appendButton"
+                    OnClick="Code"
+                    Text="Code" />
+            </div>
             <ra:TextBox 
                 runat="server" 
                 OnEscPressed="EscPressed" 

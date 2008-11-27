@@ -25,6 +25,7 @@ public partial class _Default : System.Web.UI.Page, IDefault
         if (!IsPostBack)
         {
             DataBindNewQuestions();
+            lblCount.Text += Operator.Count();
         }
     }
 

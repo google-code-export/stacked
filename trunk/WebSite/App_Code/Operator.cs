@@ -156,5 +156,10 @@ namespace Entities
             HttpContext.Current.Cache.Insert("operatorCreds" + this.ID, creds, null, DateTime.Now.AddMinutes(5), Cache.NoSlidingExpiration);
             return creds;
         }
+
+        public static int Count()
+        {
+            return ActiveRecordBase<Operator>.Count();
+        }
     }
 }
