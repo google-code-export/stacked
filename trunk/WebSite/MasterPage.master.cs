@@ -28,7 +28,17 @@ public partial class MasterPage : System.Web.UI.MasterPage
         {
             AutoCompleterItem a = new AutoCompleterItem();
             System.Web.UI.WebControls.Literal lit = new System.Web.UI.WebControls.Literal();
-            lit.Text = string.Format("<a href=\"{0}\">{1}</a>", idx.Url, idx.Header);
+            string tmpHeader = idx.Header;
+            foreach (string idxStr in e.Query.Split(' '))
+            {
+                int index = tmpHeader.IndexOf(idxStr, StringComparison.InvariantCultureIgnoreCase);
+                if (index != -1)
+                {
+                    tmpHeader = tmpHeader.Insert(index + idxStr.Length, "</span>");
+                    tmpHeader = tmpHeader.Insert(index, "<span class=\"found\">");
+                }
+            }
+            lit.Text = string.Format("<a href=\"{0}\">{1}</a>", idx.Url, tmpHeader);
             a.Controls.Add(lit);
             e.Controls.Add(a);
         }
