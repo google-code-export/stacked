@@ -17,6 +17,12 @@ public partial class Item : System.Web.UI.Page
         base.OnInit(e);
     }
 
+    protected override void OnPreRender(EventArgs e)
+    {
+        answerQuestion.Visible = Operator.Current != null;
+        base.OnPreRender(e);
+    }
+
     protected void star_Click(object sender, EventArgs e)
     {
         try
