@@ -62,17 +62,37 @@ namespace Entities
             HttpContext.Current.Response.Cookies.Add(c);
         }
 
+        public static void LoginOpenID(string username)
+        {
+            Operator oper = Operator.FindOne(
+                Expression.Eq("Username", username));
+            if (oper == null)
+            {
+                oper = new Operator();
+                oper.Username = username;
+                oper.Password = Guid.NewGuid().ToString();
+                oper.Save();
+            }
+            StoreLoggedInOperatorToSessionAndCookie(true, oper);
+        }
+
         public static bool Login(string username, string password, bool persist)
         {
             Operator oper = Operator.FindOne(
                 Expression.Eq("Username", username),
                 Expression.Eq("Password", password));
+            StoreLoggedInOperatorToSessionAndCookie(persist, oper);
+            return oper != null;
+        }
+
+        private static void StoreLoggedInOperatorToSessionAndCookie(bool persist, Operator oper)
+        {
             HttpContext.Current.Session["__CurrentOperator"] = oper;
 
             if (persist)
             {
                 // Creating persistant cookie to avoid having to log in again...
-                HttpCookie cookie = new HttpCookie("username", username + "|" + password.GetHashCode().ToString());
+                HttpCookie cookie = new HttpCookie("username", oper.Username + "|" + oper.Password.GetHashCode().ToString());
                 cookie.Expires = DateTime.Now.AddMonths(3);
                 HttpContext.Current.Response.Cookies.Add(cookie);
             }
@@ -84,7 +104,6 @@ namespace Entities
                     HttpContext.Current.Response.Cookies.Add(c);
                 }
             }
-            return oper != null;
         }
 
         public static int GetCount()

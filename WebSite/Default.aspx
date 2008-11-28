@@ -251,7 +251,7 @@
         runat="server" 
         ID="lblCount" 
         style="margin-left:25px;font-size:1.1em;font-weight:bold;margin-top:25px;margin-bottom:25px;display:block;"
-        Text="Number of users in Stacked; " />
+        Text="Number of users in Stacked: " />
 
 </asp:Content>
 

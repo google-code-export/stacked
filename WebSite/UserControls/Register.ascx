@@ -22,7 +22,7 @@
     Visible="false" 
     style="width:350px;top:10px;right:10px;position:absolute;z-index:5000;"
     Caption="Register new profile">
-    <div style="position:relative;height:170px;">
+    <div style="position:relative;height:200px;">
         <table class="login">
             <tr>
                 <td>Username</td>
@@ -69,6 +69,9 @@
                         style="color:Red;"
                         ID="lblErr" />
                 </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="color:#4a4;">You can also use OpenID from Login button!</td>
             </tr>
         </table>
         <ra:Button 
