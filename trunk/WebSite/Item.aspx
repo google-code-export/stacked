@@ -104,7 +104,7 @@
             <ItemTemplate>
                 <div class="answer">
                     <a class="operator" href='<%#Eval("CreatedBy.Username") + ".user" %>'>
-                        <%#Eval("CreatedBy.Username")%> - <%#((Entities.Operator)Eval("CreatedBy")).GetCreds()%> creds
+                        <%#Eval("CreatedBy.Username")%> - <%#Eval("CreatedBy.CalculateCreds")%> creds
                     </a>
                     <div class="vote">
                         <ra:HiddenField 
@@ -137,7 +137,10 @@
 
     </ra:Panel>
 
-    <div class="answer">
+    <ra:Panel 
+        runat="server" 
+        ID="answerQuestion" 
+        CssClass="answer">
         <ra:TextArea 
             runat="server" 
             ID="answerBody" />
@@ -147,7 +150,7 @@
             ID="btnSubmit" 
             OnClick="btnSubmit_Click"
             Text="Answer" />
-    </div>
+    </ra:Panel>
 
 </asp:Content>
 

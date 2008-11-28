@@ -119,7 +119,11 @@ namespace Entities
             return false;
         }
 
-        private int? _creds;
+        public int CalculateCreds
+        {
+            get { return GetCreds(); }
+        }
+
         public int GetCreds()
         {
             // Checking cache first
@@ -131,19 +135,31 @@ namespace Entities
                 Expression.Eq("CreatedBy", this),
                 Expression.IsNull("Parent"));
             int upVotesGivenForQuestions = 0;
-            foreach (QuizItem idx in QuizItem.FindAll(Expression.Eq("CreatedBy", this), Expression.IsNull("Parent")))
+            QuizItem[] items = QuizItem.FindAll(Expression.Eq("CreatedBy", this), Expression.IsNull("Parent"));
+            if (items != null)
             {
-                upVotesGivenForQuestions += idx.Score;
+                foreach (QuizItem idx in items)
+                {
+                    upVotesGivenForQuestions += idx.Score;
+                }
             }
             int upVotesGivenForAnswers = 0;
-            foreach (QuizItem idx in QuizItem.FindAll(Expression.Eq("CreatedBy", this), Expression.IsNotNull("Parent")))
+            items = QuizItem.FindAll(Expression.Eq("CreatedBy", this), Expression.IsNotNull("Parent"));
+            if (items != null)
             {
-                upVotesGivenForAnswers += idx.Score;
+                foreach (QuizItem idx in items)
+                {
+                    upVotesGivenForAnswers += idx.Score;
+                }
             }
             int numberOfFavoritesForQuestions = 0;
-            foreach (QuizItem idx in QuizItem.FindAll(Expression.Eq("CreatedBy", this), Expression.IsNull("Parent")))
+            items = QuizItem.FindAll(Expression.Eq("CreatedBy", this), Expression.IsNull("Parent"));
+            if (items != null)
             {
-                numberOfFavoritesForQuestions += idx.CountFavorites(this);
+                foreach (QuizItem idx in items)
+                {
+                    numberOfFavoritesForQuestions += idx.CountFavorites(this);
+                }
             }
 
             int creds = 0;
