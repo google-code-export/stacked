@@ -88,11 +88,13 @@
                     <ra:LinkButton 
                         runat="server" 
                         ID="loginBtn" 
-                        OnClick="loginBtn_Click"
+                        OnClick="loginBtn_Click" 
+                        Tooltip="You an use OpenID to login"
                         Text="Login" />
                     <ra:LinkButton 
                         runat="server" 
                         ID="registerBtn" 
+                        Tooltip="If you don't want to register you can Login with OpenID by clicking the 'Login' button"
                         OnClick="registerBtn_Click"
                         Text="Register" />
                     <ra:LinkButton 

@@ -76,6 +76,13 @@ table tr td
 	bottom:5px;
 }
 
+.loginBtnOpenID
+{
+	position:absolute;
+	left:5px;
+	bottom:5px;
+}
+
 .login input[type=password]
 {
 	width:150px;
