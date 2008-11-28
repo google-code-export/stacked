@@ -289,9 +289,14 @@ namespace Entities
 
         public static IEnumerable<QuizItem> Search(string query)
         {
-            return FindAll(
-                Expression.Like("Header", "%" + query + "%"), 
-                Expression.IsNull("Parent"));
+            string[] words = query.Split(' ');
+            List<ICriterion> exp = new List<ICriterion>();
+            foreach (string idx in words)
+            {
+                exp.Add(Expression.Like("Header", "%" + idx + "%"));
+            }
+            exp.Add(Expression.IsNull("Parent"));
+            return FindAll(exp.ToArray());
         }
     }
 }
