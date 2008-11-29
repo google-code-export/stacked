@@ -35,7 +35,8 @@
             <openId:OpenIdTextBox 
                 runat="server" 
                 OnLoggedIn="openIdTxt_LoggedIn" 
-                OnFailed="openIdTxt_Failed"
+                OnFailed="openIdTxt_Failed" 
+                Text="user.someOpenId.com"
                 ID="openIdTxt" />
             <asp:Button 
                 runat="server" 
@@ -62,9 +63,7 @@
         </ra:Panel>
         <ra:Panel 
             runat="server" 
-            Visible="false"
             DefaultWidget="loginBtn"
-            style="display:none;"
             ID="nativeWrapper">
             <table class="login">
                 <tr>
