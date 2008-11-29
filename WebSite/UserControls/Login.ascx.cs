@@ -12,6 +12,10 @@ public partial class UserControls_Login : System.Web.UI.UserControl
     {
         login.Visible = true;
         lblErr.Text = "";
+        openIdWrapper.Visible = true;
+        openIdWrapper.Style["display"] = "";
+        openIdWrapper.Style["opacity"] = "";
+        nativeWrapper.Style["display"] = "none";
     }
 
     protected void CloseLogin(object sender, EventArgs e)
@@ -22,7 +26,13 @@ public partial class UserControls_Login : System.Web.UI.UserControl
     protected override void OnLoad(EventArgs e)
     {
         _wasVisibleInLoad = login.Visible;
+        lblErr.Text = "";
         base.OnLoad(e);
+    }
+
+    protected void whatsOpenID_Click(object sender, EventArgs e)
+    {
+        wndWhatIsOpenID.Visible = true;
     }
 
     protected void login_Click(object sender, EventArgs e)
@@ -55,12 +65,19 @@ public partial class UserControls_Login : System.Web.UI.UserControl
             e.Response.Status == DotNetOpenId.RelyingParty.AuthenticationStatus.Authenticated)
         {
             string userNameTxt = e.Response.ClaimedIdentifier;
-            Operator.LoginOpenID(userNameTxt);
+            Operator.LoginOpenID(userNameTxt, e.Response.FriendlyIdentifierForDisplay);
 
             login.Visible = false;
             if (LoggedIn != null)
                 LoggedIn(this, new EventArgs());
         }
+    }
+
+    protected void openIdTxt_Failed(object sender, EventArgs e)
+    {
+        errLblOpenId.Text = "Couldn't log you in";
+        new EffectHighlight(errLblOpenId, 500).Render();
+        new EffectFocusAndSelect(openIdTxt.FindControl("wrappedTextBox")).Render();
     }
 
     protected override void OnPreRender(EventArgs e)

@@ -66,7 +66,7 @@
                             </div>
                             <div class="operatorAsked">
                                 <a href='<%# ((Entities.Operator)Eval("CreatedBy")).Username + ".user" %>'>
-                                    <%# ((Entities.Operator)Eval("CreatedBy")).Username%>
+                                    <%# ((Entities.Operator)Eval("CreatedBy")).FriendlyName%>
                                 </a>
                             </div>
                             <div class="header">

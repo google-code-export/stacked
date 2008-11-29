@@ -31,12 +31,13 @@
             Entities.Operator oper = new Entities.Operator();
             oper.Username = "admin";
             oper.Password = "admin";
+            oper.FriendlyName = "default";
             oper.IsAdmin = true;
             oper.Create();
         }
     }
     
-    void Application_End(object sender, EventArgs e) 
+    void Application_End(object sender, EventArgs e)
     {
         //  Code that runs on application shutdown
 
