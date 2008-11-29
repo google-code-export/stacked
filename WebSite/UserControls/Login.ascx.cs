@@ -1,6 +1,7 @@
 ﻿using System;
 using Entities;
 using Ra.Widgets;
+using Utilities;
 
 public partial class UserControls_Login : System.Web.UI.UserControl
 {
@@ -12,10 +13,49 @@ public partial class UserControls_Login : System.Web.UI.UserControl
     {
         login.Visible = true;
         lblErr.Text = "";
-        openIdWrapper.Visible = true;
-        openIdWrapper.Style["display"] = "";
-        openIdWrapper.Style["opacity"] = "";
-        nativeWrapper.Style["display"] = "none";
+        if (Settings.AllowOpenID)
+        {
+            // OpenID allowed
+            openIdWrapper.Visible = true;
+
+            // Making sure we're resetting any "effect" styles...
+            openIdWrapper.Style["display"] = "";
+            openIdWrapper.Style["opacity"] = "";
+        }
+        else
+        {
+            // No OpenID allowed...
+            openIdWrapper.Visible = false;
+            useOpenID.Visible = false;
+        }
+        if (Settings.AllowNativeRegistering)
+        {
+            nativeWrapper.Visible = true;
+
+            // Making sure we're resetting any "effect" styles...
+            nativeWrapper.Style["display"] = "";
+            nativeWrapper.Style["opacity"] = "";
+        }
+        else
+        {
+            // No "native" registering allowed
+            nativeWrapper.Visible = false;
+            btnNoOpenId.Visible = false;
+        }
+        if (Settings.DefaultRegistering == RegisteringType.Native)
+        {
+            // Native registering is default
+            if (!Settings.AllowNativeRegistering)
+                throw new ApplicationException("Native registering was set as default, but native registering is also not ALLOWED - modify your web.config please to allow native registering");
+            openIdWrapper.Style["display"] = "none";
+        }
+        else
+        {
+            // OpenID registering is default
+            if (!Settings.AllowOpenID)
+                throw new ApplicationException("OpenID login was set as default, but OpenID login is also not ALLOWED - modify your web.config please to allow OpenID");
+            nativeWrapper.Style["display"] = "none";
+        }
     }
 
     protected void CloseLogin(object sender, EventArgs e)
@@ -42,7 +82,6 @@ public partial class UserControls_Login : System.Web.UI.UserControl
 
     protected void btnNoOpenId_Click(object sender, EventArgs e)
     {
-        nativeWrapper.Visible = true;
         username.Text = "username";
         new EffectFadeOut(openIdWrapper, 300)
         .ChainThese(new EffectFadeIn(nativeWrapper, 300)
@@ -52,7 +91,6 @@ public partial class UserControls_Login : System.Web.UI.UserControl
 
     protected void useOpenID_Click(object sender, EventArgs e)
     {
-        openIdTxt.Text = "user.someOpenId.com";
         new EffectFadeOut(nativeWrapper, 300)
         .ChainThese(new EffectFadeIn(openIdWrapper, 300)
             .ChainThese(new EffectFocusAndSelect(openIdTxt.FindControl("wrappedTextBox"))))
