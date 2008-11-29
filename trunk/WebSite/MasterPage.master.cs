@@ -97,11 +97,8 @@ public partial class MasterPage : System.Web.UI.MasterPage
         logouBtn.Visible = true;
         askQuestion.Visible = true;
         goToProfile.Visible = true;
-        goToProfile.Text = 
-            string.Format("Profile - {1} creds", 
-                Operator.Current.Username, 
-                Operator.Current.GetCreds());
-        logouBtn.Text = "Logout " + Operator.Current.Username;
+        goToProfile.Text = "Profile";
+        logouBtn.Text = "Logout";
     }
 
     protected void logouBtn_Click(object sender, EventArgs e)

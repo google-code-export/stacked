@@ -43,6 +43,7 @@ public partial class UserControls_Register : System.Web.UI.UserControl
             o.IsAdmin = false;
             o.Password = password.Text;
             o.Username = username.Text;
+            o.FriendlyName = username.Text;
             o.Save();
             Operator.Login(username.Text, password.Text, false);
 

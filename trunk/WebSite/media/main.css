@@ -83,6 +83,13 @@ table tr td
 	bottom:5px;
 }
 
+.whatsOpenID
+{
+	position:absolute;
+	right:5px;
+	bottom:5px;
+}
+
 .login input[type=password]
 {
 	width:150px;
@@ -234,11 +241,6 @@ table tr td
 	background-color:#0d0;
 }
 
-.question a:hover
-{
-	background-color:#eee;
-}
-
 .question a
 {
 	height:100%;
@@ -247,7 +249,12 @@ table tr td
 	display:block;
 	margin:0;
 	text-align:left;
-	padding-left:15px;
+	padding-left:5px;
+}
+
+.question a:hover
+{
+	background-color:#eee;
 }
 
 .question .answers-count
@@ -272,8 +279,8 @@ table tr td
 .question .operatorAsked
 {
 	background-color:#fafafa;
-	font-size:1.0em;
-	width:80px;
+	font-size:0.8em;
+	width:120px;
 	float:left;
 	margin-left:15px;
 }
@@ -282,7 +289,7 @@ table tr td
 {
 	background-color:#fafafa;
 	font-size:1.0em;
-	margin-left:370px;
+	margin-left:410px;
 	position:relative;
 }
 

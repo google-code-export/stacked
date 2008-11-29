@@ -12,6 +12,7 @@ namespace Entities
         private int _id;
         private DateTime _created;
         private string _username;
+        private string _friendlyName;
         private string _password;
         private bool _isAdmin;
 
@@ -44,6 +45,13 @@ namespace Entities
         }
 
         [Property]
+        public string FriendlyName
+        {
+            get { return _friendlyName; }
+            set { _friendlyName = value; }
+        }
+
+        [Property]
         public string Password
         {
             get { return _password; }
@@ -62,14 +70,15 @@ namespace Entities
             HttpContext.Current.Response.Cookies.Add(c);
         }
 
-        public static void LoginOpenID(string username)
+        public static void LoginOpenID(string username, string friendlyName)
         {
             Operator oper = Operator.FindOne(
                 Expression.Eq("Username", username));
             if (oper == null)
             {
                 oper = new Operator();
-                oper.Username = username;
+                oper.Username = username.Replace("http://", "").Replace("https://", "").Replace("/", "");
+                oper.FriendlyName = friendlyName;
                 oper.Password = Guid.NewGuid().ToString();
                 oper.Save();
             }
@@ -89,7 +98,7 @@ namespace Entities
         {
             HttpContext.Current.Session["__CurrentOperator"] = oper;
 
-            if (persist)
+            if (persist && oper != null)
             {
                 // Creating persistant cookie to avoid having to log in again...
                 HttpCookie cookie = new HttpCookie("username", oper.Username + "|" + oper.Password.GetHashCode().ToString());
@@ -98,6 +107,7 @@ namespace Entities
             }
             else
             {
+                // We must *destroy* the old cookie here...!
                 if (HttpContext.Current.Response.Cookies["username"] != null)
                 {
                     HttpCookie c = new HttpCookie("username", "mumboJumbo|zxzxzx");
