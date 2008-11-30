@@ -72,6 +72,19 @@ namespace Entities
 
         public static void LoginOpenID(string username, string friendlyName)
         {
+            // Escaping username since often it contains things which we cannot legally use in Stacked like
+            // e.g. "http://" etc...
+            username = username.Replace("http", "").Replace("https", "");
+            int index = 0;
+            while (index < username.Length)
+            {
+                if (("abcdefghijklmnopqrstuvwxyz0123456789.-_").IndexOf(username[index]) == -1)
+                {
+                    username = username.Substring(0, index) + username.Substring(index + 1);
+                }
+                index += 1;
+            }
+
             Operator oper = Operator.FindOne(
                 Expression.Eq("Username", username));
             if (oper == null)
