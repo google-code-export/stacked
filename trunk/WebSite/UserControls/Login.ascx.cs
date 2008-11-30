@@ -13,14 +13,15 @@ public partial class UserControls_Login : System.Web.UI.UserControl
     {
         login.Visible = true;
         lblErr.Text = "";
+        InitializeVisibilityOfLoginControls();
+    }
+
+    private void InitializeVisibilityOfLoginControls()
+    {
         if (Settings.AllowOpenID)
         {
             // OpenID allowed
             openIdWrapper.Visible = true;
-
-            // Making sure we're resetting any "effect" styles...
-            openIdWrapper.Style["display"] = "";
-            openIdWrapper.Style["opacity"] = "";
         }
         else
         {
@@ -31,10 +32,6 @@ public partial class UserControls_Login : System.Web.UI.UserControl
         if (Settings.AllowNativeRegistering)
         {
             nativeWrapper.Visible = true;
-
-            // Making sure we're resetting any "effect" styles...
-            nativeWrapper.Style["display"] = "";
-            nativeWrapper.Style["opacity"] = "";
         }
         else
         {
@@ -47,14 +44,22 @@ public partial class UserControls_Login : System.Web.UI.UserControl
             // Native registering is default
             if (!Settings.AllowNativeRegistering)
                 throw new ApplicationException("Native registering was set as default, but native registering is also not ALLOWED - modify your web.config please to allow native registering");
+
+            // Making sure we're resetting any "effect" styles...
             openIdWrapper.Style["display"] = "none";
+            nativeWrapper.Style["display"] = "";
+            nativeWrapper.Style["opacity"] = "";
         }
         else
         {
             // OpenID registering is default
             if (!Settings.AllowOpenID)
                 throw new ApplicationException("OpenID login was set as default, but OpenID login is also not ALLOWED - modify your web.config please to allow OpenID");
+
+            // Making sure we're resetting any "effect" styles...
             nativeWrapper.Style["display"] = "none";
+            openIdWrapper.Style["display"] = "";
+            openIdWrapper.Style["opacity"] = "";
         }
     }
 
@@ -84,16 +89,16 @@ public partial class UserControls_Login : System.Web.UI.UserControl
     {
         username.Text = "username";
         new EffectFadeOut(openIdWrapper, 300)
-        .ChainThese(new EffectFadeIn(nativeWrapper, 300)
-            .ChainThese(new EffectFocusAndSelect(username)))
+            .ChainThese(new EffectFadeIn(nativeWrapper, 300)
+                .ChainThese(new EffectFocusAndSelect(username)))
         .Render();
     }
 
     protected void useOpenID_Click(object sender, EventArgs e)
     {
         new EffectFadeOut(nativeWrapper, 300)
-        .ChainThese(new EffectFadeIn(openIdWrapper, 300)
-            .ChainThese(new EffectFocusAndSelect(openIdTxt.FindControl("wrappedTextBox"))))
+            .ChainThese(new EffectFadeIn(openIdWrapper, 300)
+                .ChainThese(new EffectFocusAndSelect(openIdTxt.FindControl("wrappedTextBox"))))
         .Render();
     }
 

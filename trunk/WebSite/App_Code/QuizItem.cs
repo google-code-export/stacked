@@ -91,6 +91,9 @@ namespace Entities
         {
             string nofollow = ConfigurationManager.AppSettings["nofollow"] == "true" ? " rel=\"nofollow\"" : "";
 
+            // Sanitizing cariage returns...
+            tmp = tmp.Replace("\\r\\n", "\\n");
+
             // Replacing dummy links...
             tmp = Regex.Replace(
                 " " + tmp,
@@ -125,6 +128,12 @@ namespace Entities
                 "(?<content>\\<li\\>{1}.+\\<\\/li\\>)",
                 "<ul>${content}</ul>",
                 RegexOptions.Compiled);
+
+            // Quoting
+            tmp = Regex.Replace(tmp,
+                "(?<content>^&gt;.+$)",
+                "<blockquote>${content}</blockquote>",
+                RegexOptions.Compiled | RegexOptions.Multiline).Replace("</blockquote>\n<blockquote>", "\n");
 
             // Paragraphs
             tmp = Regex.Replace(tmp,
