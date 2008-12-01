@@ -110,6 +110,9 @@
                     <a class="operator" href='<%#Eval("CreatedBy.Username") + ".user" %>'>
                         <%#Eval("CreatedBy.Username")%> - <%#Eval("CreatedBy.CalculateCreds")%> creds
                     </a>
+                    <a class="linkAnswer" href='<%# "#" + Eval("ID") %>' name='<%#Eval("ID") %>'>
+                        link
+                    </a>
                     <div class="vote">
                         <ra:HiddenField 
                             runat="server" 
