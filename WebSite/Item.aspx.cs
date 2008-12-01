@@ -19,6 +19,10 @@ public partial class Item : System.Web.UI.Page
 
     protected override void OnPreRender(EventArgs e)
     {
+        // Only visible if some threshold has been reached...
+        deleteQuestion.Visible = Operator.Current != null && Operator.Current.CanDelete;
+        editQuestionBtn.Visible = Operator.Current != null && Operator.Current.CanEdit;
+
         answerQuestion.Visible = Operator.Current != null;
         base.OnPreRender(e);
     }
@@ -75,7 +79,39 @@ public partial class Item : System.Web.UI.Page
         askedBy.HRef = _question.CreatedBy.Username + ".user";
         Title = _question.Header;
 
+        // Only visible if some threshold has been reached...
         deleteQuestion.Visible = Operator.Current != null && Operator.Current.CanDelete;
+        editQuestionBtn.Visible = Operator.Current != null && Operator.Current.CanEdit;
+    }
+
+    protected void editQuestionBtn_Click(object sender, EventArgs e)
+    {
+        if (!editQuestion.Visible || editQuestion.Style["display"] == "none")
+        {
+            editQuestion.Visible = true;
+            editTxt.Text = _question.Body;
+            editHeader.Text = _question.Header;
+            new EffectFadeIn(editQuestion, 500)
+                .ChainThese(new EffectFocusAndSelect(editTxt))
+                .Render();
+            editQuestionBtn.Text = "Cancel edit";
+        }
+        else
+        {
+            new EffectFadeOut(editQuestion, 500).Render();
+            editQuestionBtn.Text = "Edit";
+        }
+    }
+
+    protected void saveEdit_Click(object sender, EventArgs e)
+    {
+        new EffectFadeOut(editQuestion, 500).Render();
+        editQuestionBtn.Text = "Edit";
+        _question.Body = editTxt.Text;
+        _question.Header = editHeader.Text;
+        _question.Save();
+        body.Text = _question.BodyFormated;
+        header.Text = _question.Header;
     }
 
     protected void deleteQuestion_Click(object sender, EventArgs e)

@@ -471,20 +471,6 @@ table tr td
 	text-decoration:none;
 }
 
-.deleteQuestion
-{
-	position:absolute;
-	top:5px;
-	left:60px;
-	display:block;
-	text-decoration:none;
-	border:solid 1px #999;
-	background-color:#efefef;
-	margin:5px;
-	padding:5px;
-	text-align:center;
-}
-
 .deleteQuestion:hover
 {
 	background-color:#efefab;
@@ -588,4 +574,53 @@ table tr td
 	color:#999;
 	font-size:0.8em;
 }
+
+.editQuestion
+{
+	background-color:#f0f0fe;
+	border:dotted 1px #999;
+	padding:15px;
+}
+
+.editQuestion span, .editQuestion input[type=text]
+{
+	margin:15px 0 15px 0;
+	display:block;
+	color:Blue;
+	cursor:pointer;
+}
+
+.deleteQuestionBtn
+{
+	position:absolute;
+	top:0;
+	left:85px;
+	color:#999;
+	text-decoration:none;
+	font-size:0.7em;
+	margin-top:-5px;
+}
+
+.editQuestionBtn
+{
+	position:absolute;
+	top:0;
+	left:5px;
+	color:#999;
+	text-decoration:none;
+	font-size:0.7em;
+	margin-top:-5px;
+}
+
+.editQuestion textarea
+{
+	height:150px;
+	margin-bottom:15px;
+	display:block;
+	width:100%;
+}
+
+
+
+
 

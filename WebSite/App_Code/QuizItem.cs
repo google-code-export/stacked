@@ -81,7 +81,7 @@ namespace Entities
         {
             get
             {
-                string tmp = Body.Replace("<", "&lt;").Replace(">", "&gt;");
+                string tmp = Body.Replace("<", "&lt;").Replace(">", "&gt;").Replace("&", "&amp;");
                 tmp = FormatWiki(tmp);
                 return "<p>" + tmp + "</p>";
             }
@@ -102,7 +102,7 @@ namespace Entities
         {
             string nofollow = ConfigurationManager.AppSettings["nofollow"] == "true" ? " rel=\"nofollow\"" : "";
 
-            // Sanitizing cariage returns...
+            // Sanitizing carriage returns...
             tmp = tmp.Replace("\\r\\n", "\\n");
 
             // Replacing dummy links...
@@ -235,6 +235,26 @@ namespace Entities
                     Expression.Eq("CreatedBy", oper),
                     Expression.IsNull("Parent"));
             }
+        }
+
+        public override void Delete()
+        {
+            foreach (Favorite idxFav in Favorite.FindAll(
+                Expression.Eq("Question", this)))
+            {
+                idxFav.Delete();
+            }
+            foreach (Vote idxV in Vote.FindAll(
+                Expression.Eq("QuizItem", this)))
+            {
+                idxV.Delete();
+            }
+            foreach (QuizItem idxQ in QuizItem.FindAll(
+                Expression.Eq("Parent", this)))
+            {
+                idxQ.Delete();
+            }
+            base.Delete();
         }
 
         public override void Save()

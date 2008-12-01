@@ -82,12 +82,6 @@
             ID="down" 
             Text="&nbsp;"
             OnClick="down_Click" />
-        <ra:LinkButton 
-            runat="server" 
-            ID="deleteQuestion"
-            OnClick="deleteQuestion_Click"
-            CssClass="deleteQuestion"
-            Text="X" />
     </div>
     <div class="quizContent">
         <ra:Label 
@@ -98,6 +92,36 @@
             runat="server" 
             id="askedBy" 
             class="operator operatorAskedQuestion" />
+        <ra:LinkButton 
+            runat="server" 
+            ID="editQuestionBtn" 
+            CssClass="editQuestionBtn" 
+            Visible="false" 
+            OnClick="editQuestionBtn_Click"
+            Text="Edit" />
+        <ra:LinkButton 
+            runat="server" 
+            ID="deleteQuestion"
+            OnClick="deleteQuestion_Click"
+            CssClass="deleteQuestionBtn"
+            Text="Delete..." />
+        <ra:Panel 
+            runat="server" 
+            Visible="false" 
+            CssClass="editQuestion"
+            ID="editQuestion">
+            <ext:InPlaceEdit 
+                runat="server" 
+                ID="editHeader" />
+            <ra:TextArea 
+                runat="server" 
+                ID="editTxt" />
+            <ra:Button 
+                runat="server" 
+                ID="saveEdit" 
+                OnClick="saveEdit_Click"
+                Text="Save" />
+        </ra:Panel>
     </div>
     <br style="clear:both;" />
     <ra:Panel 
