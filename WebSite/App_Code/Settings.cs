@@ -17,14 +17,24 @@ namespace Utilities
             get { return ConfigurationManager.AppSettings["allowNativeLogin"] == "true"; }
         }
 
-        public static int CredsNeededToDelete
+        public static int CredsNeededToDeleteQuestion
         {
-            get { return int.Parse(ConfigurationManager.AppSettings["CredsNeededToDelete"]); }
+            get { return int.Parse(ConfigurationManager.AppSettings["CredsNeededToDeleteQuestion"]); }
         }
 
-        public static int CredsNeededToEdit
+        public static int CredsNeededToEditQuestion
         {
-            get { return int.Parse(ConfigurationManager.AppSettings["CredsNeededToEdit"]); }
+            get { return int.Parse(ConfigurationManager.AppSettings["CredsNeededToEditQuestion"]); }
+        }
+
+        public static int CredsNeededToDeleteAnswer
+        {
+            get { return int.Parse(ConfigurationManager.AppSettings["CredsNeededToDeleteAnswer"]); }
+        }
+
+        public static int CredsNeededToEditAnswer
+        {
+            get { return int.Parse(ConfigurationManager.AppSettings["CredsNeededToEditAnswer"]); }
         }
 
         public static RegisteringType DefaultRegistering

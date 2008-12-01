@@ -612,6 +612,41 @@ table tr td
 	margin-top:-5px;
 }
 
+.editAnswer
+{
+	background-color:#f0f0fe;
+	border:dotted 1px #999;
+	padding:15px;
+	margin-top:55px;
+}
+
+.editAnswer input[type=button]
+{
+	margin-bottom:5px;
+	margin-right:5px;
+	font-size:0.9em;
+}
+
+.deleteAnswerBtn
+{
+	position:absolute;
+	top:5px;
+	left:125px;
+	color:#999;
+	text-decoration:none;
+	font-size:0.7em;
+}
+
+.editAnswerBtn
+{
+	position:absolute;
+	top:5px;
+	left:45px;
+	color:#999;
+	text-decoration:none;
+	font-size:0.7em;
+}
+
 .editQuestion textarea
 {
 	height:150px;

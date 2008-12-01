@@ -20,11 +20,58 @@ public partial class Item : System.Web.UI.Page
     protected override void OnPreRender(EventArgs e)
     {
         // Only visible if some threshold has been reached...
-        deleteQuestion.Visible = Operator.Current != null && Operator.Current.CanDelete;
-        editQuestionBtn.Visible = Operator.Current != null && Operator.Current.CanEdit;
+        deleteQuestion.Visible = Operator.Current != null && Operator.Current.CanDeleteQuestion;
+        editQuestionBtn.Visible = Operator.Current != null && Operator.Current.CanEditQuestion;
 
         answerQuestion.Visible = Operator.Current != null;
         base.OnPreRender(e);
+    }
+
+    protected void EditQuestionBtnClick(object sender, EventArgs e)
+    {
+        LinkButton btn = sender as LinkButton;
+        foreach (System.Web.UI.Control idx in btn.Parent.Controls)
+        {
+            if (idx is Panel)
+            {
+                Panel tmp = idx as Panel;
+                if (tmp.CssClass == "editAnswer")
+                {
+                    int id = GetIdOfAnswer(btn);
+                    TextArea txt = tmp.Controls[1] as TextArea;
+                    txt.Text = QuizItem.Find(id).Body;
+                    tmp.Visible = true;
+                    new EffectFadeIn(tmp, 500)
+                        .ChainThese(new EffectFocusAndSelect(txt))
+                        .Render();
+                }
+            }
+        }
+    }
+
+    protected void SaveAnswer(object sender, EventArgs e)
+    {
+        Button btn = sender as Button;
+        Panel pnl = btn.Parent as Panel;
+        TextArea txt = pnl.Controls[1] as TextArea;
+        new EffectFadeOut(pnl, 500).Render();
+        int id = GetIdOfAnswer(pnl);
+        QuizItem item = QuizItem.Find(id);
+        item.Body = txt.Text;
+        item.Save();
+        answers.DataSource = _question.GetAnswers();
+        answers.DataBind();
+        answersWrapper.ReRender();
+    }
+
+    protected void DeleteQuestionBtnClick(object sender, EventArgs e)
+    {
+        LinkButton btn = sender as LinkButton;
+        int id = GetIdOfAnswer(btn);
+        QuizItem.Find(id).Delete();
+        answers.DataSource = _question.GetAnswers();
+        answers.DataBind();
+        answersWrapper.ReRender();
     }
 
     protected void star_Click(object sender, EventArgs e)
@@ -80,8 +127,8 @@ public partial class Item : System.Web.UI.Page
         Title = _question.Header;
 
         // Only visible if some threshold has been reached...
-        deleteQuestion.Visible = Operator.Current != null && Operator.Current.CanDelete;
-        editQuestionBtn.Visible = Operator.Current != null && Operator.Current.CanEdit;
+        deleteQuestion.Visible = Operator.Current != null && Operator.Current.CanDeleteQuestion;
+        editQuestionBtn.Visible = Operator.Current != null && Operator.Current.CanEditQuestion;
     }
 
     protected void editQuestionBtn_Click(object sender, EventArgs e)
