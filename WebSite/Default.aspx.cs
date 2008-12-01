@@ -13,12 +13,12 @@ public partial class _Default : System.Web.UI.Page, IDefault
         if (id != null)
         {
             _questionsForOperator = Operator.FindOne(Expression.Eq("Username", id));
-            Title = "Profile of " + _questionsForOperator.Username;
+            Title = "Profile of " + _questionsForOperator.FriendlyName;
             topQuestions.Visible = false;
             unanswered.Visible = false;
             tabFavored.Visible = true;
-            tabFavored.Caption += _questionsForOperator.Username;
-            newQuiz.Caption = "Questions asked by; " + _questionsForOperator.Username;
+            tabFavored.Caption += _questionsForOperator.FriendlyName;
+            newQuiz.Caption = "Questions asked by; " + _questionsForOperator.FriendlyName;
         }
         base.OnInit(e);
     }

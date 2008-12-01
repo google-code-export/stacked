@@ -18,6 +18,22 @@ public partial class MasterPage : System.Web.UI.MasterPage
     protected void goToProfile_Click(object sender, EventArgs e)
     {
         // TODO: Implement...
+        profileWindow.Visible = true;
+        changeFriendlyName.Text = Operator.Current.FriendlyName;
+        changeFriendlyName.Select();
+        changeFriendlyName.Focus();
+    }
+
+    protected void saveProfile_Click(object sender, EventArgs e)
+    {
+        Operator.Current.FriendlyName = changeFriendlyName.Text;
+        Operator.Current.Save();
+        profileWindow.Visible = false;
+    }
+
+    protected void changeFriendlyName_EscPressed(object sender, EventArgs e)
+    {
+        profileWindow.Visible = false;
     }
 
     protected void auto_RetrieveAutoCompleterItems(object sender, AutoCompleter.RetrieveAutoCompleterItemsEventArgs e)
@@ -98,6 +114,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
         askQuestion.Visible = true;
         goToProfile.Visible = true;
         goToProfile.Text = "Profile";
+        goToProfile.Text += "<span class=\"profileName\">" + Operator.Current.FriendlyName + "</span>";
         logouBtn.Text = "Logout";
     }
 

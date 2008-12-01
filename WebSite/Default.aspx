@@ -71,7 +71,7 @@
                             </div>
                             <div class="header">
                                 <span class="viewCount"><%# Eval("Views") %> views</span>
-                                <a href='<%# Eval("Url") %>'>
+                                <a href='<%# Eval("Url") %>' title='<%# Eval("BodySummary") %>'>
                                     <%# Eval("Header") %>
                                 </a>
                             </div>
@@ -120,7 +120,7 @@
                             </div>
                             <div class="operatorAsked">
                                 <a href='<%# ((Entities.Operator)Eval("CreatedBy")).Username + ".user" %>'>
-                                    <%# ((Entities.Operator)Eval("CreatedBy")).Username%>
+                                    <%# ((Entities.Operator)Eval("CreatedBy")).FriendlyName%>
                                 </a>
                             </div>
                             <div class="header">
@@ -175,7 +175,7 @@
                             </div>
                             <div class="operatorAsked">
                                 <a href='<%# ((Entities.Operator)Eval("CreatedBy")).Username + ".user" %>'>
-                                    <%# ((Entities.Operator)Eval("CreatedBy")).Username%>
+                                    <%# ((Entities.Operator)Eval("CreatedBy")).FriendlyName%>
                                 </a>
                             </div>
                             <div class="header">
@@ -230,7 +230,7 @@
                             </div>
                             <div class="operatorAsked">
                                 <a href='<%# ((Entities.Operator)Eval("CreatedBy")).Username + ".user" %>'>
-                                    <%# ((Entities.Operator)Eval("CreatedBy")).Username%>
+                                    <%# ((Entities.Operator)Eval("CreatedBy")).FriendlyName%>
                                 </a>
                             </div>
                             <div class="header">

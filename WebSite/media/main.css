@@ -448,7 +448,7 @@ table tr td
 
 .operatorAskedQuestion
 {
-	margin:5px -150px 5px 5px;
+	margin:5px -250px 5px 5px;
 }
 
 .operator:hover
@@ -456,11 +456,26 @@ table tr td
 	background-color:#efefab;
 }
 
+.profileBtn
+{
+	position:relative;
+}
+
+.profileName
+{
+	position:absolute;
+	top:2px;
+	right:2px;
+	color:#999;
+	font-size:0.7em;
+	text-decoration:none;
+}
+
 .deleteQuestion
 {
 	position:absolute;
 	top:5px;
-	right:25px;
+	left:60px;
 	display:block;
 	text-decoration:none;
 	border:solid 1px #999;

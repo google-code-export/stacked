@@ -108,7 +108,7 @@
             <ItemTemplate>
                 <div class="answer">
                     <a class="operator" href='<%#Eval("CreatedBy.Username") + ".user" %>'>
-                        <%#Eval("CreatedBy.Username")%> - <%#Eval("CreatedBy.CalculateCreds")%> creds
+                        <%#Eval("CreatedBy.FriendlyName")%> - <%#Eval("CreatedBy.CalculateCreds")%> creds
                     </a>
                     <a class="linkAnswer" href='<%# "#" + Eval("ID") %>' name='<%#Eval("ID") %>'>
                         link
