@@ -87,6 +87,17 @@ namespace Entities
             }
         }
 
+        public string BodySummary
+        {
+            get
+            {
+                string retVal = Body;
+                if (retVal.Length > 100)
+                    return retVal.Substring(0, 100);
+                return retVal;
+            }
+        }
+
         public static string FormatWiki(string tmp)
         {
             string nofollow = ConfigurationManager.AppSettings["nofollow"] == "true" ? " rel=\"nofollow\"" : "";
@@ -317,7 +328,15 @@ namespace Entities
                 exp.Add(Expression.Like("Header", "%" + idx + "%"));
             }
             exp.Add(Expression.IsNull("Parent"));
-            return FindAll(exp.ToArray());
+            List<QuizItem> retVal = new List<QuizItem>(FindAll(exp.ToArray()));
+            retVal.Sort(
+                delegate(QuizItem left, QuizItem right)
+                {
+                    return right.Score.CompareTo(left.Score);
+                });
+            if (retVal.Count > 10)
+                return retVal.GetRange(0, 10);
+            return retVal;
         }
     }
 }

@@ -17,6 +17,11 @@ namespace Utilities
             get { return ConfigurationManager.AppSettings["allowNativeLogin"] == "true"; }
         }
 
+        public static int CredsNeededToDelete
+        {
+            get { return int.Parse(ConfigurationManager.AppSettings["CredsNeededToDelete"]); }
+        }
+
         public static RegisteringType DefaultRegistering
         {
             get

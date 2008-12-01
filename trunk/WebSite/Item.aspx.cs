@@ -71,11 +71,11 @@ public partial class Item : System.Web.UI.Page
         header.Text = _question.Header;
         body.Text = _question.BodyFormated;
         count.Text = _question.GetScore().ToString();
-        askedBy.InnerHtml = _question.CreatedBy.Username + " - " + _question.CreatedBy.GetCreds() + " creds";
+        askedBy.InnerHtml = _question.CreatedBy.FriendlyName + " - " + _question.CreatedBy.GetCreds() + " creds";
         askedBy.HRef = _question.CreatedBy.Username + ".user";
         Title = _question.Header;
 
-        deleteQuestion.Visible = Operator.Current != null && Operator.Current.IsAdmin;
+        deleteQuestion.Visible = Operator.Current != null && Operator.Current.CanDelete;
     }
 
     protected void deleteQuestion_Click(object sender, EventArgs e)

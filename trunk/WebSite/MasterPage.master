@@ -84,6 +84,7 @@
                         runat="server" 
                         ID="goToProfile" 
                         Visible="false"
+                        CssClass="profileBtn"
                         OnClick="goToProfile_Click" />
                     <ra:LinkButton 
                         runat="server" 
@@ -116,6 +117,32 @@
                 OnLoggedIn="login_LoggedIn"
                 runat="server" />
         </div>
+        <ext:Window 
+            runat="server" 
+            CssClass="window"
+            Caption="Edit your profile" 
+            DefaultWidget="saveProfile"
+            Visible="false"
+            style="position:absolute;top:100px;left:100px;width:400px;z-index:5000;"
+            ID="profileWindow">
+            <div style="padding:15px;height:70px;position:relative;">
+                Change Friendly Name
+                <ra:TextBox 
+                    runat="server" 
+                    OnEscPressed="changeFriendlyName_EscPressed"
+                    ID="changeFriendlyName" />
+                <br />
+                <ra:Button 
+                    runat="server" 
+                    ID="saveProfile" 
+                    style="position:absolute;bottom:5px;right:5px;"
+                    OnClick="saveProfile_Click"
+                    Text="Save" />
+                <br />
+                <em style="font-size:0.8em;font-style:italic;color:#999;">Changes won't show up before you navigate away from this page...</em>
+            </div>
+            <ra:BehaviorObscurable runat="server" ID="obscureProfile" />
+        </ext:Window>
     </form>
 </body>
 </html>

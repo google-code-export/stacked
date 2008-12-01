@@ -3,6 +3,7 @@ using Castle.ActiveRecord;
 using NHibernate.Expression;
 using System.Web;
 using System.Web.Caching;
+using Utilities;
 
 namespace Entities
 {
@@ -58,6 +59,14 @@ namespace Entities
             set { _password = value; }
         }
 
+        public bool CanDelete
+        {
+            get
+            {
+                return IsAdmin || CalculateCreds >= Settings.CredsNeededToDelete;
+            }
+        }
+
         public static Operator Current
         {
             get { return HttpContext.Current.Session["__CurrentOperator"] as Operator; }
@@ -92,6 +101,7 @@ namespace Entities
             {
                 oper = new Operator();
                 oper.Username = username;
+                oper.IsAdmin = false;
                 oper.FriendlyName = friendlyName;
                 oper.Password = Guid.NewGuid().ToString();
                 oper.Save();
