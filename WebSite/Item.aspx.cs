@@ -200,14 +200,28 @@ public partial class Item : System.Web.UI.Page
         // Saving will throw if you vote for your own question/answer...
         try
         {
-            Vote v = new Vote();
-            v.QuizItem = QuizItem.Find(idOfQuizItem);
-            v.Score = 1;
-            v.VotedBy = Operator.Current;
-            v.Save();
+            QuizItem item = QuizItem.Find(idOfQuizItem);
+            Vote o = Vote.FindOne(
+                Expression.Eq("VotedBy", Operator.Current),
+                Expression.Eq("QuizItem", item),
+                Expression.Eq("Score", 1));
+            if (o != null)
+            {
+                o.Delete();
+                FindUpLinkButtonForAnswer(sender as System.Web.UI.Control).CssClass = "up";
+                FindDownLinkButtonForAnswer(sender as System.Web.UI.Control).CssClass = "down";
+            }
+            else
+            {
+                Vote v = new Vote();
+                v.QuizItem = item;
+                v.Score = 1;
+                v.VotedBy = Operator.Current;
+                v.Save();
+                FindUpLinkButtonForAnswer(sender as System.Web.UI.Control).CssClass = "upVoted";
+                FindDownLinkButtonForAnswer(sender as System.Web.UI.Control).CssClass = "down";
+            }
             FindLabelForAnswer(sender as System.Web.UI.Control).Text = QuizItem.Find(idOfQuizItem).Score.ToString();
-            FindUpLinkButtonForAnswer(sender as System.Web.UI.Control).CssClass = "upVoted";
-            FindDownLinkButtonForAnswer(sender as System.Web.UI.Control).CssClass = "down";
         }
         catch (Exception err)
         {
@@ -232,17 +246,32 @@ public partial class Item : System.Web.UI.Page
 
     protected void VoteAnswerDown(object sender, EventArgs e)
     {
+        int idOfQuizItem = GetIdOfAnswer(sender as System.Web.UI.Control);
+
         try
         {
-            int idOfQuizItem = GetIdOfAnswer(sender as System.Web.UI.Control);
-            Vote v = new Vote();
-            v.QuizItem = QuizItem.Find(idOfQuizItem);
-            v.Score = -1;
-            v.VotedBy = Operator.Current;
-            v.Save();
+            QuizItem item = QuizItem.Find(idOfQuizItem);
+            Vote o = Vote.FindOne(
+                Expression.Eq("VotedBy", Operator.Current),
+                Expression.Eq("QuizItem", item),
+                Expression.Eq("Score", -1));
+            if (o != null)
+            {
+                o.Delete();
+                FindUpLinkButtonForAnswer(sender as System.Web.UI.Control).CssClass = "up";
+                FindDownLinkButtonForAnswer(sender as System.Web.UI.Control).CssClass = "down";
+            }
+            else
+            {
+                Vote v = new Vote();
+                v.QuizItem = item;
+                v.Score = -1;
+                v.VotedBy = Operator.Current;
+                v.Save();
+                FindUpLinkButtonForAnswer(sender as System.Web.UI.Control).CssClass = "up";
+                FindDownLinkButtonForAnswer(sender as System.Web.UI.Control).CssClass = "downVoted";
+            }
             FindLabelForAnswer(sender as System.Web.UI.Control).Text = QuizItem.Find(idOfQuizItem).Score.ToString();
-            FindUpLinkButtonForAnswer(sender as System.Web.UI.Control).CssClass = "up";
-            FindDownLinkButtonForAnswer(sender as System.Web.UI.Control).CssClass = "downVoted";
         }
         catch (Exception err)
         {

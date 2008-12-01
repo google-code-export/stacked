@@ -358,7 +358,6 @@ table tr td
 .vote
 {
 	float:left;
-	width:80px;
 	padding:15px;
 	position:relative;
 }
@@ -508,7 +507,17 @@ table tr td
 
 .answerContent
 {
-	float:left;
+	margin-top:34px;
+}
+
+.linkAnswer
+{
+	text-decoration:none;
+	color:#999;
+	font-size:0.8em;
+	position:absolute;
+	top:5px;
+	left:5px;
 }
 
 .error
