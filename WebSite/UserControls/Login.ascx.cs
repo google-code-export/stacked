@@ -82,6 +82,7 @@ public partial class UserControls_Login : System.Web.UI.UserControl
 
     protected void login_Click(object sender, EventArgs e)
     {
+        Session["publicTerminal"] = publicTerminalOpenID.Checked;
         openIdTxt.LogOn();
     }
 
@@ -108,7 +109,10 @@ public partial class UserControls_Login : System.Web.UI.UserControl
             e.Response.Status == DotNetOpenId.RelyingParty.AuthenticationStatus.Authenticated)
         {
             string userNameTxt = e.Response.ClaimedIdentifier;
-            Operator.LoginOpenID(userNameTxt, e.Response.FriendlyIdentifierForDisplay);
+            bool publicTerminal = true;
+            if (Session["publicTerminal"] != null)
+                publicTerminal = (bool)Session["publicTerminal"];
+            Operator.LoginOpenID(userNameTxt, e.Response.FriendlyIdentifierForDisplay, publicTerminal);
 
             login.Visible = false;
             if (LoggedIn != null)

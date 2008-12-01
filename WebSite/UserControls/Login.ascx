@@ -49,6 +49,13 @@
                 CssClass="loginBtnOpenID"
                 OnClick="btnNoOpenId_Click"
                 Text="I don't use OpenID" />
+            <br />
+            <ra:CheckBox 
+                runat="server" 
+                Text="Public terminal"
+                CssClass="publicTerminalOpenID" 
+                Tooltip="Mark this checkbox if you're NOT on a computer you own yourself!"
+                ID="publicTerminalOpenID" />
             <ra:LinkButton 
                 runat="server" 
                 ID="whatsOpenID" 
@@ -90,6 +97,7 @@
                     <td>
                         <ra:CheckBox 
                             runat="server" 
+                            Tooltip="Mark this checkbox if you're NOT on a computer you own yourself!"
                             ID="publicTerminale" />
                     </td>
                 </tr>

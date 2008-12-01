@@ -8,6 +8,14 @@ html, body
 	height:100%;
 }
 
+blockquote
+{
+	margin:25px;
+	padding:15px;
+	background-color:#f0f0ff;
+	border:dotted 1px #ccc;
+}
+
 pre.code
 {
 	background-color:#fafafa;
@@ -81,6 +89,17 @@ table tr td
 	position:absolute;
 	left:5px;
 	bottom:5px;
+}
+
+.publicTerminalOpenID
+{
+	margin-top:10px;
+	display:block;
+}
+
+.publicTerminalOpenID input
+{
+	margin-right:3px;
 }
 
 .whatsOpenID

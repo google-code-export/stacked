@@ -15,7 +15,8 @@ public partial class UserControls_AskQuestion : System.Web.UI.UserControl
 
     protected void EscPressed(object sender, EventArgs e)
     {
-        wndAsk.Visible = false;
+        if (body.Text.Trim() == "")
+            wndAsk.Visible = false;
     }
 
     protected void Link(object sender, EventArgs e)

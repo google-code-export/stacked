@@ -70,7 +70,7 @@ namespace Entities
             HttpContext.Current.Response.Cookies.Add(c);
         }
 
-        public static void LoginOpenID(string username, string friendlyName)
+        public static void LoginOpenID(string username, string friendlyName, bool publicTerminal)
         {
             // Escaping username since often it contains things which we cannot legally use in Stacked like
             // e.g. "http://" etc...
@@ -82,7 +82,8 @@ namespace Entities
                 {
                     username = username.Substring(0, index) + username.Substring(index + 1);
                 }
-                index += 1;
+                else
+                    index += 1;
             }
 
             Operator oper = Operator.FindOne(
@@ -90,12 +91,12 @@ namespace Entities
             if (oper == null)
             {
                 oper = new Operator();
-                oper.Username = username.Replace("http://", "").Replace("https://", "").Replace("/", "");
+                oper.Username = username;
                 oper.FriendlyName = friendlyName;
                 oper.Password = Guid.NewGuid().ToString();
                 oper.Save();
             }
-            StoreLoggedInOperatorToSessionAndCookie(true, oper);
+            StoreLoggedInOperatorToSessionAndCookie(!publicTerminal, oper);
         }
 
         public static bool Login(string username, string password, bool persist)
