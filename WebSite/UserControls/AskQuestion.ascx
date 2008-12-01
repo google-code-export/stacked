@@ -19,7 +19,7 @@
     ID="wndAsk" 
     Caption="Ask a question..."
     Visible="false" 
-    style="width:600px;position:absolute;top:100px;left:100px;z-index:5000;"
+    style="width:600px;position:absolute;top:10px;left:10px;z-index:5000;"
     CssClass="window">
     <div class="askQuestion">
         <ext:Timer 
@@ -105,6 +105,8 @@ if( YouDoThis )
   YouCanWriteCode();
 [/code]
 </pre>
+&gt; Quote
+<br />
 All HTML will be escaped
         </div>
         <div style="clear:both;margin-left:0;border:none;width:80%;overflow:auto;" class="quizContent">
