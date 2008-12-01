@@ -279,7 +279,13 @@ namespace Entities
             retVal.Sort(
                 delegate(QuizItem left, QuizItem right)
                 {
-                    return right.Score.CompareTo(left.Score);
+                    int scoreCompare = right.Score.CompareTo(left.Score);
+                    if (scoreCompare != 0)
+                        return scoreCompare;
+                    else
+                    {
+                        return left.Created.CompareTo(right.Created);
+                    }
                 });
             return retVal;
         }
