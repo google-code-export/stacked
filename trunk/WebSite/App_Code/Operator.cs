@@ -59,19 +59,35 @@ namespace Entities
             set { _password = value; }
         }
 
-        public bool CanDelete
+        public bool CanDeleteQuestion
         {
             get
             {
-                return IsAdmin || CalculateCreds >= Settings.CredsNeededToDelete;
+                return IsAdmin || CalculateCreds >= Settings.CredsNeededToDeleteQuestion;
             }
         }
 
-        public bool CanEdit
+        public bool CanEditQuestion
         {
             get
             {
-                return IsAdmin || CalculateCreds >= Settings.CredsNeededToEdit;
+                return IsAdmin || CalculateCreds >= Settings.CredsNeededToEditQuestion;
+            }
+        }
+
+        public bool CanDeleteAnswer
+        {
+            get
+            {
+                return IsAdmin || CalculateCreds >= Settings.CredsNeededToDeleteAnswer;
+            }
+        }
+
+        public bool CanEditAnswer
+        {
+            get
+            {
+                return IsAdmin || CalculateCreds >= Settings.CredsNeededToEditAnswer;
             }
         }
 

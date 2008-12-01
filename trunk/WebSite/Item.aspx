@@ -104,6 +104,7 @@
             ID="deleteQuestion"
             OnClick="deleteQuestion_Click"
             CssClass="deleteQuestionBtn"
+            Visible="false" 
             Text="Delete..." />
         <ra:Panel 
             runat="server" 
@@ -131,6 +132,18 @@
         <asp:Repeater runat="server" ID="answers">
             <ItemTemplate>
                 <div class="answer">
+                    <ra:LinkButton 
+                        runat="server" 
+                        CssClass="editAnswerBtn" 
+                        Visible='<%# (bool)(Entities.Operator.Current != null && Entities.Operator.Current.CanEditAnswer) %>'
+                        OnClick="EditQuestionBtnClick"
+                        Text="Edit" />
+                    <ra:LinkButton 
+                        runat="server" 
+                        OnClick="DeleteQuestionBtnClick"
+                        CssClass="deleteAnswerBtn"
+                        Visible='<%# (bool)(Entities.Operator.Current != null && Entities.Operator.Current.CanDeleteAnswer) %>'
+                        Text="Delete..." />
                     <a class="operator" href='<%#Eval("CreatedBy.Username") + ".user" %>'>
                         <%#Eval("CreatedBy.FriendlyName")%> - <%#Eval("CreatedBy.CalculateCreds")%> creds
                     </a>
@@ -157,10 +170,19 @@
                             CssClass='<%#GetDownCssClassIfVoted((int)Eval("Id")) %>' />
                     </div>
                     <div class="answerContent">
-                        <p>
-                            <%#Eval("BodyFormated")%>
-                        </p>
+                        <%#Eval("BodyFormated")%>
                     </div>
+                    <ra:Panel 
+                        runat="server" 
+                        Visible="false" 
+                        CssClass="editAnswer">
+                        <ra:TextArea 
+                            runat="server" />
+                        <ra:Button 
+                            runat="server" 
+                            OnClick="SaveAnswer"
+                            Text="Save" />
+                    </ra:Panel>
                 </div>
             </ItemTemplate>
         </asp:Repeater>
