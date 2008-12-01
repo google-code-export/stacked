@@ -14,95 +14,57 @@ public partial class _Default : System.Web.UI.Page, IDefault
         {
             _questionsForOperator = Operator.FindOne(Expression.Eq("Username", id));
             Title = "Profile of " + _questionsForOperator.FriendlyName;
-            topQuestions.Visible = false;
-            unanswered.Visible = false;
-            tabFavored.Visible = true;
-            tabFavored.Caption += _questionsForOperator.FriendlyName;
-            newQuiz.Caption = "Questions asked by; " + _questionsForOperator.FriendlyName;
+            tabMost.Visible = false;
+            tabUn.Visible = false;
+            tabFav.Visible = true;
+            tabFav.Caption += _questionsForOperator.FriendlyName;
+            tabNew.Caption = "Questions asked by; " + _questionsForOperator.FriendlyName;
         }
-        base.OnInit(e);
-    }
-
-    protected void Page_Load(object sender, EventArgs e)
-    {
         if (!IsPostBack)
         {
             DataBindNewQuestions();
             lblCount.Text += Operator.Count();
         }
-    }
-
-    protected string GetCssClass(int count)
-    {
-        if (count < -10)
-            return "really-bad";
-        if (count < 0)
-            return "bad";
-        if (count > 9)
-            return "great";
-        if (count > 0)
-            return "good";
-
-        // "0"
-        return "neutral";
+        base.OnInit(e);
     }
 
     private void DataBindNewQuestions()
     {
-        newRep.DataSource = QuizItem.GetQuestions(_questionsForOperator, QuizItem.OrderBy.New);
-        newRep.DataBind();
+        gridNew.DataBindGrid(QuizItem.GetQuestions(_questionsForOperator, QuizItem.OrderBy.New));
     }
 
     protected void tabContent_ActiveTabViewChanged(object sender, EventArgs e)
     {
-        if (tabContent.ActiveTabViewIndex == 0)
+        if (tab.ActiveTabViewIndex == 0)
         {
-            newQuiz.Style["display"] = "none";
-            new EffectFadeIn(newQuiz, 500).Render();
+            tabNew.Style["display"] = "none";
+            new EffectFadeIn(tabNew, 500).Render();
         }
-        if (tabContent.ActiveTabViewIndex == 1)
+        else if (tab.ActiveTabViewIndex == 1)
         {
-            if (repTopQuestions.DataSource == null)
+            if (!gridMost.IsDataBound)
             {
-                repTopQuestions.DataSource = QuizItem.GetQuestions(_questionsForOperator, QuizItem.OrderBy.Top);
-                repTopQuestions.DataBind();
-                topQuestionsPanel.ReRender();
+                gridMost.DataBindGrid(QuizItem.GetQuestions(_questionsForOperator, QuizItem.OrderBy.Top));
             }
-            topQuestionsPanel.Style["display"] = "none";
-            new EffectFadeIn(topQuestionsPanel, 500).Render();
         }
-        else if (tabContent.ActiveTabViewIndex == 2)
+        else if (tab.ActiveTabViewIndex == 2)
         {
-            if (repUnansweredQuestions.DataSource == null)
+            if (!gridUn.IsDataBound)
             {
-                repUnansweredQuestions.DataSource = QuizItem.GetQuestions(_questionsForOperator, QuizItem.OrderBy.Unanswered);
-                repUnansweredQuestions.DataBind();
-                unansweredQuestionsPanel.ReRender();
+                gridUn.DataBindGrid(QuizItem.GetQuestions(_questionsForOperator, QuizItem.OrderBy.Unanswered));
             }
-            unansweredQuestionsPanel.Style["display"] = "none";
-            new EffectFadeIn(unansweredQuestionsPanel, 500).Render();
         }
-        else if (tabContent.ActiveTabViewIndex == 3)
+        else if (tab.ActiveTabViewIndex == 3)
         {
-            if (repFavoredBy.DataSource == null)
+            if (!gridFav.IsDataBound)
             {
-                repFavoredBy.DataSource = QuizItem.GetFavoredQuestions(_questionsForOperator);
-                repFavoredBy.DataBind();
-                panelFavoredBy.ReRender();
+                gridFav.DataBindGrid(QuizItem.GetFavoredQuestions(_questionsForOperator));
             }
-            panelFavoredBy.Style["display"] = "none";
-            new EffectFadeIn(panelFavoredBy, 500).Render();
         }
-    }
-
-    protected string GetTime(DateTime time)
-    {
-        return TimeFormatter.Format(time);
     }
 
     public void QuestionsUpdated()
     {
         DataBindNewQuestions();
-        newQuiz.ReRender();
     }
 }
