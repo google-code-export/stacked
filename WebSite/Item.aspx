@@ -61,6 +61,10 @@
             runat="server" 
             OnClick="star_Click"
             ID="star" />
+        <ra:Label 
+            runat="server" 
+            CssClass="numberOfFavorites"
+            ID="numberOfFavorites" />
     </div>
     <div class="vote">
         <ra:LinkButton 

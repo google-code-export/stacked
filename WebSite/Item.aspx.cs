@@ -63,6 +63,7 @@ public partial class Item : System.Web.UI.Page
             star.CssClass = "starNone";
             star.Tooltip = "Click to add to favorites";
         }
+        numberOfFavorites.Text = _question.CountFavorites(null).ToString();
     }
 
     private void FillOutContent()
