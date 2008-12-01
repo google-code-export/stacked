@@ -67,6 +67,14 @@ namespace Entities
             }
         }
 
+        public bool CanEdit
+        {
+            get
+            {
+                return IsAdmin || CalculateCreds >= Settings.CredsNeededToEdit;
+            }
+        }
+
         public static Operator Current
         {
             get { return HttpContext.Current.Session["__CurrentOperator"] as Operator; }

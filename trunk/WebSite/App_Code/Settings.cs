@@ -22,6 +22,11 @@ namespace Utilities
             get { return int.Parse(ConfigurationManager.AppSettings["CredsNeededToDelete"]); }
         }
 
+        public static int CredsNeededToEdit
+        {
+            get { return int.Parse(ConfigurationManager.AppSettings["CredsNeededToEdit"]); }
+        }
+
         public static RegisteringType DefaultRegistering
         {
             get
