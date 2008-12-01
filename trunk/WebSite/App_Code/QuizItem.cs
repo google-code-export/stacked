@@ -275,7 +275,13 @@ namespace Entities
 
         public IEnumerable<QuizItem> GetAnswers()
         {
-            return QuizItem.FindAll(Expression.Eq("Parent", this));
+            List<QuizItem> retVal = new List<QuizItem>(QuizItem.FindAll(Expression.Eq("Parent", this)));
+            retVal.Sort(
+                delegate(QuizItem left, QuizItem right)
+                {
+                    return right.Score.CompareTo(left.Score);
+                });
+            return retVal;
         }
 
         public int CountFavorites(Operator exclude)
