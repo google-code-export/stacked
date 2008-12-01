@@ -126,20 +126,28 @@
             style="position:absolute;top:100px;left:100px;width:400px;z-index:5000;"
             ID="profileWindow">
             <div style="padding:15px;height:70px;position:relative;">
-                Change Friendly Name
-                <ra:TextBox 
-                    runat="server" 
-                    OnEscPressed="changeFriendlyName_EscPressed"
-                    ID="changeFriendlyName" />
-                <br />
+                <table>
+                    <tr>
+                        <td>Friendly Name</td>
+                        <td>
+                            <ra:TextBox 
+                                runat="server" 
+                                OnEscPressed="changeFriendlyName_EscPressed"
+                                ID="changeFriendlyName" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <em style="font-size:0.8em;font-style:italic;color:#999;">Changes won't show up before you navigate away from this page...</em>
+                        </td>
+                    </tr>
+                </table>
                 <ra:Button 
                     runat="server" 
                     ID="saveProfile" 
                     style="position:absolute;bottom:5px;right:5px;"
                     OnClick="saveProfile_Click"
                     Text="Save" />
-                <br />
-                <em style="font-size:0.8em;font-style:italic;color:#999;">Changes won't show up before you navigate away from this page...</em>
             </div>
             <ra:BehaviorObscurable runat="server" ID="obscureProfile" />
         </ext:Window>

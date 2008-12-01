@@ -31,10 +31,6 @@ public partial class UserControls_Register : System.Web.UI.UserControl
         {
             ShowError("Passwords doesn't match");
         }
-        else if (email.Text.IndexOf("@") == -1 || email.Text.IndexOf(".") == -1 || email.Text.Length < 7)
-        {
-            ShowError("You must give a valid email address");
-        }
         else
         {
             // VALIDATED...!! :)
