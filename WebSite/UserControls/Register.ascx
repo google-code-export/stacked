@@ -54,15 +54,6 @@
                 </td>
             </tr>
             <tr>
-                <td>Email</td>
-                <td>
-                    <ra:TextBox 
-                        runat="server" 
-                        OnEscPressed="CloseWindow"
-                        id="email" />
-                </td>
-            </tr>
-            <tr>
                 <td colspan="2">
                     <ra:Label 
                         runat="server" 
