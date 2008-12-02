@@ -14,7 +14,17 @@ public partial class Item : System.Web.UI.Page
         FillOutContent();
         SetCssClassIfCurrentOperatorHasVoted();
         SetCssClassForFavorite();
+        DataBindTags();
         base.OnInit(e);
+    }
+
+    private void DataBindTags()
+    {
+        if (!IsPostBack)
+        {
+            repTags.DataSource = _question.Tags;
+            repTags.DataBind();
+        }
     }
 
     protected void quoteQuestion_Click(object sender, EventArgs e)

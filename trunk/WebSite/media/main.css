@@ -344,6 +344,28 @@ table tr td
 	color:#999;
 }
 
+.tagsHeader
+{
+	position:absolute;
+	top:5px;
+	right:5px;
+	font-size:0.9em;
+}
+
+.tagsHeader a
+{
+	text-decoration:none;
+	color:#999;
+	background-color:#eee;
+	padding:5px;
+	border:solid 1px #999;
+}
+
+.tagsHeader a:hover
+{
+	background-color:#efefab;
+}
+
 .question .top
 {
 	font-size:1.2em;

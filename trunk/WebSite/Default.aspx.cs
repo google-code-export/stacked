@@ -6,10 +6,12 @@ using Ra.Widgets;
 public partial class _Default : System.Web.UI.Page, IDefault
 {
     private Operator _questionsForOperator;
+    private Tag _questionsForTag;
 
     protected override void OnInit(EventArgs e)
     {
         string id = Request["operatorProfile"];
+        string tag = Request["tags"];
         if (id != null)
         {
             _questionsForOperator = Operator.FindOne(Expression.Eq("Username", id));
@@ -19,6 +21,12 @@ public partial class _Default : System.Web.UI.Page, IDefault
             tabFav.Visible = true;
             tabFav.Caption += _questionsForOperator.FriendlyName;
             tabNew.Caption = "Questions asked by; " + _questionsForOperator.FriendlyName;
+        }
+        else if (tag != null)
+        {
+            _questionsForTag = Tag.FindOne(Expression.Eq("Name", tag));
+            Title = "Posts tagged with " + _questionsForTag.Name;
+            tabNew.Caption = "Posts tagged with; " + _questionsForTag.Name;
         }
         if (!IsPostBack)
         {
@@ -30,7 +38,7 @@ public partial class _Default : System.Web.UI.Page, IDefault
 
     private void DataBindNewQuestions()
     {
-        gridNew.DataBindGrid(QuizItem.GetQuestions(_questionsForOperator, QuizItem.OrderBy.New));
+        gridNew.DataBindGrid(QuizItem.GetQuestions(_questionsForOperator, _questionsForTag, QuizItem.OrderBy.New));
     }
 
     protected void tabContent_ActiveTabViewChanged(object sender, EventArgs e)
@@ -44,7 +52,7 @@ public partial class _Default : System.Web.UI.Page, IDefault
         {
             if (!gridMost.IsDataBound)
             {
-                gridMost.DataBindGrid(QuizItem.GetQuestions(_questionsForOperator, QuizItem.OrderBy.Top));
+                gridMost.DataBindGrid(QuizItem.GetQuestions(_questionsForOperator, _questionsForTag, QuizItem.OrderBy.Top));
             }
             new EffectFadeIn(tabMost, 500).Render();
         }
@@ -52,7 +60,7 @@ public partial class _Default : System.Web.UI.Page, IDefault
         {
             if (!gridUn.IsDataBound)
             {
-                gridUn.DataBindGrid(QuizItem.GetQuestions(_questionsForOperator, QuizItem.OrderBy.Unanswered));
+                gridUn.DataBindGrid(QuizItem.GetQuestions(_questionsForOperator, _questionsForTag, QuizItem.OrderBy.Unanswered));
             }
             new EffectFadeIn(tabUn, 500).Render();
         }

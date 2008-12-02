@@ -40,10 +40,19 @@
     </ext:Window>
 
 
-    <ra:Label 
-        runat="server" 
-        ID="header" 
-        Tag="h2" />
+    <div style="position:relative;">
+        <ra:Label 
+            runat="server" 
+            ID="header" 
+            Tag="h2" />
+        <div class="tagsHeader">
+            <asp:Repeater runat="server" ID="repTags">
+                <ItemTemplate>
+                    <a href='<%#Eval("Name") + ".tag" %>'><%#Eval("Name") %> (<%#Eval("Item.Count") %>)</a>
+                </ItemTemplate>
+            </asp:Repeater>
+        </div>
+    </div>
     <ra:Label 
         runat="server" 
         ID="errorLabel" 
