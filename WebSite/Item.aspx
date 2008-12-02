@@ -106,6 +106,13 @@
             CssClass="deleteQuestionBtn"
             Visible="false" 
             Text="Delete..." />
+        <ra:LinkButton 
+            runat="server" 
+            ID="quoteQuestion"
+            OnClick="quoteQuestion_Click"
+            CssClass="quoteQuestionBtn"
+            Visible="false" 
+            Text="Quote..." />
         <ra:Panel 
             runat="server" 
             Visible="false" 

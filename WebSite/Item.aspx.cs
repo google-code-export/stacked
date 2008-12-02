@@ -17,6 +17,13 @@ public partial class Item : System.Web.UI.Page
         base.OnInit(e);
     }
 
+    protected void quoteQuestion_Click(object sender, EventArgs e)
+    {
+        answerBody.Text = _question.BodyQuote;
+        answerBody.Select();
+        answerBody.Focus();
+    }
+
     protected override void OnPreRender(EventArgs e)
     {
         // Only visible if some threshold has been reached...
@@ -26,6 +33,7 @@ public partial class Item : System.Web.UI.Page
             (Operator.Current.CanEditQuestion || Operator.Current.ID == _question.CreatedBy.ID);
 
         answerQuestion.Visible = Operator.Current != null;
+        quoteQuestion.Visible = Operator.Current != null;
         base.OnPreRender(e);
     }
 

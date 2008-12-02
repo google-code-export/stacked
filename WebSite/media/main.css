@@ -16,6 +16,14 @@ blockquote
 	border:dotted 1px #ccc;
 }
 
+.answerContent blockquote
+{
+	margin:25px 25px 25px 50px;
+	padding:15px;
+	background-color:#f0f0ff;
+	border:dotted 1px #ccc;
+}
+
 pre.code
 {
 	background-color:#fafafa;
@@ -590,18 +598,29 @@ table tr td
 	cursor:pointer;
 }
 
-.deleteQuestionBtn
+.editQuestionBtn
 {
 	position:absolute;
 	top:0;
-	left:85px;
+	left:65px;
 	color:#999;
 	text-decoration:none;
 	font-size:0.7em;
 	margin-top:-5px;
 }
 
-.editQuestionBtn
+.deleteQuestionBtn
+{
+	position:absolute;
+	top:0;
+	left:145px;
+	color:#999;
+	text-decoration:none;
+	font-size:0.7em;
+	margin-top:-5px;
+}
+
+.quoteQuestionBtn
 {
 	position:absolute;
 	top:0;
@@ -655,6 +674,16 @@ table tr td
 	width:100%;
 }
 
+
+.lblCountUsers
+{
+	margin-left:25px;
+	font-size:1.1em;
+	font-weight:bold;
+	margin-top:25px;
+	margin-bottom:25px;
+	display:block;
+}
 
 
 

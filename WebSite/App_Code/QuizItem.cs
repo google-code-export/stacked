@@ -77,11 +77,21 @@ namespace Entities
             set { _body = value; }
         }
 
+        public string BodyQuote
+        {
+            get
+            {
+                string tmp = ">" + Body;
+                tmp = tmp.Replace("\n", "\n>");
+                return tmp;
+            }
+        }
+
         public string BodyFormated
         {
             get
             {
-                string tmp = Body.Replace("<", "&lt;").Replace(">", "&gt;").Replace("&", "&amp;");
+                string tmp = Body.Replace("&", "&amp;").Replace("<", "&lt;").Replace(">", "&gt;");
                 tmp = FormatWiki(tmp);
                 return "<p>" + tmp + "</p>";
             }
