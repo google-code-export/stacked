@@ -11,6 +11,7 @@
             new Type[] { 
                 typeof(Entities.Operator),
                 typeof(Entities.Favorite),
+                typeof(Entities.Tag),
                 typeof(Entities.Vote),
                 typeof(Entities.QuizItem)
             });

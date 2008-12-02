@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Configuration;
 using Castle.ActiveRecord.Queries;
+using System.Collections;
 
 namespace Entities
 {
@@ -20,6 +21,7 @@ namespace Entities
         private Operator _createdBy;
         private QuizItem _parent;
         private string _url;
+        private IList _tags;
 
         [PrimaryKey]
         public int ID
@@ -75,6 +77,14 @@ namespace Entities
         {
             get { return _body; }
             set { _body = value; }
+        }
+
+        [HasAndBelongsToMany(typeof(Tag),
+            Table = "QuizItemTag", ColumnRef = "TagId", ColumnKey = "QuizItemId")]
+        public IList Tags
+        {
+            get { return _tags; }
+            set { _tags = value; }
         }
 
         public string BodyQuote

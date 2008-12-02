@@ -28,7 +28,7 @@
             Enabled="true" 
             Duration="5000" 
             OnTick="timerUpdatePreview_Tick" />
-        <div class="askQuestionLeft">
+        <div class="askQuestionLeft" style="z-index:5000;">
             <div style="margin:15px;">
                 Append; 
                 <ra:LinkButton 
@@ -72,6 +72,12 @@
                 runat="server" 
                 OnEscPressed="EscPressed"
                 ID="body" />
+            <ext:AutoCompleter 
+                runat="server" 
+                ID="tags" 
+                CssClass="auto" 
+                OnAutoCompleterItemSelected="tags_AutoCompleterItemSelected"
+                OnRetrieveAutoCompleterItems="tags_RetrieveAutoCompleterItems" />
 
             <ra:Button 
                 runat="server" 
@@ -109,12 +115,12 @@ if( YouDoThis )
 <br />
 All HTML will be escaped
         </div>
-        <div style="clear:both;margin-left:0;border:none;width:80%;overflow:auto;" class="quizContent">
-            <ra:Label 
-                runat="server" 
-                ID="preview" 
-                Tag="div" />
-        </div>
+        <ra:Label 
+            style="clear:both;margin-left:0;border:none;width:80%;overflow:auto;" 
+            runat="server" 
+            ID="preview" 
+            CssClass="quizContent"
+            Tag="div" />
     </div>
     <ra:BehaviorObscurable runat="server" ID="obscurerAsk" />
 </ext:Window>
