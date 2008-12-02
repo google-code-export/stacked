@@ -33,7 +33,5 @@ public partial class UserControls_ItemGrid : System.Web.UI.UserControl
         rep.DataSource = items;
         rep.DataBind();
         wrap.ReRender();
-        wrap.Style["display"] = "none";
-        new EffectFadeIn(wrap, 500).Render();
     }
 }

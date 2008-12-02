@@ -46,6 +46,7 @@ public partial class _Default : System.Web.UI.Page, IDefault
             {
                 gridMost.DataBindGrid(QuizItem.GetQuestions(_questionsForOperator, QuizItem.OrderBy.Top));
             }
+            new EffectFadeIn(tabMost, 500).Render();
         }
         else if (tab.ActiveTabViewIndex == 2)
         {
@@ -53,6 +54,7 @@ public partial class _Default : System.Web.UI.Page, IDefault
             {
                 gridUn.DataBindGrid(QuizItem.GetQuestions(_questionsForOperator, QuizItem.OrderBy.Unanswered));
             }
+            new EffectFadeIn(tabUn, 500).Render();
         }
         else if (tab.ActiveTabViewIndex == 3)
         {
@@ -60,6 +62,7 @@ public partial class _Default : System.Web.UI.Page, IDefault
             {
                 gridFav.DataBindGrid(QuizItem.GetFavoredQuestions(_questionsForOperator));
             }
+            new EffectFadeIn(tabFav, 500).Render();
         }
     }
 
