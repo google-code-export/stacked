@@ -320,12 +320,26 @@ table tr td
 	position:relative;
 }
 
+.headerLink
+{
+	font-size:0.9em;
+}
+
 .viewCount
 {
 	position:absolute;
 	top:5px;
 	right:5px;
 	margin-top:-15px;
+	font-size:0.9em;
+	color:#999;
+}
+
+.tags
+{
+	position:absolute;
+	top:12px;
+	right:5px;
 	font-size:0.9em;
 	color:#999;
 }

@@ -87,6 +87,19 @@ namespace Entities
             set { _tags = value; }
         }
 
+        public string TagsFormated
+        {
+            get
+            {
+                string retVal = "";
+                foreach (Tag idx in Tags)
+                {
+                    retVal += idx.Name + " ";
+                }
+                return retVal.Trim().Replace(" ", " | ");
+            }
+        }
+
         public string BodyQuote
         {
             get

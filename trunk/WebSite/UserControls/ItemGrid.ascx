@@ -51,7 +51,8 @@
                 </div>
                 <div class="header">
                     <span class="viewCount"><%# Eval("Views") %> views</span>
-                    <a href='<%# Eval("Url") %>' title='<%# Eval("BodySummary") %>'>
+                    <span class="tags"><%# Eval("TagsFormated") %></span>
+                    <a class="headerLink" href='<%# Eval("Url") %>' title='<%# Eval("BodySummary") %>'>
                         <%# Eval("Header") %>
                     </a>
                 </div>

@@ -71,6 +71,8 @@ public partial class UserControls_AskQuestion : System.Web.UI.UserControl
             tmp += idx + " ";
         }
         tags.Text = tmp + t.Name + " ";
+        tags.Select();
+        tags.Focus();
     }
 
     protected void Link(object sender, EventArgs e)
@@ -116,8 +118,8 @@ public partial class UserControls_AskQuestion : System.Web.UI.UserControl
         q.CreatedBy = Operator.Current;
         q.Header = header.Text;
         q.Body = body.Text;
-        string[] ents = tags.Text.Split(' ');
-        if (ents != null && ents.Length > 0 && ents[ents.Length - 1].Trim().Length > 0)
+        string[] ents = tags.Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+        if (ents != null && ents.Length > 0)
         {
             q.Tags = new List<Tag>();
             foreach (string idx in ents)
