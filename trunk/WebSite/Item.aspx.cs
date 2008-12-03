@@ -79,7 +79,26 @@ public partial class Item : System.Web.UI.Page
         QuizItem item = QuizItem.Find(id);
         item.Body = txt.Text;
         item.Save();
-        answers.DataSource = _question.GetAnswers();
+        DataBindAnswers();
+    }
+
+    public QuizItem.OrderAnswersBy OrderAnswersBy
+    {
+        get
+        {
+            if (ViewState["OrderAnswersBy"] == null)
+                return QuizItem.OrderAnswersBy.Determine;
+            return (QuizItem.OrderAnswersBy)ViewState["OrderAnswersBy"];
+        }
+        set
+        {
+            ViewState["OrderAnswersBy"] = value;
+        }
+    }
+
+    private void DataBindAnswers()
+    {
+        answers.DataSource = _question.GetAnswers(OrderAnswersBy);
         answers.DataBind();
         answersWrapper.ReRender();
     }
@@ -89,9 +108,7 @@ public partial class Item : System.Web.UI.Page
         LinkButton btn = sender as LinkButton;
         int id = GetIdOfAnswer(btn);
         QuizItem.Find(id).Delete();
-        answers.DataSource = _question.GetAnswers();
-        answers.DataBind();
-        answersWrapper.ReRender();
+        DataBindAnswers();
     }
 
     protected void star_Click(object sender, EventArgs e)
@@ -140,6 +157,7 @@ public partial class Item : System.Web.UI.Page
     private void FillOutContent()
     {
         header.Text = _question.Header;
+        whenPosted.Text = " [" + GetTime(_question.Created) + "]";
         body.Text = _question.BodyFormated;
         count.Text = _question.GetScore().ToString();
         askedBy.InnerHtml = _question.CreatedBy.FriendlyName + " - " + _question.CreatedBy.GetCreds() + " creds";
@@ -183,6 +201,29 @@ public partial class Item : System.Web.UI.Page
         deleteBtn.Focus();
     }
 
+    protected void changeOrdering_Click(object sender, EventArgs e)
+    {
+        if (OrderAnswersBy == QuizItem.OrderAnswersBy.MostVotes)
+        {
+            OrderAnswersBy = QuizItem.OrderAnswersBy.Newest;
+            changeOrdering.Text = "Order by oldest [current - Newest]";
+        }
+        else if (OrderAnswersBy == QuizItem.OrderAnswersBy.Newest || OrderAnswersBy == QuizItem.OrderAnswersBy.Determine)
+        {
+            OrderAnswersBy = QuizItem.OrderAnswersBy.Oldest;
+            changeOrdering.Text = "Order by most votes [current - Oldest]";
+        }
+        else if (OrderAnswersBy == QuizItem.OrderAnswersBy.Oldest)
+        {
+            OrderAnswersBy = QuizItem.OrderAnswersBy.MostVotes;
+            changeOrdering.Text = "Order by newest [current - Most Votes]";
+        }
+        DataBindAnswers();
+        new EffectRollUp(answersWrapper, 200)
+            .ChainThese(new EffectRollDown(answersWrapper, 800))
+            .Render();
+    }
+
     protected void deleteBtn_Click(object sender, EventArgs e)
     {
         _question.Delete();
@@ -213,8 +254,7 @@ public partial class Item : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            answers.DataSource = _question.GetAnswers();
-            answers.DataBind();
+            DataBindAnswers();
         }
         base.OnLoad(e);
     }
@@ -230,9 +270,7 @@ public partial class Item : System.Web.UI.Page
         q.Save();
 
         // Binding grid again
-        answers.DataSource = _question.GetAnswers();
-        answers.DataBind();
-        answersWrapper.ReRender();
+        DataBindAnswers();
 
         new EffectHighlight(answersWrapper, 500).Render();
         answerBody.Text = "";
@@ -490,5 +528,10 @@ public partial class Item : System.Web.UI.Page
         {
             _question.IncreaseViewCount();
         }
+    }
+
+    protected string GetTime(DateTime time)
+    {
+        return TimeFormatter.Format(time);
     }
 }

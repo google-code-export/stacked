@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using System.Configuration;
 using Castle.ActiveRecord.Queries;
 using System.Collections;
+using Utilities;
 
 namespace Entities
 {
@@ -22,6 +23,9 @@ namespace Entities
         private QuizItem _parent;
         private string _url;
         private IList _tags;
+
+        public enum OrderBy { New, Unanswered, Top };
+        public enum OrderAnswersBy { Newest, Oldest, MostVotes, Determine };
 
         [PrimaryKey]
         public int ID
@@ -218,8 +222,6 @@ namespace Entities
             }
         }
 
-        public enum OrderBy { New, Unanswered, Top };
-
         public static IEnumerable<QuizItem> GetQuestions(Operator oper, Tag tag, OrderBy order)
         {
             if (oper == null)
@@ -409,9 +411,55 @@ group by c2.FK_Parent order by count(c2.FK_Parent) desc, this_.Created desc");
             return plus - minus;
         }
 
-        public IEnumerable<QuizItem> GetAnswers()
+        public IEnumerable<QuizItem> GetAnswers(OrderAnswersBy order)
         {
             List<QuizItem> retVal = new List<QuizItem>(QuizItem.FindAll(Expression.Eq("Parent", this)));
+
+            if (order == OrderAnswersBy.MostVotes)
+            {
+                OrderByVotes(retVal);
+            }
+            else if (order == OrderAnswersBy.Newest)
+            {
+                retVal.Sort(
+                    delegate(QuizItem left, QuizItem right)
+                    {
+                        return right.Created.CompareTo(left.Created);
+                    });
+            }
+            else if (order == OrderAnswersBy.Oldest)
+            {
+                OrderByOldest(retVal);
+            }
+            else if (order == OrderAnswersBy.Determine)
+            {
+                // Here we are supposed to determine according to settings in Web.Config how
+                // to order the answers...
+                if (this.Created + Settings.SpanBeforeOrderingAnswersByVotes < DateTime.Now)
+                {
+                    OrderByVotes(retVal);
+                }
+                else
+                {
+                    OrderByOldest(retVal);
+                }
+            }
+            else
+                throw new ApplicationException("Unknown ordering of votes");
+            return retVal;
+        }
+
+        private static void OrderByOldest(List<QuizItem> retVal)
+        {
+            retVal.Sort(
+                delegate(QuizItem left, QuizItem right)
+                {
+                    return left.Created.CompareTo(right.Created);
+                });
+        }
+
+        private static void OrderByVotes(List<QuizItem> retVal)
+        {
             retVal.Sort(
                 delegate(QuizItem left, QuizItem right)
                 {
@@ -423,7 +471,6 @@ group by c2.FK_Parent order by count(c2.FK_Parent) desc, this_.Created desc");
                         return left.Created.CompareTo(right.Created);
                     }
                 });
-            return retVal;
         }
 
         public int CountFavorites(Operator exclude)

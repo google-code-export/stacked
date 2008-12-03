@@ -45,6 +45,10 @@
             runat="server" 
             ID="header" 
             Tag="h2" />
+        <ra:Label 
+            runat="server" 
+            CssClass="whenPosted"
+            ID="whenPosted" />
         <div class="tagsHeader">
             <asp:Repeater runat="server" ID="repTags">
                 <ItemTemplate>
@@ -103,6 +107,13 @@
             class="operator operatorAskedQuestion" />
         <ra:LinkButton 
             runat="server" 
+            ID="quoteQuestion"
+            OnClick="quoteQuestion_Click"
+            CssClass="quoteQuestionBtn"
+            Visible="false" 
+            Text="Quote..." />
+        <ra:LinkButton 
+            runat="server" 
             ID="editQuestionBtn" 
             CssClass="editQuestionBtn" 
             Visible="false" 
@@ -117,11 +128,10 @@
             Text="Delete..." />
         <ra:LinkButton 
             runat="server" 
-            ID="quoteQuestion"
-            OnClick="quoteQuestion_Click"
-            CssClass="quoteQuestionBtn"
-            Visible="false" 
-            Text="Quote..." />
+            ID="changeOrdering"
+            Text="Change ordering [current - determine]"
+            OnClick="changeOrdering_Click"
+            CssClass="changeOrdering" />
         <ra:Panel 
             runat="server" 
             Visible="false" 
@@ -166,7 +176,10 @@
                     <a class="linkAnswer" href='<%# "#" + Eval("ID") %>' name='<%#Eval("ID") %>'>
                         link
                     </a>
-                    <div class="vote">
+                    <div class="answerDate">
+                        <%#GetTime((DateTime)Eval("Created")) %>
+                    </div>
+                    <ra:Panel runat="server" CssClass="vote">
                         <ra:HiddenField 
                             runat="server" 
                             Value='<%#Eval("Id") %>' />
@@ -184,7 +197,7 @@
                             Text="&nbsp;"
                             OnClick="VoteAnswerDown"
                             CssClass='<%#GetDownCssClassIfVoted((int)Eval("Id")) %>' />
-                    </div>
+                    </ra:Panel>
                     <div class="answerContent">
                         <%#Eval("BodyFormated")%>
                     </div>
