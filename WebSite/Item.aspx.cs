@@ -3,6 +3,8 @@ using Entities;
 using NHibernate.Expression;
 using Ra.Widgets;
 using Ra;
+using RaSelector;
+using Utilities;
 
 public partial class Item : System.Web.UI.Page
 {
@@ -51,30 +53,22 @@ public partial class Item : System.Web.UI.Page
     protected void EditQuestionBtnClick(object sender, EventArgs e)
     {
         LinkButton btn = sender as LinkButton;
-        foreach (System.Web.UI.Control idx in btn.Parent.Controls)
-        {
-            if (idx is Panel)
-            {
-                Panel tmp = idx as Panel;
-                if (tmp.CssClass == "editAnswer")
-                {
-                    int id = GetIdOfAnswer(btn);
-                    TextArea txt = tmp.Controls[1] as TextArea;
-                    txt.Text = QuizItem.Find(id).Body;
-                    tmp.Visible = true;
-                    new EffectFadeIn(tmp, 500)
-                        .ChainThese(new EffectFocusAndSelect(txt))
-                        .Render();
-                }
-            }
-        }
+        Panel editAnswer = SelectorHelpers.FindFirstByCssClass<Panel>(btn.Parent, "editAnswer");
+        TextArea text = Selector.SelectFirst<TextArea>(editAnswer);
+        int id = GetIdOfAnswer(btn);
+
+        text.Text = QuizItem.Find(id).Body;
+        editAnswer.Visible = true;
+        new EffectFadeIn(editAnswer, 500)
+            .ChainThese(new EffectFocusAndSelect(text))
+            .Render();
     }
 
     protected void SaveAnswer(object sender, EventArgs e)
     {
         Button btn = sender as Button;
         Panel pnl = btn.Parent as Panel;
-        TextArea txt = pnl.Controls[1] as TextArea;
+        TextArea txt = Selector.SelectFirst<TextArea>(pnl);
         new EffectFadeOut(pnl, 500).Render();
         int id = GetIdOfAnswer(pnl);
         QuizItem item = QuizItem.Find(id);
@@ -205,20 +199,23 @@ public partial class Item : System.Web.UI.Page
 
     protected void changeOrdering_Click(object sender, EventArgs e)
     {
-        if (OrderAnswersBy == QuizItem.OrderAnswersBy.MostVotes)
+        switch (OrderAnswersBy)
         {
-            OrderAnswersBy = QuizItem.OrderAnswersBy.Newest;
-            changeOrdering.Text = "Order by oldest [current - Newest]";
-        }
-        else if (OrderAnswersBy == QuizItem.OrderAnswersBy.Newest || OrderAnswersBy == QuizItem.OrderAnswersBy.Determine)
-        {
-            OrderAnswersBy = QuizItem.OrderAnswersBy.Oldest;
-            changeOrdering.Text = "Order by most votes [current - Oldest]";
-        }
-        else if (OrderAnswersBy == QuizItem.OrderAnswersBy.Oldest)
-        {
-            OrderAnswersBy = QuizItem.OrderAnswersBy.MostVotes;
-            changeOrdering.Text = "Order by newest [current - Most Votes]";
+            case QuizItem.OrderAnswersBy.MostVotes:
+                OrderAnswersBy = QuizItem.OrderAnswersBy.Newest;
+                changeOrdering.Text = "Order by oldest [current - Newest]";
+                break;
+            case QuizItem.OrderAnswersBy.Newest:
+            case QuizItem.OrderAnswersBy.Determine:
+                OrderAnswersBy = QuizItem.OrderAnswersBy.Oldest;
+                changeOrdering.Text = "Order by most votes [current - Oldest]";
+                break;
+            case QuizItem.OrderAnswersBy.Oldest:
+                OrderAnswersBy = QuizItem.OrderAnswersBy.MostVotes;
+                changeOrdering.Text = "Order by newest [current - Most Votes]";
+                break;
+            default:
+                throw new ApplicationException("Not implemented sorting order of QuizItems...!");
         }
         DataBindAnswers();
         new EffectRollUp(answersWrapper, 200)
@@ -281,38 +278,23 @@ public partial class Item : System.Web.UI.Page
     protected void ViewComments(object sender, EventArgs e)
     {
         LinkButton btn = sender as LinkButton;
-        foreach (System.Web.UI.Control idx in btn.Parent.Controls)
-        {
-            if (idx is Panel)
-            {
-                Panel tmp = idx as Panel;
-                if (tmp.CssClass == "viewComments")
-                {
-                    int id = GetIdOfAnswer(btn);
-                    tmp.Visible = true;
-                    QuizItem answer = QuizItem.Find(id);
+        int id = GetIdOfAnswer(btn);
+        QuizItem answer = QuizItem.Find(id);
 
-                    // Finding repeater
-                    foreach (System.Web.UI.Control idxC in tmp.Controls)
-                    {
-                        if (idxC is System.Web.UI.WebControls.Repeater)
-                        {
-                            System.Web.UI.WebControls.Repeater rep = idxC as System.Web.UI.WebControls.Repeater;
-                            rep.DataSource = answer.Children;
-                            rep.DataBind();
-                        }
-                        else if (idxC is TextArea)
-                        {
-                            new EffectFadeIn(tmp, 200)
-                                .ChainThese(new EffectFocusAndSelect(idxC as TextArea))
-                                .Render();
-                            (idxC as TextArea).Text = "write your comment here...";
-                        }
-                    }
-                    tmp.ReRender();
-                }
-            }
-        }
+        Panel tmp = SelectorHelpers.FindFirstByCssClass<Panel>(btn.Parent, "viewComments");
+        tmp.Visible = true;
+        tmp.ReRender();
+
+        System.Web.UI.WebControls.Repeater rep = Selector.SelectFirst<System.Web.UI.WebControls.Repeater>(tmp);
+        rep.DataSource = answer.Children;
+        rep.DataBind();
+
+        TextArea txt = Selector.SelectFirst<TextArea>(tmp);
+        txt.Text = "write your comment here...";
+
+        new EffectFadeIn(tmp, 200)
+            .ChainThese(new EffectFocusAndSelect(txt))
+            .Render();
     }
 
     protected void SaveComment(object sender, EventArgs e)
@@ -320,85 +302,50 @@ public partial class Item : System.Web.UI.Page
         Button btn = sender as Button;
         int id = GetIdOfAnswer(btn.Parent);
         QuizItem q = QuizItem.Find(id);
-        foreach (System.Web.UI.Control idx in btn.Parent.Controls)
-        {
-            if (idx is TextArea)
-            {
-                TextArea tmp = idx as TextArea;
-                QuizItem n = new QuizItem();
-                n.Body = tmp.Text;
-                n.CreatedBy = Operator.Current;
-                n.Parent = q;
-                n.Save();
-                q.Refresh();
-                new EffectFadeOut((idx.Parent as Panel), 300).Render();
-            }
-        }
-        foreach (System.Web.UI.Control idx in btn.Parent.Parent.Controls)
-        {
-            if (idx is LinkButton)
-            {
-                LinkButton viewComments = idx as LinkButton;
-                if (viewComments.CssClass == "comments")
-                {
-                    viewComments.Text = "Comments [" + q.Children.Count + "]";
-                }
-            }
-        }
+
+        TextArea tmp = Selector.SelectFirst<TextArea>(btn.Parent);
+        QuizItem n = new QuizItem();
+        n.Body = tmp.Text;
+        n.CreatedBy = Operator.Current;
+        n.Parent = q;
+        n.Save();
+        q.Refresh();
+        new EffectFadeOut(btn.Parent, 300).Render();
+
+        LinkButton viewComments = SelectorHelpers.FindFirstByCssClass<LinkButton>(btn.Parent.Parent, "comments");
+        viewComments.Text = "Comments [" + q.Children.Count + "]";
     }
 
     private int GetIdOfAnswer(System.Web.UI.Control ctrl)
     {
-        foreach (System.Web.UI.Control idx in ctrl.Parent.Controls)
-        {
-            if (idx is HiddenField)
-            {
-                return int.Parse((idx as HiddenField).Value);
-            }
-        }
-        return -1;
+        HiddenField field = Selector.SelectFirst<HiddenField>(ctrl.Parent);
+        return int.Parse(field.Value);
     }
 
     private Label FindLabelForAnswer(System.Web.UI.Control ctrl)
     {
-        foreach (System.Web.UI.Control idx in ctrl.Parent.Controls)
-        {
-            if (idx is Label)
-            {
-                return idx as Label;
-            }
-        }
-        return null;
+        return Selector.SelectFirst<Label>(ctrl.Parent);
     }
 
     private LinkButton FindUpLinkButtonForAnswer(System.Web.UI.Control ctrl)
     {
-        foreach (System.Web.UI.Control idx in ctrl.Parent.Controls)
-        {
-            if (idx is LinkButton)
-            {
-                return idx as LinkButton;
-            }
-        }
-        return null;
+        return Selector.SelectFirst<LinkButton>(ctrl.Parent);
     }
 
     private LinkButton FindDownLinkButtonForAnswer(System.Web.UI.Control ctrl)
     {
         bool first = true;
-        foreach (System.Web.UI.Control idx in ctrl.Parent.Controls)
-        {
-            if (idx is LinkButton)
+        return Selector.SelectFirst<LinkButton>(ctrl.Parent,
+            delegate(System.Web.UI.Control idx)
             {
-                if (first)
+                if (idx is LinkButton)
                 {
+                    if (!first)
+                        return true;
                     first = false;
-                    continue;
                 }
-                return idx as LinkButton;
-            }
-        }
-        return null;
+                return false;
+            });
     }
 
     protected void VoteAnswerUp(object sender, EventArgs e)
@@ -442,7 +389,8 @@ public partial class Item : System.Web.UI.Page
         errorLabel.Text = error;
         errorLabel.Visible = true;
         errorLabel.Style["display"] = "none";
-        new EffectFadeIn(errorLabel, 1000).Render();
+        new EffectFadeIn(errorLabel, 1000)
+            .Render();
         timerRemoveError.Enabled = true;
     }
 
@@ -455,7 +403,6 @@ public partial class Item : System.Web.UI.Page
     protected void VoteAnswerDown(object sender, EventArgs e)
     {
         int idOfQuizItem = GetIdOfAnswer(sender as System.Web.UI.Control);
-
         try
         {
             QuizItem item = QuizItem.Find(idOfQuizItem);
