@@ -100,6 +100,7 @@ namespace Entities
         {
             HttpContext.Current.Session["__CurrentOperator"] = null;
             HttpCookie c = new HttpCookie("username", "mumboJumbo|zxzxzx");
+            c.HttpOnly = true;
             HttpContext.Current.Response.Cookies.Add(c);
         }
 
@@ -150,6 +151,7 @@ namespace Entities
             {
                 // Creating persistant cookie to avoid having to log in again...
                 HttpCookie cookie = new HttpCookie("username", oper.Username + "|" + oper.Password.GetHashCode().ToString());
+                cookie.HttpOnly = true;
                 cookie.Expires = DateTime.Now.AddMonths(3);
                 HttpContext.Current.Response.Cookies.Add(cookie);
             }
@@ -159,6 +161,7 @@ namespace Entities
                 if (HttpContext.Current.Response.Cookies["username"] != null)
                 {
                     HttpCookie c = new HttpCookie("username", "mumboJumbo|zxzxzx");
+                    c.HttpOnly = true;
                     HttpContext.Current.Response.Cookies.Add(c);
                 }
             }
@@ -171,6 +174,8 @@ namespace Entities
 
         public override void Save()
         {
+            this.FriendlyName = this.FriendlyName.Replace("&", "&amp;").Replace("<", "&lt;").Replace(">", "&gt;");
+            this.Username = this.Username.Replace("&", "&amp;").Replace("<", "&lt;").Replace(">", "&gt;");
             if (_id == 0)
                 Created = DateTime.Now;
             base.Save();
@@ -185,6 +190,16 @@ namespace Entities
                 HttpCookie creds = HttpContext.Current.Request.Cookies["username"];
                 string username = creds.Value.Split('|')[0];
                 string hashedPwd = creds.Value.Split('|')[1];
+
+                // We want to *overwrite* to make sure only HTTP cookies are allowed here
+                if (!creds.HttpOnly)
+                {
+                    // Overwriting existing cookie if it's not an HTTP-Only cookie...
+                    HttpCookie n = new HttpCookie("username");
+                    n.Value = username + "|" + hashedPwd;
+                    HttpContext.Current.Response.Cookies.Add(n);
+                }
+
                 Operator oper = Operator.FindOne(
                     Expression.Eq("Username", username));
                 if (oper != null && oper.Password.GetHashCode().ToString() == hashedPwd)
@@ -250,7 +265,7 @@ namespace Entities
             return creds;
         }
 
-        public static int Count()
+        public new static int Count()
         {
             return ActiveRecordBase<Operator>.Count();
         }

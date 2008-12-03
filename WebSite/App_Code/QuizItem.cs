@@ -375,6 +375,7 @@ group by c2.FK_Parent order by count(c2.FK_Parent) desc, this_.Created desc");
         public override void Save()
         {
             // Checking to see if this is FIRST saving and if it is create a new friendly URL...
+            this.Header = this.Header.Replace("&", "&amp;").Replace("<", "&lt;").Replace(">", "&gt;");
             if (_id == 0)
             {
                 Created = DateTime.Now;
