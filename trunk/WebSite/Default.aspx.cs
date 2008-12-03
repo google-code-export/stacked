@@ -26,7 +26,9 @@ public partial class _Default : System.Web.UI.Page, IDefault
         {
             _questionsForTag = Tag.FindOne(Expression.Eq("Name", tag));
             Title = "Posts tagged with " + _questionsForTag.Name;
-            tabNew.Caption = "Posts tagged with; " + _questionsForTag.Name;
+            tabNew.Caption = "Posts with; " + _questionsForTag.Name;
+            tabMost.Caption = "Most answers with; " + _questionsForTag.Name;
+            tabUn.Caption = "Unanswered with; " + _questionsForTag.Name;
         }
         if (!IsPostBack)
         {
