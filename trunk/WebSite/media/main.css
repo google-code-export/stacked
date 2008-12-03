@@ -788,5 +788,33 @@ table tr td
 }
 
 
+.comments
+{
+	position:absolute;
+	left:5px;
+	bottom:5px;
+	color:#999;
+	text-decoration:none;
+	font-size:0.8em;
+}
+
+.viewComments
+{
+	margin:25px;
+	border:dotted 1px #999;
+	background-color:#f0f0fe;
+	padding:15px;
+	font-size:0.8em;
+	color:#666;
+}
+
+textarea.commentTxt
+{
+	height:60px;
+	margin:10px;
+}
+
+
+
 
 

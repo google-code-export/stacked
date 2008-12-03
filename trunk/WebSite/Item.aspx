@@ -158,6 +158,9 @@
         <asp:Repeater runat="server" ID="answers">
             <ItemTemplate>
                 <div class="answer">
+                    <ra:HiddenField ID="HiddenField1" 
+                        runat="server" 
+                        Value='<%#Eval("Id") %>' />
                     <ra:LinkButton 
                         runat="server" 
                         CssClass="editAnswerBtn" 
@@ -201,6 +204,11 @@
                     <div class="answerContent">
                         <%#Eval("BodyFormated")%>
                     </div>
+                    <ra:LinkButton 
+                        runat="server" 
+                        CssClass="comments" 
+                        OnClick="ViewComments"
+                        Text='<%# "Comments [" + Eval("Children.Count") + "]"%>' />
                     <ra:Panel 
                         runat="server" 
                         Visible="false" 
@@ -211,6 +219,27 @@
                             runat="server" 
                             OnClick="SaveAnswer"
                             Text="Save" />
+                    </ra:Panel>
+                    <ra:Panel 
+                        runat="server" 
+                        Visible="false"
+                        CssClass="viewComments">
+                        <asp:Repeater runat="server">
+                            <ItemTemplate>
+                                <div>
+                                    <%#Eval("BodyFormated") %>
+                                </div>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                        <div>
+                            <ra:TextArea 
+                                runat="server" 
+                                CssClass="commentTxt" />
+                            <ra:Button 
+                                runat="server" 
+                                Text="Save" 
+                                OnClick="SaveComment" />
+                        </div>
                     </ra:Panel>
                 </div>
             </ItemTemplate>

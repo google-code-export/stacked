@@ -44,6 +44,7 @@ public partial class Item : System.Web.UI.Page
 
         answerQuestion.Visible = Operator.Current != null;
         quoteQuestion.Visible = Operator.Current != null;
+        changeOrdering.Visible = _question.Children.Count > 1;
         base.OnPreRender(e);
     }
 
@@ -79,6 +80,7 @@ public partial class Item : System.Web.UI.Page
         QuizItem item = QuizItem.Find(id);
         item.Body = txt.Text;
         item.Save();
+        _question.Refresh();
         DataBindAnswers();
     }
 
@@ -274,6 +276,75 @@ public partial class Item : System.Web.UI.Page
 
         new EffectHighlight(answersWrapper, 500).Render();
         answerBody.Text = "";
+    }
+
+    protected void ViewComments(object sender, EventArgs e)
+    {
+        LinkButton btn = sender as LinkButton;
+        foreach (System.Web.UI.Control idx in btn.Parent.Controls)
+        {
+            if (idx is Panel)
+            {
+                Panel tmp = idx as Panel;
+                if (tmp.CssClass == "viewComments")
+                {
+                    int id = GetIdOfAnswer(btn);
+                    tmp.Visible = true;
+                    QuizItem answer = QuizItem.Find(id);
+
+                    // Finding repeater
+                    foreach (System.Web.UI.Control idxC in tmp.Controls)
+                    {
+                        if (idxC is System.Web.UI.WebControls.Repeater)
+                        {
+                            System.Web.UI.WebControls.Repeater rep = idxC as System.Web.UI.WebControls.Repeater;
+                            rep.DataSource = answer.Children;
+                            rep.DataBind();
+                        }
+                        else if (idxC is TextArea)
+                        {
+                            new EffectFadeIn(tmp, 200)
+                                .ChainThese(new EffectFocusAndSelect(idxC as TextArea))
+                                .Render();
+                            (idxC as TextArea).Text = "write your comment here...";
+                        }
+                    }
+                    tmp.ReRender();
+                }
+            }
+        }
+    }
+
+    protected void SaveComment(object sender, EventArgs e)
+    {
+        Button btn = sender as Button;
+        int id = GetIdOfAnswer(btn.Parent);
+        QuizItem q = QuizItem.Find(id);
+        foreach (System.Web.UI.Control idx in btn.Parent.Controls)
+        {
+            if (idx is TextArea)
+            {
+                TextArea tmp = idx as TextArea;
+                QuizItem n = new QuizItem();
+                n.Body = tmp.Text;
+                n.CreatedBy = Operator.Current;
+                n.Parent = q;
+                n.Save();
+                q.Refresh();
+                new EffectFadeOut((idx.Parent as Panel), 300).Render();
+            }
+        }
+        foreach (System.Web.UI.Control idx in btn.Parent.Parent.Controls)
+        {
+            if (idx is LinkButton)
+            {
+                LinkButton viewComments = idx as LinkButton;
+                if (viewComments.CssClass == "comments")
+                {
+                    viewComments.Text = "Comments [" + q.Children.Count + "]";
+                }
+            }
+        }
     }
 
     private int GetIdOfAnswer(System.Web.UI.Control ctrl)
