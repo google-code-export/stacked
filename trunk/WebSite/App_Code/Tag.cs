@@ -46,6 +46,7 @@ namespace Entities
 
         public override void Save()
         {
+            this.Name = this.Name.Replace("&", "&amp;").Replace("<", "&lt;").Replace(">", "&gt;");
             if (_id == 0)
             {
                 Created = DateTime.Now;
