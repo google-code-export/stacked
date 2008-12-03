@@ -36,6 +36,34 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <ra:Panel 
+            runat="server" 
+            ID="internetExplorerWarning"
+            Visible="false"
+            CssClass="internetExploderWarning">
+            It seems that you are using Internet Explorer. IE is a broken browser and helps hold back the web
+            and is also making it very difficult for web developers to create beautiful solutions. We encourage
+            you to download one of the browsers below which are not only orders of magnitudes better but will
+            also give you a much better experience. Both of them are also Free of Charge and Open Source. 
+            In addition by <em>"saying no"</em> to Internet Explorer you also help the web move forward and makes it a 
+            better playground for innovation and developers which in turn creates better solutions for you as an
+            end user. This website along with all other standard compliant websites on the internet will also 
+            perform much better with anything else then Internet Explorer.
+            <ul>
+                <li><a href="http://getfirefox.com">FireFox</a></li>
+                <li><a href="http://www.google.com/chrome">Google Chrome</a></li>
+            </ul>
+            <ra:Button 
+                runat="server" 
+                ID="permanentlyDismiss" 
+                OnClick="permanentlyDismiss_Click"
+                Text="I don't care!" />
+            <ra:Button 
+                runat="server" 
+                ID="remindMeLater" 
+                OnClick="remindMeLater_Click"
+                Text="Remind me later..." />
+        </ra:Panel>
         <div class="mainContent">
 
             <ra:Label 
