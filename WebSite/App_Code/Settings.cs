@@ -37,6 +37,20 @@ namespace Utilities
             get { return int.Parse(ConfigurationManager.AppSettings["CredsNeededToEditAnswer"]); }
         }
 
+        public static TimeSpan SpanBeforeOrderingAnswersByVotes
+        {
+            get
+            {
+                int days = int.Parse(ConfigurationManager.AppSettings["SpanBeforeOrderingAnswersByVotes"]);
+                if (days == 0)
+                    return new TimeSpan();
+                else if (days == -1)
+                    return new TimeSpan(10000, 0, 0, 0);
+                else
+                    return new TimeSpan(days, 0, 0, 0);
+            }
+        }
+
         public static RegisteringType DefaultRegistering
         {
             get
