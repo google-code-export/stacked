@@ -37,6 +37,11 @@ namespace Utilities
             get { return int.Parse(ConfigurationManager.AppSettings["CredsNeededToEditAnswer"]); }
         }
 
+        public static bool GiveInternetExploderWarning
+        {
+            get { return ConfigurationManager.AppSettings["GiveInternetExploderWarning"] == "true"; }
+        }
+
         public static TimeSpan SpanBeforeOrderingAnswersByVotes
         {
             get

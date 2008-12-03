@@ -2,6 +2,8 @@
 using Ra.Widgets;
 using Entities;
 using Ra.Extensions;
+using System.Web;
+using Utilities;
 
 public partial class MasterPage : System.Web.UI.MasterPage
 {
@@ -12,7 +14,46 @@ public partial class MasterPage : System.Web.UI.MasterPage
             // Successfully logged in from cookie...
             Login();
         }
+        if (!IsPostBack)
+        {
+            CheckToSeeIfWeShouldWarnAboutInternetExplorer();
+        }
         base.OnInit(e);
+    }
+
+    private void CheckToSeeIfWeShouldWarnAboutInternetExplorer()
+    {
+        if (Settings.GiveInternetExploderWarning)
+        {
+            // Checking to see if browser is IE
+            if (Request.Browser.Browser == "IE")
+            {
+                // Checking to see if Session has turned warning OFF
+                if (Session["hasSeenIEWarning"] == null)
+                {
+                    // Checking to see if persistant cookie is on disc
+                    if (Request.Cookies["shutOffIEWarning"] == null)
+                    {
+                        internetExplorerWarning.Visible = true;
+                        new EffectHighlight(internetExplorerWarning, 500).Render();
+                    }
+                }
+            }
+        }
+    }
+
+    protected void remindMeLater_Click(object sender, EventArgs e)
+    {
+        Session["hasSeenIEWarning"] = true;
+        new EffectFadeOut(internetExplorerWarning, 500).Render();
+    }
+
+    protected void permanentlyDismiss_Click(object sender, EventArgs e)
+    {
+        HttpCookie cookie = new HttpCookie("shutOffIEWarning", "true");
+        cookie.Expires = DateTime.Now.AddMonths(2);
+        Response.Cookies.Add(cookie);
+        new EffectFadeOut(internetExplorerWarning, 500).Render();
     }
 
     protected void goToProfile_Click(object sender, EventArgs e)

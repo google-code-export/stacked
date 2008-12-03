@@ -16,6 +16,42 @@ blockquote
 	border:dotted 1px #ccc;
 }
 
+.internetExploderWarning
+{
+	position:absolute;
+	top:15px;
+	left:15px;
+	padding:25px;
+	border:dotted 1px #999;
+	background-color:#fefefe;
+	font-size:1.2em;
+	color:#999;
+	width:600px;
+	z-index:5000;
+}
+
+.internetExploderWarning ul
+{
+	margin:15px 0 15px 50px;
+}
+
+.internetExploderWarning ul li
+{
+	list-style-position:outside;
+	list-style-type:disc;
+}
+
+.internetExploderWarning a
+{
+	text-decoration:none;
+	color:#66b;
+}
+
+.internetExploderWarning a:hover
+{
+	background-color:#f0f0f0;
+}
+
 .answerContent blockquote
 {
 	margin:25px 25px 25px 60px;
