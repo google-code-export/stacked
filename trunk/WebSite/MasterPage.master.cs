@@ -58,7 +58,6 @@ public partial class MasterPage : System.Web.UI.MasterPage
 
     protected void goToProfile_Click(object sender, EventArgs e)
     {
-        // TODO: Implement...
         profileWindow.Visible = true;
         changeFriendlyName.Text = Operator.Current.FriendlyName;
         changeFriendlyName.Select();
