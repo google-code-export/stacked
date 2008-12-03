@@ -23,6 +23,7 @@ namespace Entities
         private QuizItem _parent;
         private string _url;
         private IList _tags;
+        private IList _children;
 
         public enum OrderBy { New, Unanswered, Top };
         public enum OrderAnswersBy { Newest, Oldest, MostVotes, Determine };
@@ -60,6 +61,13 @@ namespace Entities
         {
             get { return _parent; }
             set { _parent = value; }
+        }
+
+        [HasMany(typeof(QuizItem))]
+        public IList Children
+        {
+            get { return _children; }
+            set { _children = value; }
         }
 
         [Property]
@@ -370,35 +378,54 @@ group by c2.FK_Parent order by count(c2.FK_Parent) desc, this_.Created desc");
             if (_id == 0)
             {
                 Created = DateTime.Now;
-                
-                // Building UNIQUE friendly URL
-                Url = Header.ToLower();
-                if (Url.Length > 100)
-                    Url = Url.Substring(0, 100);
-                int index = 0;
-                while (index < Url.Length)
+
+                if (this.Parent != null)
                 {
-                    if (("abcdefghijklmnopqrstuvwxyz0123456789").IndexOf(Url[index]) == -1)
-                    {
-                        Url = Url.Substring(0, index) + "-" + Url.Substring(index + 1);
-                    }
-                    index += 1;
+                    // Must have random Url...
+                    this.Url = Guid.NewGuid().ToString();
                 }
-                Url = Url.Trim('-');
-                bool found = true;
-                while (found)
+                else
                 {
-                    found = false;
-                    if (Url.IndexOf("--") != -1)
+                    // Building UNIQUE friendly URL
+                    Url = Header.ToLower();
+                    if (Url.Length > 100)
+                        Url = Url.Substring(0, 100);
+                    int index = 0;
+                    while (index < Url.Length)
                     {
-                        Url = Url.Replace("--", "-");
-                        found = true;
+                        if (("abcdefghijklmnopqrstuvwxyz0123456789").IndexOf(Url[index]) == -1)
+                        {
+                            Url = Url.Substring(0, index) + "-" + Url.Substring(index + 1);
+                        }
+                        index += 1;
                     }
+                    Url = Url.Trim('-');
+                    bool found = true;
+                    while (found)
+                    {
+                        found = false;
+                        if (Url.IndexOf("--") != -1)
+                        {
+                            Url = Url.Replace("--", "-");
+                            found = true;
+                        }
+                    }
+                    int countOfOldWithSameURL = QuizItem.Count(Expression.Like("Url", Url + "%.quiz"));
+                    if (countOfOldWithSameURL > 0)
+                    {
+                        while (true)
+                        {
+                            if (QuizItem.Count(Expression.Like("Url", (Url + countOfOldWithSameURL) + "%.quiz")) > 0)
+                            {
+                                countOfOldWithSameURL += 1;
+                            }
+                            else 
+                                break;
+                        }
+                        Url += (countOfOldWithSameURL).ToString();
+                    }
+                    Url += ".quiz";
                 }
-                int countOfOldWithSameURL = QuizItem.Count(Expression.Like("Url", Url + "%.quiz"));
-                if (countOfOldWithSameURL > 0)
-                    Url += (countOfOldWithSameURL + 1).ToString();
-                Url += ".quiz";
                 base.Save();
             }
             base.Save();
