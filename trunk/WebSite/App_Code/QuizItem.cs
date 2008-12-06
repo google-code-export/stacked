@@ -261,7 +261,7 @@ namespace Entities
                         Expression.IsNull("Parent"));
                 case OrderBy.Top:
                     SimpleQuery<QuizItem> retVal = new SimpleQuery<QuizItem>(QueryLanguage.Sql,
-                        "select this_.* from QuizItems this_, QuizItems c2 where this_.ID = c2.FK_Parent group by c2.FK_Parent order by count(c2.FK_Parent) desc, this_.Created desc");
+                        "select this_.* from QuizItems this_, QuizItems c2 where this_.FK_Parent is null and this_.ID = c2.FK_Parent group by c2.FK_Parent order by count(c2.FK_Parent) desc, this_.Created desc");
                     retVal.SetQueryRange(20);
                     retVal.AddSqlReturnDefinition(typeof(QuizItem), "this_");
                     return retVal.Execute();
@@ -287,7 +287,8 @@ namespace Entities
                 case OrderBy.Top:
                     SimpleQuery<QuizItem> retVal = new SimpleQuery<QuizItem>(QueryLanguage.Sql,
                         @"select this_.* from QuizItems this_, QuizItems c2 
-where this_.ID = c2.FK_Parent 
+where this_.FK_Parent is null 
+and this_.ID = c2.FK_Parent 
 and exists(select * from QuizItemTag qt where qt.QuizItemId = this_.Id and exists(select * from Tags t where t.Id = qt.TagId and t.Name='" + tag.Name + @"'))
 group by c2.FK_Parent order by count(c2.FK_Parent) desc, this_.Created desc");
                     retVal.SetQueryRange(20);
