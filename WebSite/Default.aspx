@@ -46,7 +46,7 @@
         </ext:TabView>
 
         <ext:TabView 
-            Caption="Fresh" 
+            Caption="Last asked" 
             runat="server" 
             ID="tabNew" 
             CssClass="content">

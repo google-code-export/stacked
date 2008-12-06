@@ -369,7 +369,7 @@ order by (select Created from QuizItems q2
                             string.Format(@"select this_.* from QuizItems this_, QuizItems c2 
 where this_.FK_Parent is null 
 and this_.ID = c2.FK_Parent 
-and this_.CreatedBy = {0}
+and this_.FK_CreatedBy = {0}
 group by c2.FK_Parent 
 order by count(c2.FK_Parent) desc, this_.Created desc", oper.ID));
                         retVal.SetQueryRange(20);

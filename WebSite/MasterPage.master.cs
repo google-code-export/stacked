@@ -125,9 +125,6 @@ public partial class MasterPage : System.Web.UI.MasterPage
 
     protected void ask_QuestionAsked(object sender, EventArgs e)
     {
-        IDefault def = (Page as IDefault);
-        if (def != null)
-            def.QuestionsUpdated();
     }
 
     protected void loginBtn_Click(object sender, EventArgs e)
