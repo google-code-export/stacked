@@ -29,11 +29,24 @@ public partial class _Default : System.Web.UI.Page
             DataBindGrid();
             lblCount.Text += Operator.Count();
         }
+        CreateBehaviorsForTabViews();
     }
 
     protected void tabContent_ActiveTabViewChanged(object sender, EventArgs e)
     {
         DataBindGrid();
+
+        // We must RE-add the bahviors to the TbView's "Button" property here since
+        // when changing TabView the Button is "re-created"...
+        CreateBehaviorsForTabViews();
+    }
+
+    private void CreateBehaviorsForTabViews()
+    {
+        tabLateAct.Button.Controls.Add(new BehaviorUpdater(200, 0.3M));
+        tabMost.Button.Controls.Add(new BehaviorUpdater(200, 0.3M));
+        tabNew.Button.Controls.Add(new BehaviorUpdater(200, 0.3M));
+        tabUn.Button.Controls.Add(new BehaviorUpdater(200, 0.3M));
     }
 
     private void DataBindGrid()
@@ -79,7 +92,5 @@ public partial class _Default : System.Web.UI.Page
             gridToUpate.DataBindGrid(QuizItem.GetQuestionsFromOperator(order, _questionsForOperator));
         else
             gridToUpate.DataBindGrid(QuizItem.GetQuestions(order));
-        if (IsPostBack)
-            new EffectFadeIn(tabViewToUpdate, 500).Render();
     }
 }
