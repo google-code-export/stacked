@@ -32,6 +32,9 @@ public partial class UserControls_ItemGrid : System.Web.UI.UserControl
             ShouldReRender = false;
             wrap.ReRender();
         }
+        if (IsPostBack)
+            new EffectFadeIn(wrap, 200)
+                .Render();
     }
 
     // Since the Repeater doesn't have any CONTROL we don't need to re-render it wen switching tabs...
