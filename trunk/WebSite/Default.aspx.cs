@@ -79,6 +79,7 @@ public partial class _Default : System.Web.UI.Page
             gridToUpate.DataBindGrid(QuizItem.GetQuestionsFromOperator(order, _questionsForOperator));
         else
             gridToUpate.DataBindGrid(QuizItem.GetQuestions(order));
-        new EffectFadeIn(tabViewToUpdate, 500).Render();
+        if (IsPostBack)
+            new EffectFadeIn(tabViewToUpdate, 500).Render();
     }
 }
