@@ -31,7 +31,7 @@
         Question
     </div>
 </div>
-<ra:Panel runat="server" ID="wrap">
+<ra:Panel runat="server" ID="wrap" EnableViewState="false">
     <asp:Repeater runat="server" ID="rep">
         <ItemTemplate>
             <div class="question">

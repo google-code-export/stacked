@@ -3,13 +3,14 @@ using Entities;
 using NHibernate.Expression;
 using Ra.Widgets;
 using Ra.Extensions;
+using System.Drawing;
 
-public partial class _Default : System.Web.UI.Page, IDefault
+public partial class _Default : System.Web.UI.Page
 {
     private Operator _questionsForOperator;
     private Tag _questionsForTag;
 
-    protected override void OnInit(EventArgs e)
+    protected void Page_Load(object sender, EventArgs e)
     {
         string id = Request["operatorProfile"];
         string tag = Request["tags"];
@@ -25,18 +26,17 @@ public partial class _Default : System.Web.UI.Page, IDefault
         }
         if (!IsPostBack)
         {
-            DataBindGrid(false);
+            DataBindGrid();
             lblCount.Text += Operator.Count();
         }
-        base.OnInit(e);
     }
 
     protected void tabContent_ActiveTabViewChanged(object sender, EventArgs e)
     {
-        DataBindGrid(false);
+        DataBindGrid();
     }
 
-    private void DataBindGrid(bool force)
+    private void DataBindGrid()
     {
         if (_questionsForOperator != null && _questionsForTag != null)
         {
@@ -73,22 +73,12 @@ public partial class _Default : System.Web.UI.Page, IDefault
         else
             throw new ApplicationException("Added grid without adding databinding logic to it!");
 
-        if (!gridToUpate.IsDataBound || force)
-        {
-            if (_questionsForTag != null)
-                gridToUpate.DataBindGrid(QuizItem.GetTaggedQuestions(order, _questionsForTag));
-            else if (_questionsForOperator != null)
-                gridToUpate.DataBindGrid(QuizItem.GetQuestionsFromOperator(order, _questionsForOperator));
-            else
-                gridToUpate.DataBindGrid(QuizItem.GetQuestions(order));
-            if (force)
-                tabViewToUpdate.ReRender();
-        }
+        if (_questionsForTag != null)
+            gridToUpate.DataBindGrid(QuizItem.GetTaggedQuestions(order, _questionsForTag));
+        else if (_questionsForOperator != null)
+            gridToUpate.DataBindGrid(QuizItem.GetQuestionsFromOperator(order, _questionsForOperator));
+        else
+            gridToUpate.DataBindGrid(QuizItem.GetQuestions(order));
         new EffectFadeIn(tabViewToUpdate, 500).Render();
-    }
-
-    public void QuestionsUpdated()
-    {
-        DataBindGrid(true);
     }
 }

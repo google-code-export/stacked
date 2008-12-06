@@ -23,15 +23,21 @@ public partial class UserControls_ItemGrid : System.Web.UI.UserControl
         return TimeFormatter.Format(time);
     }
 
-    public bool IsDataBound
-    {
-        get { return rep.DataSource != null; }
-    }
-
     public void DataBindGrid(IEnumerable<QuizItem> items)
     {
         rep.DataSource = items;
         rep.DataBind();
-        wrap.ReRender();
+        if (ShouldReRender)
+        {
+            ShouldReRender = false;
+            wrap.ReRender();
+        }
+    }
+
+    // Since the Repeater doesn't have any CONTROL we don't need to re-render it wen switching tabs...
+    private bool ShouldReRender
+    {
+        get { return ViewState["shouldReRender"] == null; }
+        set { ViewState["shouldReRender"] = value ? null : new object(); }
     }
 }
