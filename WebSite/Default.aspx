@@ -34,6 +34,18 @@
         CssClass="tab">
 
         <ext:TabView 
+            Caption="Latest activity" 
+            runat="server" 
+            ID="tabLateAct" 
+            CssClass="content">
+
+            <uc1:ItemGrid 
+                ID="gridLateAct" 
+                runat="server" />
+
+        </ext:TabView>
+
+        <ext:TabView 
             Caption="Fresh" 
             runat="server" 
             ID="tabNew" 
@@ -65,19 +77,6 @@
 
             <uc1:ItemGrid 
                 ID="gridUn" 
-                runat="server" />
-
-        </ext:TabView>
-
-        <ext:TabView 
-            Caption="Favored by; " 
-            runat="server" 
-            Visible="false" 
-            ID="tabFav" 
-            CssClass="content">
-
-            <uc1:ItemGrid 
-                ID="gridFav" 
                 runat="server" />
 
         </ext:TabView>

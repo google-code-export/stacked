@@ -25,7 +25,7 @@ namespace Entities
         private IList _tags;
         private IList _children;
 
-        public enum OrderBy { New, Unanswered, Top };
+        public enum OrderBy { LatestActivity, New, Unanswered, Top };
         public enum OrderAnswersBy { Newest, Oldest, MostVotes, Determine };
 
         [PrimaryKey]
@@ -230,41 +230,39 @@ namespace Entities
             }
         }
 
-        public static IEnumerable<QuizItem> GetQuestions(Operator oper, Tag tag, OrderBy order)
-        {
-            if (oper == null)
-                return GetQuestions(order, tag);
-            else
-                return GetQuestionsForUser(oper, tag, order, false);
-        }
-
-        public static IEnumerable<QuizItem> GetFavoredQuestions(Operator oper)
-        {
-            return GetQuestionsForUser(oper, null, OrderBy.New, true);
-        }
-
-        private static IEnumerable<QuizItem> GetQuestions(OrderBy order, Tag tag)
-        {
-            if (tag == null)
-                return GetQuestionsNoTag(order);
-            else
-                return GetQuestionsWithTag(order, tag);
-        }
-
-        private static IEnumerable<QuizItem> GetQuestionsNoTag(OrderBy order)
+        public static IEnumerable<QuizItem> GetQuestions(OrderBy order)
         {
             switch (order)
             {
+                case OrderBy.LatestActivity:
+                    {
+                        SimpleQuery<QuizItem> retVal = new SimpleQuery<QuizItem>(QueryLanguage.Sql,
+                            @"select this_.* from QuizItems this_
+where this_.FK_Parent is null 
+order by (select Created from QuizItems q2 
+    where this_.ID = q2.ID or q2.FK_Parent = this_.ID 
+    order by Created desc limit 0,1) desc
+");
+                        retVal.SetQueryRange(20);
+                        retVal.AddSqlReturnDefinition(typeof(QuizItem), "this_");
+                        return retVal.Execute();
+                    }
                 case OrderBy.New:
                     return QuizItem.SlicedFindAll(0, 20,
                         new Order[] { Order.Desc("Created") },
                         Expression.IsNull("Parent"));
                 case OrderBy.Top:
-                    SimpleQuery<QuizItem> retVal = new SimpleQuery<QuizItem>(QueryLanguage.Sql,
-                        "select this_.* from QuizItems this_, QuizItems c2 where this_.FK_Parent is null and this_.ID = c2.FK_Parent group by c2.FK_Parent order by count(c2.FK_Parent) desc, this_.Created desc");
-                    retVal.SetQueryRange(20);
-                    retVal.AddSqlReturnDefinition(typeof(QuizItem), "this_");
-                    return retVal.Execute();
+                    {
+                        SimpleQuery<QuizItem> retVal = new SimpleQuery<QuizItem>(QueryLanguage.Sql,
+                            @"select this_.* from QuizItems this_, QuizItems c2 
+where this_.FK_Parent is null 
+and this_.ID = c2.FK_Parent 
+group by c2.FK_Parent 
+order by count(c2.FK_Parent) desc, this_.Created desc");
+                        retVal.SetQueryRange(20);
+                        retVal.AddSqlReturnDefinition(typeof(QuizItem), "this_");
+                        return retVal.Execute();
+                    }
                 case OrderBy.Unanswered:
                     return QuizItem.SlicedFindAll(0, 20,
                         new Order[] { Order.Desc("Created") },
@@ -275,81 +273,170 @@ namespace Entities
             }
         }
 
-        private static IEnumerable<QuizItem> GetQuestionsWithTag(OrderBy order, Tag tag)
+        public static IEnumerable<QuizItem> GetTaggedQuestions(OrderBy order, Tag tag)
         {
             switch (order)
             {
+                case OrderBy.LatestActivity:
+                    {
+                        SimpleQuery<QuizItem> retVal = new SimpleQuery<QuizItem>(QueryLanguage.Sql,
+                            @"select this_.* from QuizItems this_, QuizItems c2 
+where this_.FK_Parent is null 
+and this_.ID = c2.FK_Parent 
+and exists(select * from QuizItemTag qt 
+    where qt.QuizItemId = this_.Id 
+    and exists(select * from Tags t 
+        where t.Id = qt.TagId 
+        and t.Name='" + tag.Name + @"'))
+group by c2.FK_Parent order by c2.Created desc, this_.Created desc");
+                        retVal.SetQueryRange(20);
+                        retVal.AddSqlReturnDefinition(typeof(QuizItem), "this_");
+                        return retVal.Execute();
+                    }
                 case OrderBy.New:
                     return QuizItem.SlicedFindAll(0, 20,
                         new Order[] { Order.Desc("Created") },
                         Expression.IsNull("Parent"),
-                        Expression.Sql("exists(select * from QuizItemTag qt where qt.QuizItemId = this_.Id and exists(select * from Tags t where t.Id = qt.TagId and t.Name='" + tag.Name + "'))"));
+                        Expression.Sql(
+                            @"exists(select * from QuizItemTag qt 
+where qt.QuizItemId = this_.Id 
+and exists(select * from Tags t 
+    where t.Id = qt.TagId 
+    and t.Name='" + tag.Name + "'))"));
                 case OrderBy.Top:
-                    SimpleQuery<QuizItem> retVal = new SimpleQuery<QuizItem>(QueryLanguage.Sql,
-                        @"select this_.* from QuizItems this_, QuizItems c2 
+                    {
+                        SimpleQuery<QuizItem> retVal = new SimpleQuery<QuizItem>(QueryLanguage.Sql,
+                            @"select this_.* from QuizItems this_, QuizItems c2 
 where this_.FK_Parent is null 
 and this_.ID = c2.FK_Parent 
-and exists(select * from QuizItemTag qt where qt.QuizItemId = this_.Id and exists(select * from Tags t where t.Id = qt.TagId and t.Name='" + tag.Name + @"'))
-group by c2.FK_Parent order by count(c2.FK_Parent) desc, this_.Created desc");
-                    retVal.SetQueryRange(20);
-                    retVal.AddSqlReturnDefinition(typeof(QuizItem), "this_");
-                    return retVal.Execute();
+and exists(select * from QuizItemTag qt 
+    where qt.QuizItemId = this_.Id 
+    and exists(select * from Tags t 
+        where t.Id = qt.TagId 
+        and t.Name='" + tag.Name + @"'))
+group by c2.FK_Parent 
+order by count(c2.FK_Parent) desc, this_.Created desc");
+                        retVal.SetQueryRange(20);
+                        retVal.AddSqlReturnDefinition(typeof(QuizItem), "this_");
+                        return retVal.Execute();
+                    }
                 case OrderBy.Unanswered:
                     return QuizItem.SlicedFindAll(0, 20,
                         new Order[] { Order.Desc("Created") },
                         Expression.IsNull("Parent"),
-                        Expression.Sql("not exists(select * from QuizItems where FK_Parent=this_.ID)"),
-                        Expression.Sql("exists(select * from QuizItemTag qt where qt.QuizItemId = this_.Id and exists(select * from Tags t where t.Id = qt.TagId and t.Name='" + tag.Name + "'))"));
+                        Expression.Sql(
+                            "not exists(select * from QuizItems where FK_Parent=this_.ID)"),
+                        Expression.Sql(
+                            @"
+exists(select * from QuizItemTag qt 
+    where qt.QuizItemId = this_.Id 
+    and exists(select * from Tags t 
+        where t.Id = qt.TagId 
+        and t.Name='" + tag.Name + "'))"));
                 default:
                     throw new ApplicationException("Not implemented OrderBy");
             }
         }
 
-        private static IEnumerable<QuizItem> GetQuestionsForUser(Operator oper, Tag tag, OrderBy order, bool onlyFavored)
+        public static IEnumerable<QuizItem> GetQuestionsFromOperator(OrderBy order, Operator oper)
         {
-            if (tag == null)
-                return GetQuestionsForUseNoTag(oper, onlyFavored);
-            else
-                return GetQuestionsForUseWithTag(oper, tag, onlyFavored);
+            switch (order)
+            {
+                case OrderBy.LatestActivity:
+                    {
+                        SimpleQuery<QuizItem> retVal = new SimpleQuery<QuizItem>(QueryLanguage.Sql,
+                            string.Format(@"select this_.* from QuizItems this_, QuizItems c2 
+where this_.FK_Parent is null 
+and this_.ID = c2.FK_Parent 
+and this_.FK_CreatedBy = {0}
+group by c2.FK_Parent 
+order by c2.Created desc, this_.Created desc", oper.ID));
+                        retVal.SetQueryRange(20);
+                        retVal.AddSqlReturnDefinition(typeof(QuizItem), "this_");
+                        return retVal.Execute();
+                    }
+                case OrderBy.New:
+                    return QuizItem.SlicedFindAll(0, 20,
+                        new Order[] { Order.Desc("Created") },
+                        Expression.IsNull("Parent"),
+                        Expression.Eq("CreatedBy", oper));
+                case OrderBy.Top:
+                    {
+                        SimpleQuery<QuizItem> retVal = new SimpleQuery<QuizItem>(QueryLanguage.Sql,
+                            string.Format(@"select this_.* from QuizItems this_, QuizItems c2 
+where this_.FK_Parent is null 
+and this_.ID = c2.FK_Parent 
+and this_.CreatedBy = {0}
+group by c2.FK_Parent 
+order by count(c2.FK_Parent) desc, this_.Created desc", oper.ID));
+                        retVal.SetQueryRange(20);
+                        retVal.AddSqlReturnDefinition(typeof(QuizItem), "this_");
+                        return retVal.Execute();
+                    }
+                case OrderBy.Unanswered:
+                    return QuizItem.SlicedFindAll(0, 20,
+                        new Order[] { Order.Desc("Created") },
+                        Expression.IsNull("Parent"),
+                        Expression.Eq("CreatedBy", oper),
+                        Expression.Sql("not exists(select * from QuizItems where FK_Parent=this_.ID)"));
+                default:
+                    throw new ApplicationException("Not implemented OrderBy");
+            }
         }
 
-        private static IEnumerable<QuizItem> GetQuestionsForUseNoTag(Operator oper, bool onlyFavored)
+        public static IEnumerable<QuizItem> GetQuestionsFavoredByOperator(OrderBy order, Operator oper)
         {
-            if (onlyFavored)
+            switch (order)
             {
-                return QuizItem.FindAll(
-                    new Order[] { Order.Desc("Created") },
-                    Expression.IsNull("Parent"),
-                    Expression.Sql(
-                    string.Format("exists(select * from Favorites f where f.FK_FavoredBy={0} and this_.ID = f.FK_Question)", oper.ID)));
-            }
-            else
-            {
-                return QuizItem.FindAll(
-                    new Order[] { Order.Desc("Created") },
-                    Expression.Eq("CreatedBy", oper),
-                    Expression.IsNull("Parent"));
-            }
-        }
-
-        private static IEnumerable<QuizItem> GetQuestionsForUseWithTag(Operator oper, Tag tag, bool onlyFavored)
-        {
-            if (onlyFavored)
-            {
-                return QuizItem.FindAll(
-                    new Order[] { Order.Desc("Created") },
-                    Expression.IsNull("Parent"),
-                    Expression.Sql(
-                    string.Format("exists(select * from Favorites f where f.FK_FavoredBy={0} and this_.ID = f.FK_Question)", oper.ID)),
-                    Expression.Sql("exists(select * from QuizItemTag qt where qt.QuizItemId = this_.Id and exists(select * from Tags t where t.Id = qt.TagId and t.Name='" + tag.Name + "'))"));
-            }
-            else
-            {
-                return QuizItem.FindAll(
-                    new Order[] { Order.Desc("Created") },
-                    Expression.Eq("CreatedBy", oper),
-                    Expression.IsNull("Parent"),
-                    Expression.Sql("exists(select * from QuizItemTag qt where qt.QuizItemId = this_.Id and exists(select * from Tags t where t.Id = qt.TagId and t.Name='" + tag.Name + "'))"));
+                case OrderBy.LatestActivity:
+                    {
+                        SimpleQuery<QuizItem> retVal = new SimpleQuery<QuizItem>(QueryLanguage.Sql,
+                            string.Format(@"select this_.* from QuizItems this_, QuizItems c2 
+where this_.FK_Parent is null 
+and this_.ID = c2.FK_Parent 
+and exists(select * from Favorites f 
+    where f.FK_FavoredBy = {0}
+    and f.FK_Question = this_.ID)
+group by c2.FK_Parent 
+order by c2.Created desc, this_.Created desc", oper.ID));
+                        retVal.SetQueryRange(20);
+                        retVal.AddSqlReturnDefinition(typeof(QuizItem), "this_");
+                        return retVal.Execute();
+                    }
+                case OrderBy.New:
+                    return QuizItem.SlicedFindAll(0, 20,
+                        new Order[] { Order.Desc("Created") },
+                        Expression.IsNull("Parent"),
+                        Expression.Sql(
+                             string.Format(@"and exists(select * from Favorites f 
+where f.FK_FavoredBy = {0}
+and f.FK_Question = this_.ID)", oper.ID)));
+                case OrderBy.Top:
+                    {
+                        SimpleQuery<QuizItem> retVal = new SimpleQuery<QuizItem>(QueryLanguage.Sql,
+                            string.Format(@"select this_.* from QuizItems this_, QuizItems c2 
+where this_.FK_Parent is null 
+and this_.ID = c2.FK_Parent 
+and exists(select * from Favorites f 
+    where f.FK_FavoredBy = {0}
+    and f.FK_Question = this_.ID)
+group by c2.FK_Parent 
+order by count(c2.FK_Parent) desc, this_.Created desc", oper.ID));
+                        retVal.SetQueryRange(20);
+                        retVal.AddSqlReturnDefinition(typeof(QuizItem), "this_");
+                        return retVal.Execute();
+                    }
+                case OrderBy.Unanswered:
+                    return QuizItem.SlicedFindAll(0, 20,
+                        new Order[] { Order.Desc("Created") },
+                        Expression.IsNull("Parent"),
+                        Expression.Sql("not exists(select * from QuizItems where FK_Parent=this_.ID)"),
+                        Expression.Sql(
+                             string.Format(@"and exists(select * from Favorites f 
+where f.FK_FavoredBy = {0}
+and f.FK_Question = this_.ID)", oper.ID)));
+                default:
+                    throw new ApplicationException("Not implemented OrderBy");
             }
         }
 
