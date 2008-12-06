@@ -280,15 +280,17 @@ order by count(c2.FK_Parent) desc, this_.Created desc");
                 case OrderBy.LatestActivity:
                     {
                         SimpleQuery<QuizItem> retVal = new SimpleQuery<QuizItem>(QueryLanguage.Sql,
-                            @"select this_.* from QuizItems this_, QuizItems c2 
+                            string.Format(@"select this_.* from QuizItems this_
 where this_.FK_Parent is null 
-and this_.ID = c2.FK_Parent 
 and exists(select * from QuizItemTag qt 
     where qt.QuizItemId = this_.Id 
     and exists(select * from Tags t 
         where t.Id = qt.TagId 
-        and t.Name='" + tag.Name + @"'))
-group by c2.FK_Parent order by c2.Created desc, this_.Created desc");
+        and t.Name='{0}'))
+order by (select Created from QuizItems q2 
+    where this_.ID = q2.ID or q2.FK_Parent = this_.ID 
+    order by Created desc limit 0,1) desc
+", tag.Name.Replace("\n", "").Replace("\r", "").Replace("'", "")));
                         retVal.SetQueryRange(20);
                         retVal.AddSqlReturnDefinition(typeof(QuizItem), "this_");
                         return retVal.Execute();
@@ -345,12 +347,13 @@ exists(select * from QuizItemTag qt
                 case OrderBy.LatestActivity:
                     {
                         SimpleQuery<QuizItem> retVal = new SimpleQuery<QuizItem>(QueryLanguage.Sql,
-                            string.Format(@"select this_.* from QuizItems this_, QuizItems c2 
+                            string.Format(@"select this_.* from QuizItems this_
 where this_.FK_Parent is null 
-and this_.ID = c2.FK_Parent 
 and this_.FK_CreatedBy = {0}
-group by c2.FK_Parent 
-order by c2.Created desc, this_.Created desc", oper.ID));
+order by (select Created from QuizItems q2 
+    where this_.ID = q2.ID or q2.FK_Parent = this_.ID 
+    order by Created desc limit 0,1) desc
+", oper.ID));
                         retVal.SetQueryRange(20);
                         retVal.AddSqlReturnDefinition(typeof(QuizItem), "this_");
                         return retVal.Execute();
