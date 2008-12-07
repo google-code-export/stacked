@@ -122,6 +122,7 @@
         <ra:Label 
             runat="server" 
             ID="body" 
+            CssClass="questionContent"
             Tag="div" />
         <a 
             runat="server" 
@@ -132,7 +133,12 @@
             ID="changeOrdering"
             Text="Change ordering [current - determine]"
             OnClick="changeOrdering_Click"
-            CssClass="changeOrdering" />
+            CssClass="changeOrdering">
+            <ra:BehaviorUpdater 
+                Delay="200" 
+                runat="server" 
+                ID="obscureChangeOrder" />
+        </ra:LinkButton>
         <ra:Panel 
             runat="server" 
             Visible="false" 
@@ -213,7 +219,12 @@
                         runat="server" 
                         CssClass="comments" 
                         OnClick="ViewComments"
-                        Text='<%# "Comments [" + Eval("Children.Count") + "]"%>' />
+                        Text='<%# "Comments [" + Eval("Children.Count") + "]"%>'>
+                        <ra:BehaviorUpdater 
+                            Delay="200" 
+                            runat="server" 
+                            ID="obscureChangeOrder" />
+                    </ra:LinkButton>
                     <ra:Panel 
                         runat="server" 
                         Visible="false" 
@@ -231,18 +242,25 @@
                         CssClass="viewComments">
                         <asp:Repeater runat="server">
                             <ItemTemplate>
-                                <div>
+                                <div class="oneComment">
                                     <%#Eval("BodyFormated") %>
+                                    <div class="commentedByWho">
+                                        <a
+                                            href='<%#Eval("CreatedBy.Username") + ".user" %>'>
+                                            <%#Eval("CreatedBy.FriendlyName") %>
+                                        </a>
+                                    </div>
                                 </div>
                             </ItemTemplate>
                         </asp:Repeater>
-                        <div>
+                        <div class="commentSubmit">
                             <ra:TextArea 
                                 runat="server" 
                                 CssClass="commentTxt" />
                             <ra:Button 
                                 runat="server" 
                                 Text="Save" 
+                                CssClass="submitComment"
                                 OnClick="SaveComment" />
                         </div>
                     </ra:Panel>
@@ -255,15 +273,17 @@
     <ra:Panel 
         runat="server" 
         ID="answerQuestion" 
-        CssClass="answer">
+        CssClass="answerQuestion">
         <ra:TextArea 
             runat="server" 
+            CssClass="answerBody"
             ID="answerBody" />
 
         <ra:Button 
             runat="server" 
             ID="btnSubmit" 
             OnClick="btnSubmit_Click"
+            CssClass="answerQuestionBtn"
             Text="Answer" />
     </ra:Panel>
 
