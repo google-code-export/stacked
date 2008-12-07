@@ -100,7 +100,7 @@ input[type=checkbox] { margin-right:6px; vertical-align:top; margin-top:1px; }
 .linkButton:hover { text-decoration:none; }
 .profileName { position:absolute; top:2px; right:2px; font-size:0.7em; color:#999; }
 .search { position:absolute; top:15px; right:290px; }
-.contentPlaceHolder { padding-top:150px; }
+.contentPlaceHolder { padding-top:150px; margin-bottom:90px; }
 .infoSmallText { font-size:0.8em; font-style:italic; color:#999; }
 
 /* Default.aspx */
@@ -114,6 +114,13 @@ input[type=checkbox] { margin-right:6px; vertical-align:top; margin-top:1px; }
 .content-item { position:relative; background-color:#f5f5f5; padding:10px; margin:0px 5px 0px 5px; float:left; text-align:center; }
 .score { width:60px; }
 .answers-count { width:70px; }
+.item .score { font-size:128.1%; }
+.really-bad { background-color:#f00; }
+.bad { background-color:#e99; }
+.neutral { }
+.good { background-color:#9e9; }
+.great { background-color:#3f3; }
+.item .answers-count { font-size:128.1%; }
 .date { width:80px; }
 .operator { width:90px; }
 .question { width:420px; }
@@ -358,6 +365,11 @@ input[type=checkbox] { margin-right:6px; vertical-align:top; margin-top:1px; }
 	font-size:0.9em;
 }
 
+.questionContent
+{
+	font-size:123.1%;
+}
+
 .changeOrdering
 {
 	position:absolute;
@@ -462,17 +474,85 @@ input[type=checkbox] { margin-right:6px; vertical-align:top; margin-top:1px; }
 .answerContent
 {
 	margin:25px 0 35px 25px;
+	font-size:123.1%;
 }
 
 .comments
 {
 	position:absolute;
 	left:2px;
+	bottom:2px;
 	border:2px;
 	color:#999;
 	padding:5px;
 }
 
+.viewComments
+{
+}
+
+.oneComment
+{
+	border:dotted 1px #ddd;
+	width:550px;
+	margin:15px auto 0 auto;
+	padding:15px;
+	position:relative;
+}
+
+.commentedByWho
+{
+	position:absolute;
+	top:5px;
+	right:0px;
+}
+
+.commentedByWho a
+{
+	padding:5px;
+}
+
+.commentSubmit
+{
+	width:550px;
+	margin:15px auto 0 auto;
+	position:relative;
+}
+
+.commentTxt
+{
+	height:200px;
+	width:100%;
+	margin-bottom:35px;
+}
+
+.submitComment
+{
+	position:absolute;
+	bottom:0px;
+	right:0px;
+}
+
+.answerQuestion
+{
+	margin-left:100px;
+	width:750px;
+	position:relative;
+}
+
+.answerBody
+{
+	width:100%;
+	height:180px;
+	margin-bottom:35px;
+}
+
+.answerQuestionBtn
+{
+	position:absolute;
+	bottom:0px;
+	right:0px;
+}
 
 
 
