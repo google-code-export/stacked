@@ -84,6 +84,7 @@ a { text-decoration:none; color:#00f; }
 a:hover { color:#00a; background-color:#dedede; text-decoration:underline; }
 table { border-collapse:collapse; }
 td { border:none 0; }
+input[type=checkbox] { margin-right:6px; vertical-align:top; margin-top:1px; }
 
 /* Custom fields - classes for MasterPage */
 .internetExploderWarning { position:absolute; top:5px; left:5px; padding:15px; border:dotted 2px #999; background-color:#fafafa; width:50%; font-size:123.1%; }
@@ -105,120 +106,94 @@ td { border:none 0; }
 .lblCountUsers { margin:10px 0px 25px 0px; font-size:123.1%; display:block; }
 
 /* ItemGrid.ascx */
-.list-item
+.list-item { border:dotted 1px #999; padding:15px 10px 15px 10px; margin:10px 0px 10px 0px; }
+.list-header { font-size:138.5%; overflow:auto; }
+.header-item { position:relative; background-color:#ddd; padding:10px; margin:0px 5px 0px 5px; float:left; text-align:center; }
+.item { font-size:108%; overflow:auto; line-height:25px; }
+.content-item { position:relative; background-color:#f5f5f5; padding:10px; margin:0px 5px 0px 5px; float:left; text-align:center; }
+.score { width:60px; }
+.answers-count { width:70px; }
+.date { width:70px; }
+.operator { width:90px; }
+.question { width:430px; }
+.item .date { font-size:70%; }
+.item .operator { padding:0px; width:110px; font-size:0.9em; text-align:left; }
+.item a { display:block; padding:10px; }
+.item a:hover { text-decoration:none; }
+.item .question { padding:0px; text-align:left; width:450px; font-size:0.9em; }
+.item .viewCount { position:absolute; top:0px; right:5px; color:#999; font-size:0.9em; }
+.item .tags { position:absolute; bottom:0px; right:5px; color:#999; font-size:0.9em; }
+
+/* Login.ascx */
+.loginWindow
 {
-	border:dotted 1px #999;
-	padding:15px 10px 15px 10px;
-	margin:10px 0px 10px 0px;
+	width:400px;
+	top:10px;
+	right:10px;
+	position:absolute;
+	z-index:5000;
 }
 
-.list-header
-{
-	font-size:138.5%;
-	overflow:auto;
-}
-
-.header-item
-{
-	position:relative;
-	background-color:#ddd;
-	padding:10px;
-	margin:0px 5px 0px 5px;
-	float:left;
-	text-align:center;
-}
-
-.item
-{
-	font-size:108%;
-	overflow:auto;
-	line-height:25px;
-}
-
-.content-item
+.loginDiv
 {
 	position:relative;
-	background-color:#f5f5f5;
-	padding:10px;
-	margin:0px 5px 0px 5px;
-	float:left;
-	text-align:center;
+	height:160px;
 }
 
-.score
+.openIdWrapper
 {
-	width:60px;
+	padding:25px;
+	padding-top:40px;
 }
 
-.answers-count
-{
-	width:70px;
-}
-
-.date
-{
-	width:70px;
-}
-
-.operator
-{
-	width:90px;
-}
-
-.question
-{
-	width:430px;
-}
-
-.item .date
-{
-	font-size:70%;
-}
-
-.item .operator
-{
-	padding:0px;
-	width:110px;
-	font-size:0.9em;
-	text-align:left;
-}
-
-.item a
+.openIdBtn
 {
 	display:block;
-	padding:10px;
+	width:100px;
+	font-size:0.8em;
+	position:absolute;
+	bottom:2px;
+	left:2px;
 }
 
-.item a:hover
+.whatsOpenId
 {
-	text-decoration:none;
+	display:block;
+	width:100px;
+	font-size:0.8em;
+	position:absolute;
+	bottom:2px;
+	right:2px;
 }
 
-.item .question
+.publicTerminalOpenID
 {
-	padding:0px;
-	text-align:left;
-	width:450px;
+	padding:10px 10px 10px 0px;
+	display:block;
+}
+
+.errLblOpenId
+{
+	color:Red;
 	font-size:0.9em;
+	font-style:italic;
 }
 
-.item .viewCount
+.loginTable
+{
+	margin:15px auto 0px auto;
+}
+
+.loginNativeBtn
 {
 	position:absolute;
-	top:0px;
-	right:5px;
-	color:#999;
-	font-size:0.9em;
+	bottom:2px;
+	right:2px;
 }
 
-.item .tags
-{
-	position:absolute;
-	bottom:0px;
-	right:5px;
-	color:#999;
-	font-size:0.9em;
-}
+
+
+
 
 
 
