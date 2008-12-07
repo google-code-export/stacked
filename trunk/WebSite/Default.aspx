@@ -34,7 +34,7 @@
         CssClass="tab">
 
         <ext:TabView 
-            Caption="Latest activity" 
+            Caption="Recently answered" 
             runat="server" 
             ID="tabLateAct" 
             CssClass="content">
@@ -46,7 +46,7 @@
         </ext:TabView>
 
         <ext:TabView 
-            Caption="Last asked" 
+            Caption="Recently asked" 
             runat="server" 
             ID="tabNew" 
             CssClass="content">

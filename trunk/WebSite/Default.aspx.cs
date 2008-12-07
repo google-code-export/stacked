@@ -36,7 +36,7 @@ public partial class _Default : System.Web.UI.Page
     {
         DataBindGrid();
 
-        // We must RE-add the bahviors to the TbView's "Button" property here since
+        // We must RE-add the behaviors to the TbView's "Button" property here since
         // when changing TabView the Button is "re-created"...
         CreateBehaviorsForTabViews();
     }
