@@ -6,7 +6,22 @@ using System.Collections.Generic;
 
 public partial class UserControls_AskQuestion : System.Web.UI.UserControl
 {
-    public event EventHandler QuestionAsked;
+    public class QuestionAskedEventArgs : EventArgs
+    {
+        private string _url;
+
+        public QuestionAskedEventArgs(string url)
+        {
+            _url = url;
+        }
+
+        public string Url
+        {
+            get { return _url; }
+        }
+    }
+
+    public event EventHandler<QuestionAskedEventArgs> QuestionAsked;
 
     public void ShowAskQuestion()
     {
@@ -140,6 +155,6 @@ public partial class UserControls_AskQuestion : System.Web.UI.UserControl
         }
         q.Save();
         if (QuestionAsked != null)
-            QuestionAsked(this, new EventArgs());
+            QuestionAsked(this, new QuestionAskedEventArgs(q.Url));
     }
 }

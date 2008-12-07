@@ -27,32 +27,29 @@
         ID="wndDelete" 
         Caption="You SURE? There's no rollback for this..."
         Visible="false" 
-        style="width:300px;position:absolute;top:100px;left:100px;z-index:5000;"
-        CssClass="window">
-        <div style="padding:70px;">
+        CssClass="window wndDelete">
+        <div class="divDelete">
             <ra:Button 
                 runat="server" 
                 ID="deleteBtn" 
                 OnClick="deleteBtn_Click"
                 Text="Yes I am sure!" />
         </div>
-        <ra:BehaviorObscurable runat="server" ID="deleteObscurer" />
+        <ra:BehaviorObscurable 
+            runat="server" 
+            ID="deleteObscurer" />
     </ext:Window>
 
 
-    <div style="position:relative;">
+    <div class="answerDiv">
         <ra:Label 
             runat="server" 
             ID="header" 
             Tag="h1" />
-        <ra:Label 
-            runat="server" 
-            CssClass="whenPosted"
-            ID="whenPosted" />
         <div class="tagsHeader">
             <asp:Repeater runat="server" ID="repTags">
                 <ItemTemplate>
-                    <a href='<%#Eval("Name") + ".tag" %>'><%#Eval("Name") %> (<%#Eval("Item.Count") %>)</a>
+                    <a class="linkButton" href='<%#Eval("Name") + ".tag" %>'><%#Eval("Name") %> (<%#Eval("Item.Count") %>)</a>
                 </ItemTemplate>
             </asp:Repeater>
         </div>
@@ -61,7 +58,7 @@
         runat="server" 
         ID="errorLabel" 
         Visible="false"
-        CssClass="error" />
+        CssClass="errPanel" />
     <ext:Timer 
         runat="server" 
         ID="timerRemoveError" 
@@ -96,15 +93,7 @@
             Text="&nbsp;"
             OnClick="down_Click" />
     </div>
-    <div class="quizContent">
-        <ra:Label 
-            runat="server" 
-            ID="body" 
-            Tag="div" />
-        <a 
-            runat="server" 
-            id="askedBy" 
-            class="operator operatorAskedQuestion" />
+    <div class="questionStart">
         <ra:LinkButton 
             runat="server" 
             ID="quoteQuestion"
@@ -126,6 +115,18 @@
             CssClass="deleteQuestionBtn"
             Visible="false" 
             Text="Delete..." />
+        <ra:Label 
+            runat="server" 
+            CssClass="whenPosted"
+            ID="whenPosted" />
+        <ra:Label 
+            runat="server" 
+            ID="body" 
+            Tag="div" />
+        <a 
+            runat="server" 
+            id="askedBy" 
+            class="linkButton operatorAsked" />
         <ra:LinkButton 
             runat="server" 
             ID="changeOrdering"
@@ -139,13 +140,16 @@
             ID="editQuestion">
             <ext:InPlaceEdit 
                 runat="server" 
+                CssClass="editHeader"
                 ID="editHeader" />
             <ra:TextArea 
                 runat="server" 
+                CssClass="editQuestionText"
                 ID="editTxt" />
             <ra:Button 
                 runat="server" 
                 ID="saveEdit" 
+                CssClass="saveEditedQuestion"
                 OnClick="saveEdit_Click"
                 Text="Save" />
         </ra:Panel>
@@ -153,6 +157,7 @@
     <br style="clear:both;" />
     <ra:Panel 
         runat="server" 
+        CssClass="answersWrapper"
         ID="answersWrapper">
 
         <asp:Repeater runat="server" ID="answers">
@@ -161,6 +166,9 @@
                     <ra:HiddenField ID="HiddenField1" 
                         runat="server" 
                         Value='<%#Eval("Id") %>' />
+                    <a class="linkAnswer" href='<%# "#" + Eval("ID") %>' name='<%#Eval("ID") %>'>
+                        link
+                    </a>
                     <ra:LinkButton 
                         runat="server" 
                         CssClass="editAnswerBtn" 
@@ -173,16 +181,13 @@
                         CssClass="deleteAnswerBtn"
                         Visible='<%# (bool)(Entities.Operator.Current != null && Entities.Operator.Current.CanDeleteAnswer) %>'
                         Text="Delete..." />
-                    <a class="operator" href='<%#Eval("CreatedBy.Username") + ".user" %>'>
+                    <a class="linkButton answeredBy" href='<%#Eval("CreatedBy.Username") + ".user" %>'>
                         <%#Eval("CreatedBy.FriendlyName")%> - <%#Eval("CreatedBy.CalculateCreds")%> creds
-                    </a>
-                    <a class="linkAnswer" href='<%# "#" + Eval("ID") %>' name='<%#Eval("ID") %>'>
-                        link
                     </a>
                     <div class="answerDate">
                         <%#GetTime((DateTime)Eval("Created")) %>
                     </div>
-                    <ra:Panel runat="server" CssClass="vote">
+                    <ra:Panel runat="server" CssClass="vote voteAnswer">
                         <ra:HiddenField 
                             runat="server" 
                             Value='<%#Eval("Id") %>' />
