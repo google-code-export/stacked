@@ -221,7 +221,7 @@
                         OnClick="ViewComments"
                         Text='<%# "Comments [" + Eval("Children.Count") + "]"%>'>
                         <ra:BehaviorUpdater 
-                            Delay="200" 
+                            Delay="400" 
                             runat="server" 
                             ID="obscureChangeOrder" />
                     </ra:LinkButton>
