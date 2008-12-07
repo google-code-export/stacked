@@ -22,15 +22,15 @@
 <ext:Window 
     runat="server" 
     ID="login" 
-    CssClass="window" 
+    CssClass="window loginWindow" 
     Visible="false" 
-    style="width:400px;top:10px;right:10px;position:absolute;z-index:5000;"
     Caption="Please login">
-    <div style="position:relative;height:140px;">
+
+    <div class="loginDiv">
         <ra:Panel 
             runat="server" 
-            style="padding:25px;padding-top:40px;" 
             DefaultWidget="Button1"
+            CssClass="openIdWrapper"
             ID="openIdWrapper">
             <openId:OpenIdTextBox 
                 runat="server" 
@@ -46,9 +46,17 @@
             <ra:LinkButton 
                 runat="server" 
                 ID="btnNoOpenId" 
-                CssClass="loginBtnOpenID"
-                OnClick="btnNoOpenId_Click"
+                CssClass="linkButton openIdBtn"
+                OnClick="btnNoOpenId_Click" 
+                AccessKey="I" 
+                Tooltip="Keyboard shortcut SHIFT+ALT+I"
                 Text="I don't use OpenID" />
+            <ra:LinkButton 
+                runat="server" 
+                ID="whatsOpenID" 
+                CssClass="linkButton whatsOpenId"
+                OnClick="whatsOpenID_Click"
+                Text="What is 'OpenID'...?" />
             <br />
             <ra:CheckBox 
                 runat="server" 
@@ -56,23 +64,16 @@
                 CssClass="publicTerminalOpenID" 
                 Tooltip="Mark this checkbox if you're NOT on a computer you own yourself!"
                 ID="publicTerminalOpenID" />
-            <ra:LinkButton 
-                runat="server" 
-                ID="whatsOpenID" 
-                CssClass="whatsOpenID"
-                OnClick="whatsOpenID_Click"
-                Text="What is 'OpenID'...?" />
-            <br />
             <ra:Label 
                 runat="server" 
-                style="color:Red;"
+                CssClass="errLblOpenId"
                 ID="errLblOpenId" />
         </ra:Panel>
         <ra:Panel 
             runat="server" 
             DefaultWidget="loginBtn"
             ID="nativeWrapper">
-            <table class="login">
+            <table class="loginTable">
                 <tr>
                     <td>Username: </td>
                     <td>
@@ -93,10 +94,11 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Public terminal</td>
+                    <td>&nbsp;</td>
                     <td>
                         <ra:CheckBox 
                             runat="server" 
+                            Text="Public terminal?"
                             Tooltip="Mark this checkbox if you're NOT on a computer you own yourself!"
                             ID="publicTerminale" />
                     </td>
@@ -113,17 +115,20 @@
             <ra:LinkButton 
                 runat="server" 
                 ID="useOpenID" 
-                CssClass="loginBtnOpenID"
-                OnClick="useOpenID_Click"
+                CssClass="linkButton openIdBtn"
+                OnClick="useOpenID_Click" 
+                AccessKey="D"
+                Tooltip="Keyboard shortcut SHIFT+ALT+D"
                 Text="I want to use OpenID" />
             <ra:Button 
                 runat="server" 
                 ID="loginBtn" 
-                CssClass="loginBtn"
+                CssClass="loginNativeBtn"
                 OnClick="loginBtn_Click"
                 Text="Login" />
         </ra:Panel>
     </div>
+
     <ra:BehaviorObscurable runat="server" ID="obscurer" />
 </ext:Window>
 
