@@ -31,7 +31,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Stacked - Questions and Answer done right!</title>
-    <link href="media/Sapphire/Sapphire-0.8.5.css" rel="stylesheet" type="text/css" />
     <link href="media/main.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -64,13 +63,18 @@
                 OnClick="remindMeLater_Click"
                 Text="Remind me later..." />
         </ra:Panel>
+
         <div class="mainContent">
+
+            <a id="A1" href="~/" runat="server" class="logo">
+                <img src="media/stacked.jpg" alt="Stacked logo" />
+            </a>
 
             <ra:Label 
                 runat="server" 
                 ID="infoLabel" 
                 Visible="false"
-                CssClass="info" />
+                CssClass="infoLabel" />
             <ext:Timer 
                 runat="server" 
                 ID="infoTimer" 
@@ -86,60 +90,61 @@
                 OnQuestionAsked="ask_QuestionAsked"
                 runat="server" />
 
-            <h1 class="logo"><a id="A1" runat="server" href="~/">Stacked - Questions and Answers done right</a></h1>
+            <ra:Panel 
+                runat="server" 
+                ID="loginPnl" 
+                CssClass="loginPnl">
+                <ra:LinkButton 
+                    runat="server" 
+                    ID="goToProfile" 
+                    CssClass="linkButton"
+                    Visible="false"
+                    OnClick="goToProfile_Click" />
+                <ra:LinkButton 
+                    runat="server" 
+                    ID="loginBtn" 
+                    CssClass="linkButton"
+                    OnClick="loginBtn_Click" 
+                    Tooltip="You an use OpenID to login"
+                    Text="Login" />
+                <ra:LinkButton 
+                    runat="server" 
+                    ID="registerBtn" 
+                    CssClass="linkButton"
+                    Tooltip="If you don't want to register you can Login with OpenID by clicking the 'Login' button"
+                    OnClick="registerBtn_Click"
+                    Text="Register" />
+                <ra:LinkButton 
+                    runat="server" 
+                    ID="logouBtn" 
+                    CssClass="linkButton"
+                    Visible="false"
+                    OnClick="logouBtn_Click"
+                    Text="Logout" />
+                <ra:LinkButton 
+                    runat="server" 
+                    ID="askQuestion" 
+                    CssClass="linkButton"
+                    Visible="false"
+                    OnClick="askQuestion_Click"
+                    Text="Ask question" />
+            </ra:Panel>
+            <div class="search">
+                <ext:AutoCompleter 
+                    runat="server" 
+                    ID="auto" 
+                    CssClass="auto" 
+                    AccessKey="S" 
+                    Tooltip="Search - Keyboard shortcut; ALT+SHIFT+S"
+                    OnRetrieveAutoCompleterItems="auto_RetrieveAutoCompleterItems" />
+            </div>
 
-            <div style="margin-top:100px;">
+            <div class="contentPlaceHolder">
                 <asp:ContentPlaceHolder 
                     id="body" 
                     runat="server" />
             </div>
 
-            <ra:Panel 
-                runat="server" 
-                ID="loginPnl" 
-                CssClass="loginPnl">
-                <div style="float:left;width:49%;">
-                    <ext:AutoCompleter 
-                        runat="server" 
-                        ID="auto" 
-                        CssClass="auto" 
-                        AccessKey="S" 
-                        Tooltip="Search - Keyboard shortcut; ALT+SHIFT+S"
-                        OnRetrieveAutoCompleterItems="auto_RetrieveAutoCompleterItems" />
-                </div>
-                <div style="float:left;width:49%;">
-                    <ra:LinkButton 
-                        runat="server" 
-                        ID="goToProfile" 
-                        Visible="false"
-                        CssClass="profileBtn"
-                        OnClick="goToProfile_Click" />
-                    <ra:LinkButton 
-                        runat="server" 
-                        ID="loginBtn" 
-                        OnClick="loginBtn_Click" 
-                        Tooltip="You an use OpenID to login"
-                        Text="Login" />
-                    <ra:LinkButton 
-                        runat="server" 
-                        ID="registerBtn" 
-                        Tooltip="If you don't want to register you can Login with OpenID by clicking the 'Login' button"
-                        OnClick="registerBtn_Click"
-                        Text="Register" />
-                    <ra:LinkButton 
-                        runat="server" 
-                        ID="logouBtn" 
-                        Visible="false"
-                        OnClick="logouBtn_Click"
-                        Text="Logout" />
-                    <ra:LinkButton 
-                        runat="server" 
-                        ID="askQuestion" 
-                        Visible="false"
-                        OnClick="askQuestion_Click"
-                        Text="Ask question" />
-                </div>
-            </ra:Panel>
             <uc1:Login 
                 ID="login" 
                 OnLoggedIn="login_LoggedIn"
@@ -165,8 +170,8 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">
-                            <em style="font-size:0.8em;font-style:italic;color:#999;">Changes won't show up before you navigate away from this page...</em>
+                        <td colspan="2" class="infoSmallText">
+                            Changes won't show up before you navigate away from this page...
                         </td>
                     </tr>
                 </table>
@@ -180,13 +185,5 @@
             <ra:BehaviorObscurable runat="server" ID="obscureProfile" />
         </ext:Window>
     </form>
-<script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-var pageTracker = _gat._getTracker("UA-4923736-3");
-pageTracker._trackPageview();
-</script>
 </body>
 </html>

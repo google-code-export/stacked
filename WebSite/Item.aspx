@@ -44,7 +44,7 @@
         <ra:Label 
             runat="server" 
             ID="header" 
-            Tag="h2" />
+            Tag="h1" />
         <ra:Label 
             runat="server" 
             CssClass="whenPosted"
