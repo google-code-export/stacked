@@ -66,7 +66,7 @@
                 ID="publicTerminalOpenID" />
             <ra:Label 
                 runat="server" 
-                CssClass="errLblOpenId"
+                CssClass="errLbl"
                 ID="errLblOpenId" />
         </ra:Panel>
         <ra:Panel 
