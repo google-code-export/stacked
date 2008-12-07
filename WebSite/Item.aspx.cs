@@ -153,7 +153,7 @@ public partial class Item : System.Web.UI.Page
     private void FillOutContent()
     {
         header.Text = _question.Header;
-        whenPosted.Text = " [" + GetTime(_question.Created) + "]";
+        whenPosted.Text = GetTime(_question.Created);
         body.Text = _question.BodyFormated;
         count.Text = _question.GetScore().ToString();
         askedBy.InnerHtml = _question.CreatedBy.FriendlyName + " - " + _question.CreatedBy.GetCreds() + " creds";

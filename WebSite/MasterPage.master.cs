@@ -4,6 +4,7 @@ using Entities;
 using Ra.Extensions;
 using System.Web;
 using Utilities;
+using Ra;
 
 public partial class MasterPage : System.Web.UI.MasterPage
 {
@@ -123,8 +124,9 @@ public partial class MasterPage : System.Web.UI.MasterPage
         ask.ShowAskQuestion();
     }
 
-    protected void ask_QuestionAsked(object sender, EventArgs e)
+    protected void ask_QuestionAsked(object sender, UserControls_AskQuestion.QuestionAskedEventArgs e)
     {
+        AjaxManager.Instance.Redirect("~/" + e.Url);
     }
 
     protected void loginBtn_Click(object sender, EventArgs e)
