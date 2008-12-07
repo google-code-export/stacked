@@ -489,6 +489,8 @@ input[type=checkbox] { margin-right:6px; vertical-align:top; margin-top:1px; }
 
 .viewComments
 {
+	/* Unless we've got this one then panel will "jump" when Rolled Down...! */
+	overflow:hidden;
 }
 
 .oneComment

@@ -282,19 +282,26 @@ public partial class Item : System.Web.UI.Page
         QuizItem answer = QuizItem.Find(id);
 
         Panel tmp = SelectorHelpers.FindFirstByCssClass<Panel>(btn.Parent, "viewComments");
-        tmp.Visible = true;
-        tmp.ReRender();
+        if (!tmp.Visible || tmp.Style["display"] == "none")
+        {
+            tmp.Visible = true;
+            tmp.ReRender();
 
-        System.Web.UI.WebControls.Repeater rep = Selector.SelectFirst<System.Web.UI.WebControls.Repeater>(tmp);
-        rep.DataSource = answer.Children;
-        rep.DataBind();
+            System.Web.UI.WebControls.Repeater rep = Selector.SelectFirst<System.Web.UI.WebControls.Repeater>(tmp);
+            rep.DataSource = answer.Children;
+            rep.DataBind();
 
-        TextArea txt = Selector.SelectFirst<TextArea>(tmp);
-        txt.Text = "write your comment here...";
+            TextArea txt = Selector.SelectFirst<TextArea>(tmp);
+            txt.Text = "write your comment here...";
 
-        new EffectFadeIn(tmp, 200)
-            .ChainThese(new EffectFocusAndSelect(txt))
-            .Render();
+            new EffectRollDown(tmp, 500)
+                .Render();
+        }
+        else
+        {
+            new EffectRollUp(tmp, 500)
+                .Render();
+        }
     }
 
     protected void SaveComment(object sender, EventArgs e)
@@ -310,7 +317,8 @@ public partial class Item : System.Web.UI.Page
         n.Parent = q;
         n.Save();
         q.Refresh();
-        new EffectFadeOut(btn.Parent, 300).Render();
+        new EffectRollUp(btn.Parent, 500)
+            .Render();
 
         LinkButton viewComments = SelectorHelpers.FindFirstByCssClass<LinkButton>(btn.Parent.Parent, "comments");
         viewComments.Text = "Comments [" + q.Children.Count + "]";
