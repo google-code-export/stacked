@@ -4,6 +4,7 @@ using NHibernate.Expression;
 using Ra.Widgets;
 using Ra.Extensions;
 using System.Drawing;
+using Ra;
 
 public partial class _Default : System.Web.UI.Page
 {
@@ -24,7 +25,7 @@ public partial class _Default : System.Web.UI.Page
             _questionsForTag = Tag.FindOne(Expression.Eq("Name", tag));
             Title = "Posts tagged with " + _questionsForTag.Name;
         }
-        if (!IsPostBack)
+        if (!AjaxManager.Instance.IsCallback)
         {
             DataBindGrid();
             lblCount.Text += Operator.Count();

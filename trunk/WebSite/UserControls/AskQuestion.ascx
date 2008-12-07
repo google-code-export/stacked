@@ -19,8 +19,7 @@
     ID="wndAsk" 
     Caption="Ask a question..."
     Visible="false" 
-    style="width:600px;position:absolute;top:10px;left:10px;z-index:5000;"
-    CssClass="window">
+    CssClass="window askQuestionWindow">
     <div class="askQuestion">
         <ext:Timer 
             runat="server" 
@@ -28,37 +27,37 @@
             Enabled="true" 
             Duration="5000" 
             OnTick="timerUpdatePreview_Tick" />
-        <div class="askQuestionLeft" style="z-index:5000;">
-            <div style="margin:15px;">
+        <div class="askQuestionLeft">
+            <div class="actionButtons">
                 Append; 
                 <ra:LinkButton 
                     runat="server" 
                     ID="appendLink" 
-                    CssClass="appendButton" 
+                    CssClass="linkButton actionButton" 
                     OnClick="Link"
                     Text="Link" />
                 <ra:LinkButton 
                     runat="server" 
                     ID="appendBold" 
-                    CssClass="appendButton"
+                    CssClass="linkButton actionButton"
                     OnClick="Bold"
                     Text="Bold" />
                 <ra:LinkButton 
                     runat="server" 
                     ID="appendItalic" 
-                    CssClass="appendButton"
+                    CssClass="linkButton actionButton"
                     OnClick="Italic"
                     Text="Italic" />
                 <ra:LinkButton 
                     runat="server" 
                     ID="appendList" 
-                    CssClass="appendButton"
+                    CssClass="linkButton actionButton"
                     OnClick="List"
                     Text="List" />
                 <ra:LinkButton 
                     runat="server" 
                     ID="appendCode" 
-                    CssClass="appendButton"
+                    CssClass="linkButton actionButton"
                     OnClick="Code"
                     Text="Code" />
             </div>
@@ -75,7 +74,7 @@
             <ext:AutoCompleter 
                 runat="server" 
                 ID="tags" 
-                CssClass="auto" 
+                CssClass="auto tagsAuto" 
                 OnAutoCompleterItemSelected="tags_AutoCompleterItemSelected"
                 OnRetrieveAutoCompleterItems="tags_RetrieveAutoCompleterItems" />
 
@@ -87,7 +86,7 @@
                 Text="Ask" />
         </div>
         <div class="askQuestionRight">
-<pre style="font-size:0.9em;">
+<pre class="legend">
 Link;
 [http://x.com text]
 
@@ -116,7 +115,6 @@ if( YouDoThis )
 All HTML will be escaped
         </div>
         <ra:Label 
-            style="clear:both;margin-left:0;border:none;width:80%;overflow:auto;" 
             runat="server" 
             ID="preview" 
             CssClass="quizContent"

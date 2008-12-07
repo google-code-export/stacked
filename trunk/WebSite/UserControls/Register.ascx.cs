@@ -31,6 +31,10 @@ public partial class UserControls_Register : System.Web.UI.UserControl
         {
             ShowError("Passwords doesn't match");
         }
+        else if (password.Text.Trim().Length < 4)
+        {
+            ShowError("Passwords is too short");
+        }
         else
         {
             // VALIDATED...!! :)

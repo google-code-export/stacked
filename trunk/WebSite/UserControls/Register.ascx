@@ -17,13 +17,12 @@
 <ext:Window 
     runat="server" 
     ID="register" 
-    CssClass="window" 
+    CssClass="window registerWindow" 
     DefaultWidget="registerBtn"
     Visible="false" 
-    style="width:350px;top:10px;right:10px;position:absolute;z-index:5000;"
     Caption="Register new profile">
-    <div style="position:relative;height:200px;">
-        <table class="login">
+    <div class="registerDiv">
+        <table class="registerTable">
             <tr>
                 <td>Username</td>
                 <td>
@@ -57,12 +56,12 @@
                 <td colspan="2">
                     <ra:Label 
                         runat="server" 
-                        style="color:Red;"
+                        CssClass="errLbl"
                         ID="lblErr" />
                 </td>
             </tr>
             <tr>
-                <td colspan="2" style="color:#4a4;">You can also use OpenID from Login button!</td>
+                <td colspan="2" class="infoOpenId">You can also use OpenID from Login button!</td>
             </tr>
         </table>
         <ra:Button 
