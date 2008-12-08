@@ -123,7 +123,7 @@ public partial class UserControls_AskQuestion : System.Web.UI.UserControl
 
     protected void timerUpdatePreview_Tick(object sender, EventArgs e)
     {
-        preview.Text = QuizItem.FormatWiki(body.Text);
+        preview.Text = QuizItem.FormatWiki(body.Text, null);
     }
 
     protected void btnSubmit_Click(object sender, EventArgs e)

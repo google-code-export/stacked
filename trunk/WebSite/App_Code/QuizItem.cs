@@ -135,7 +135,7 @@ namespace Entities
             get
             {
                 string tmp = Body.Replace("&", "&amp;").Replace("<", "&lt;").Replace(">", "&gt;");
-                tmp = FormatWiki(tmp);
+                tmp = FormatWiki(tmp, this);
                 return "<p>" + tmp + "</p>";
             }
         }
@@ -151,7 +151,7 @@ namespace Entities
             }
         }
 
-        public static string FormatWiki(string tmp)
+        public static string FormatWiki(string tmp, QuizItem item)
         {
             string nofollow = ConfigurationManager.AppSettings["nofollow"] == "true" ? " rel=\"nofollow\"" : "";
 
@@ -234,8 +234,7 @@ namespace Entities
             tmp = Regex.Replace(tmp,
                 "(?<begin>\\[gmaps[ ]+)(?<content1>[^,]+)[,]{1}(?<content2>[^,]+),{1}[ ]+(?<message>.*)(?<end>\\])",
                 string.Format(@"
-<script src=""http://maps.google.com/maps?file=api&amp;v=2&amp;key={0}""
-      type=""text/javascript""></script>
+<script src=""http://maps.google.com/maps?file=api&amp;v=2&amp;key={0}"" type=""text/javascript""></script>
     <script type=""text/javascript"">
 
     //<![CDATA[
@@ -250,7 +249,7 @@ namespace Entities
 
     function loadGMaps() {{
       if (GBrowserIsCompatible()) {{
-        var map = new GMap2(document.getElementById(""GMapContent""));
+        var map = new GMap2(document.getElementById(""GMapContent{2}""));
         map.addControl(new GLargeMapControl());
         map.addControl(new GMapTypeControl());
         map.setCenter(new GLatLng(${{content1}}, ${{content2}}), 15);
@@ -266,9 +265,13 @@ if( {1} ) {{
       loadGMaps();
       Ra.extend(document.body, Ra.Element.prototype);
       document.body.observe('unload', GUnload);
-  }}, false);
+    }}, false);
   }} else {{
-    window.attachEvent('onload', RAInitialize);
+    window.attachEvent('onload', function() {{
+      loadGMaps();
+      Ra.extend(document.body, Ra.Element.prototype);
+      document.body.observe('unload', GUnload);
+    }});
   }}
 }} else {{
   loadGMaps();
@@ -276,8 +279,8 @@ if( {1} ) {{
 }})();
     //]]>
     </script>
-    <div id=""GMapContent"" style=""width:750px;height:400px""></div>
-", Settings.GMapsAPIKey, (!AjaxManager.Instance.IsCallback).ToString().ToLower()),
+    <div id=""GMapContent{2}"" style=""width:750px;height:400px""></div>
+", Settings.GMapsAPIKey, (!AjaxManager.Instance.IsCallback).ToString().ToLower(), (item == null ? "" : item.ID.ToString())),
                 RegexOptions.Compiled);
             return tmp;
         }
