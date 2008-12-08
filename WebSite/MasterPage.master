@@ -31,7 +31,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Stacked - Questions and Answer done right!</title>
-    <link href="media/main.css" rel="stylesheet" type="text/css" />
+    <link href="media/main-0.5.0.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <form id="form1" runat="server">

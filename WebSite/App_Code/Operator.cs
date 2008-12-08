@@ -223,9 +223,18 @@ namespace Entities
                 return (int)HttpContext.Current.Cache["operatorCreds" + this.ID];
 
             // Figuring out how many points the user have
+
+            // How many questions user have asked
             int questionsAsked = QuizItem.Count(
                 Expression.Eq("CreatedBy", this),
                 Expression.IsNull("Parent"));
+
+            // How many answers/comments user have given
+            int answersComments = QuizItem.Count(
+                Expression.Eq("CreatedBy", this),
+                Expression.IsNotNull("Parent"));
+
+            // How many POINTS (plus votes) for the questions he has asked
             int upVotesGivenForQuestions = 0;
             QuizItem[] items = QuizItem.FindAll(Expression.Eq("CreatedBy", this), Expression.IsNull("Parent"));
             if (items != null)
@@ -235,6 +244,8 @@ namespace Entities
                     upVotesGivenForQuestions += idx.Score;
                 }
             }
+
+            // How many POINTS (plus votes) for the ANSWERS he has given
             int upVotesGivenForAnswers = 0;
             items = QuizItem.FindAll(Expression.Eq("CreatedBy", this), Expression.IsNotNull("Parent"));
             if (items != null)
@@ -244,6 +255,8 @@ namespace Entities
                     upVotesGivenForAnswers += idx.Score;
                 }
             }
+
+            // How many users have favorited his questions
             int numberOfFavoritesForQuestions = 0;
             items = QuizItem.FindAll(Expression.Eq("CreatedBy", this), Expression.IsNull("Parent"));
             if (items != null)
@@ -254,10 +267,19 @@ namespace Entities
                 }
             }
 
+
+            // Algo is basically 
+            // 1 point answer and comment given
+            // 2 point per question asked
+            // Total score of all answers * 5 (remember that negative votes then counts *-5*)
+            // Total score of all questions * 10 (remember that negative votes then counts *-5*)
+            // Number of people favoriting his questions * 20
+
             int creds = 0;
-            creds += questionsAsked;
-            creds += (upVotesGivenForQuestions * 5);
-            creds += (upVotesGivenForAnswers * 10);
+            creds += answersComments;
+            creds += questionsAsked * 2;
+            creds += (upVotesGivenForAnswers * 5);
+            creds += (upVotesGivenForQuestions * 10);
             creds += (numberOfFavoritesForQuestions * 20);
 
             // Adding to cache
