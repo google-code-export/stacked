@@ -86,6 +86,8 @@ a:hover { color:#00a; background-color:#dedede; text-decoration:underline; }
 table { border-collapse:collapse; }
 td { border:none 0; }
 input[type=checkbox] { margin-right:6px; vertical-align:top; margin-top:1px; }
+blockquote { background-color:#f0f0f0; padding:15px; }
+input[type=button] { font-size:123.1%; }
 
 /* Custom fields - classes for MasterPage */
 .internetExploderWarning { position:absolute; top:5px; left:5px; padding:15px; border:dotted 2px #999; background-color:#fafafa; width:50%; font-size:123.1%; }
@@ -100,6 +102,8 @@ input[type=checkbox] { margin-right:6px; vertical-align:top; margin-top:1px; }
 .linkButton:hover { text-decoration:none; }
 .profileName { position:absolute; top:2px; right:2px; font-size:0.7em; color:#999; }
 .search { position:absolute; top:15px; right:290px; }
+.found { color:#ea0; }
+.search .auto-items { z-index:5000; }
 .contentPlaceHolder { padding-top:150px; margin-bottom:90px; }
 .infoSmallText { font-size:0.8em; font-style:italic; color:#999; }
 
@@ -171,420 +175,62 @@ input[type=checkbox] { margin-right:6px; vertical-align:top; margin-top:1px; }
 
 
 /* Item.aspx (view single question) */
-.wndDelete
-{
-	width:300px;
-	position:absolute;
-	top:100px;
-	left:100px;
-	z-index:5000;
-}
-
-.divDelete
-{
-	padding:70px;
-}
-
-.answerDiv
-{
-	position:relative;
-}
-
-.tagsHeader
-{
-	position:absolute;
-	bottom:2px;
-	right:2px;
-}
-
-.tagsHeader .linkButton
-{
-	display:inline;
-}
-
-.errPanel
-{
-	position:absolute;
-	top:0px;
-	left:0px;
-	font-size:123.1%;
-	background-color:#f00;
-	border:dashed 2px Black;
-}
-
-.star
-{
-	float:left;
-	width:40px;
-}
-
-.starFavored
-{
-	background:Transparent url(sprite.png) no-repeat 0 -72px;
-	height:31px;
-	width:32px;
-	display:block;
-}
-
-.starNone
-{
-	background:Transparent url(sprite.png) no-repeat 0 -102px;
-	height:31px;
-	width:32px;
-	display:block;
-}
-
-.starNone:hover, .starFavored:hover
-{
-	background-color:Yellow;
-}
-
-.numberOfFavorites
-{
-	margin-left:12px;
-	color:#999;
-	font-size:0.9em;
-}
-
-.vote
-{
-	float:left;
-	width:32px;
-}
-
-.vote a
-{
-	color:#fff;
-}
-
-.up
-{
-	background:Transparent url(sprite.png) no-repeat 0 0;
-	height:12px;
-	width:24px;
-	display:block;
-}
-
-.down
-{
-	background:Transparent url(sprite.png) no-repeat 0 -12px;
-	height:12px;
-	width:24px;
-	display:block;
-}
-
-.up:hover
-{
-	background:Transparent url(sprite.png) no-repeat 0 -24px;
-}
-
-.down:hover
-{
-	background:Transparent url(sprite.png) no-repeat 0 -36px;
-}
-
-.upVoted
-{
-	background:Transparent url(sprite.png) no-repeat 0 -48px;
-	height:12px;
-	width:24px;
-	display:block;
-}
-
-.downVoted
-{
-	background:Transparent url(sprite.png) no-repeat 0 -60px;
-	height:12px;
-	width:24px;
-	display:block;
-}
-
-.votes
-{
-	font-size:1.4em;
-	width:24px;
-	text-align:center;
-	display:block;
-}
-
-.questionStart
-{
-	float:left;
-	margin:0 0 0 15px;
-	border-left:dotted 1px #999;
-	padding:35px 0 15px 15px;
-	position:relative;
-	width:700px;
-}
-
-.operatorAsked
-{
-	position:absolute;
-	top:0px;
-	right:0px;
-	margin:0 -41px 0 0;
-	display:inline;
-}
-
-.quoteQuestionBtn
-{
-	position:absolute;
-	top:2px;
-	left:18px;
-	color:#999;
-	font-size:0.9em;
-	padding:5px;
-}
-
-.editQuestionBtn
-{
-	position:absolute;
-	top:2px;
-	left:119px;
-	color:#999;
-	font-size:0.9em;
-	padding:5px;
-}
-
-.deleteQuestionBtn
-{
-	position:absolute;
-	top:2px;
-	left:202px;
-	color:#999;
-	font-size:0.9em;
-	padding:5px;
-}
-
-.whenPosted
-{
-	position:absolute;
-	top:7px;
-	left:318px;
-	color:#999;
-	font-size:0.9em;
-}
-
-.questionContent
-{
-	font-size:123.1%;
-}
-
-.changeOrdering
-{
-	position:absolute;
-	bottom:0px;
-	margin-bottom:-15px;
-	left:5px;
-	color:#999;
-	font-size:0.9em;
-	padding:5px;
-}
-
-.editQuestion
-{
-	margin:15px 15px 15px 15px;
-}
-
-.editHeader
-{
-	color:#00f;
-	cursor:pointer;
-	font-size:1.2em;
-	margin-bottom:5px;
-}
-
-.editQuestionText
-{
-	width:550px;
-	height:180px;
-	padding:0px;
-}
-
-.saveEditedQuestion
-{
-	position:absolute;
-	bottom:0px;
-	left:30px;
-}
-
-.answersWrapper
-{
-	margin:25px 25px 25px 100px;
-}
-
-.answer
-{
-	padding:25px;
-	border:dotted 1px #999;
-	margin-bottom:25px;
-	width:700px;
-	background-color:#fafafa;
-	position:relative;
-}
-
-.linkAnswer
-{
-	position:absolute;
-	top:5px;
-	left:5px;
-	color:#999;
-	padding:5px;
-}
-
-.editAnswerBtn
-{
-	position:absolute;
-	top:5px;
-	left:105px;
-	color:#999;
-	padding:5px;
-}
-
-.deleteAnswerBtn
-{
-	position:absolute;
-	top:5px;
-	left:185px;
-	color:#999;
-	padding:5px;
-}
-
-.answerDate
-{
-	position:absolute;
-	top:10px;
-	left:305px;
-	color:#999;
-}
-
-.answeredBy
-{
-	display:inline;
-	position:absolute;
-	top:5px;
-	right:5px;
-}
-
-.voteAnswer
-{
-	margin:15px 0 0 -15px;
-}
-
-.answerContent
-{
-	margin:25px 0 35px 25px;
-	font-size:123.1%;
-}
-
-.comments
-{
-	position:absolute;
-	left:2px;
-	bottom:2px;
-	border:2px;
-	color:#999;
-	padding:5px;
-}
-
-.viewComments
-{
-	/* Unless we've got this one then panel will "jump" when Rolled Down...! */
-	overflow:hidden;
-}
-
-.oneComment
-{
-	border:dotted 1px #ddd;
-	width:550px;
-	margin:15px auto 0 auto;
-	padding:25px 15px 0 15px;
-	position:relative;
-}
-
-.commentedByWho
-{
-	position:absolute;
-	top:5px;
-	right:0px;
-}
-
-.commentedByWho a
-{
-	padding:5px;
-}
-
-.commentSubmit
-{
-	width:550px;
-	margin:15px auto 0 auto;
-	position:relative;
-}
-
-.commentTxt
-{
-	height:200px;
-	width:100%;
-	margin-bottom:35px;
-}
-
-.submitComment
-{
-	position:absolute;
-	bottom:0px;
-	right:0px;
-}
-
-.answerQuestion
-{
-	margin-left:100px;
-	width:750px;
-	position:relative;
-}
-
-.answerBody
-{
-	width:100%;
-	height:180px;
-	margin-bottom:35px;
-}
-
-.answerQuestionBtn
-{
-	position:absolute;
-	bottom:0px;
-	right:0px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.wndDelete { width:300px; position:absolute; top:100px; left:100px; z-index:5000; }
+.divDelete { padding:70px; }
+.answerDiv { position:relative; }
+.tagsHeader { position:absolute; bottom:2px; right:2px; }
+.tagsHeader .linkButton { display:inline; }
+.errPanel { position:fixed; top:0px; left:0px; font-size:123.1%; background-color:#f00; border:dashed 5px Black; width:500px; padding:50px; }
+.star { float:left; width:40px; }
+.starFavored { background:Transparent url(sprite.png) no-repeat 0 -72px; height:31px; width:32px; display:block; }
+.starNone { background:Transparent url(sprite.png) no-repeat 0 -102px; height:31px; width:32px; display:block; }
+.starNone:hover, .starFavored:hover { background-color:Yellow; }
+.numberOfFavorites { margin-left:12px; color:#999; font-size:0.9em; }
+.vote { float:left; width:32px; }
+.vote a { color:#fff; }
+.up { background:Transparent url(sprite.png) no-repeat 0 0; height:12px; width:24px; display:block; }
+.down { background:Transparent url(sprite.png) no-repeat 0 -12px; height:12px; width:24px; display:block; }
+.up:hover { background:Transparent url(sprite.png) no-repeat 0 -24px; }
+.down:hover { background:Transparent url(sprite.png) no-repeat 0 -36px; }
+.upVoted { background:Transparent url(sprite.png) no-repeat 0 -48px; height:12px; width:24px; display:block; }
+.downVoted { background:Transparent url(sprite.png) no-repeat 0 -60px; height:12px; width:24px; display:block; }
+.votes { font-size:1.4em; width:24px; text-align:center; display:block; }
+.questionStart { float:left; margin:0 0 0 15px; border-left:dotted 1px #999; padding:35px 0 15px 15px; position:relative; width:700px; }
+.operatorAsked { position:absolute; top:0px; right:0px; margin:0 -41px 0 0; display:inline; }
+.quoteQuestionBtn { position:absolute; top:2px; left:18px; color:#999; font-size:0.9em; padding:5px; }
+.editQuestionBtn { position:absolute; top:2px; left:119px; color:#999; font-size:0.9em; padding:5px; }
+.deleteQuestionBtn { position:absolute; top:2px; left:202px; color:#999; font-size:0.9em; padding:5px; }
+.whenPosted { position:absolute; top:7px; left:318px; color:#999; font-size:0.9em; }
+.questionContent { font-size:123.1%; }
+.changeOrdering { position:absolute; bottom:0px; margin-bottom:-15px; left:5px; color:#999; font-size:0.9em; padding:5px; }
+.editQuestion { margin:15px 15px 15px 15px; }
+.editHeader { color:#00f; cursor:pointer; font-size:1.2em; margin-bottom:5px; }
+.editQuestionText { width:550px; height:180px; padding:0px; }
+.saveEditedQuestion { position:absolute; bottom:0px; left:30px; }
+.answersWrapper { margin:25px 25px 25px 100px; }
+.answer { padding:25px; border:dotted 1px #999; margin-bottom:25px; width:700px; background-color:#fafafa; position:relative; }
+.linkAnswer { position:absolute; top:5px; left:5px; color:#999; padding:5px; }
+.editAnswerBtn { position:absolute; top:5px; left:105px; color:#999; padding:5px; }
+.deleteAnswerBtn { position:absolute; top:5px; left:185px; color:#999; padding:5px; }
+.answerDate { position:absolute; top:10px; left:305px; color:#999; }
+.answeredBy { display:inline; position:absolute; top:5px; right:5px; }
+.voteAnswer { margin:15px 0 0 -15px; }
+.answerContent { margin:25px 0 35px 25px; font-size:123.1%; }
+.editAnswer { background-color:#fafffa; position:relative; overflow:hidden; }
+.editAnswerDiv { padding:25px 25px 50px 25px; margin:15px; }
+.editAnswerTxt { width:100%; height:150px; margin:0px auto 0px auto; }
+.saveEditedAnswer { position:absolute; bottom:5px; right:5px; }
+.comments { position:absolute; left:2px; bottom:2px; border:2px; color:#999; padding:5px; }
+.viewComments { overflow:hidden; }
+.oneComment { border:dotted 1px #ddd; width:550px; margin:15px auto 0 auto; padding:25px 15px 0 15px; position:relative; }
+.commentedByWho { position:absolute; top:5px; right:0px; }
+.commentedByWho a { padding:5px; }
+.commentSubmit { width:550px; margin:15px auto 0 auto; position:relative; }
+.commentTxt { height:200px; width:100%; margin-bottom:35px; }
+.submitComment { position:absolute; bottom:0px; right:0px; }
+.answerQuestion { margin-left:100px; width:750px; position:relative; }
+.answerBody { width:100%; height:180px; margin-bottom:35px; }
+.answerQuestionBtn { position:absolute; bottom:0px; right:0px; }
 
 
 
