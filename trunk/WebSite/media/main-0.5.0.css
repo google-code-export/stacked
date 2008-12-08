@@ -65,7 +65,7 @@ input[type=text],input[type=password],textarea{width:12.25em;*width:11.9em;}
 .tab .tab-header ul li.active span.right { background:url('steel/tab-sprite.png') no-repeat -30px 0px; }
 .tab .content { padding:5px; background-color:#fdfdfd; border:solid 1px #D6D6D6; }
 .auto { background-color:#fff; border:dotted 1px Black; padding:15px; height:20px; width:200px; overflow:visible; }
-.auto input[type=text] { display:block; width:175px; background: url('sprite.png') no-repeat 0px -134px; 
+.auto input[type=text] { display:block; width:175px; background: url('sprite-0.5.0.png') no-repeat 0px -134px; 
 border:solid 1px #999; padding-left:20px; }
 .auto-items { position:absolute; border:solid 1px #CCD1FF; background-color:#fff; width:187px; padding:5px; margin:0; }
 .auto-item { border:solid 1px Transparent; cursor:pointer; }
@@ -182,25 +182,25 @@ input[type=button] { font-size:123.1%; }
 .tagsHeader .linkButton { display:inline; }
 .errPanel { position:fixed; top:0px; left:0px; font-size:123.1%; background-color:#f00; border:dashed 5px Black; width:500px; padding:50px; z-index:6000; }
 .star { float:left; width:40px; }
-.starFavored { background:url('sprite.png') no-repeat 0 -72px; 
+.starFavored { background:url('sprite-0.5.0.png') no-repeat 0 -72px; 
 height:31px; width:32px; display:block; }
-.starNone { background:url('sprite.png') no-repeat 0 -102px; 
+.starNone { background:url('sprite-0.5.0.png') no-repeat 0 -102px; 
 height:31px; width:32px; display:block; }
 .starNone:hover, .starFavored:hover { background-color:Yellow; }
 .numberOfFavorites { margin-left:12px; color:#999; font-size:0.9em; }
 .vote { float:left; width:32px; }
 .vote a { color:#fff; }
-.up { background:url('sprite.png') no-repeat 0 0; 
+.up { background:url('sprite-0.5.0.png') no-repeat 0 0; 
 height:12px; width:24px; display:block; }
-.down { background:url('sprite.png') no-repeat 0 -12px; 
+.down { background:url('sprite-0.5.0.png') no-repeat 0 -12px; 
 height:12px; width:24px; display:block; }
-.up:hover { background:url('sprite.png') no-repeat 0 -24px;
+.up:hover { background:url('sprite-0.5.0.png') no-repeat 0 -24px;
 }
-.down:hover { background:url('sprite.png') no-repeat 0 -36px;
+.down:hover { background:url('sprite-0.5.0.png') no-repeat 0 -36px;
 }
-.upVoted { background:url('sprite.png') no-repeat 0 -48px; 
+.upVoted { background:url('sprite-0.5.0.png') no-repeat 0 -48px; 
 height:12px; width:24px; display:block; }
-.downVoted { background:url('sprite.png') no-repeat 0 -60px; 
+.downVoted { background:url('sprite-0.5.0.png') no-repeat 0 -60px; 
 height:12px; width:24px; display:block; }
 .votes { font-size:1.4em; width:24px; text-align:center; display:block; }
 .questionStart { float:left; margin:0 0 0 15px; border-left:dotted 1px #999; padding:35px 0 15px 15px; position:relative; width:700px; }
