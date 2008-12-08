@@ -45,6 +45,7 @@
         <ra:Label 
             runat="server" 
             ID="header" 
+            CssClass="itemHeader"
             Tag="h1" />
         <div class="tagsHeader">
             <asp:Repeater 
@@ -52,7 +53,7 @@
                 ID="repTags" 
                 EnableViewState="false">
                 <ItemTemplate>
-                    <a class="linkButton" href='<%#Eval("Name") + ".tag" %>'><%#Eval("Name") %> (<%#Eval("NumberOfOccurencies")%>)</a>
+                    <a class="linkButton tagButton" href='<%#Eval("Name") + ".tag" %>'><%#Eval("Name") %> (<%#Eval("NumberOfOccurencies")%>)</a>
                 </ItemTemplate>
             </asp:Repeater>
         </div>
@@ -147,20 +148,22 @@
             Visible="false" 
             CssClass="editQuestion"
             ID="editQuestion">
-            <ext:InPlaceEdit 
-                runat="server" 
-                CssClass="editHeader"
-                ID="editHeader" />
-            <ra:TextArea 
-                runat="server" 
-                CssClass="editQuestionText"
-                ID="editTxt" />
-            <ra:Button 
-                runat="server" 
-                ID="saveEdit" 
-                CssClass="saveEditedQuestion"
-                OnClick="saveEdit_Click"
-                Text="Save" />
+            <div class="editQuestionDiv">
+                <ext:InPlaceEdit 
+                    runat="server" 
+                    CssClass="editHeader"
+                    ID="editHeader" />
+                <ra:TextArea 
+                    runat="server" 
+                    CssClass="editQuestionText"
+                    ID="editTxt" />
+                <ra:Button 
+                    runat="server" 
+                    ID="saveEdit" 
+                    CssClass="saveEditedQuestion"
+                    OnClick="saveEdit_Click"
+                    Text="Save" />
+            </div>
         </ra:Panel>
     </div>
     <br style="clear:both;" />

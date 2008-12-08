@@ -170,6 +170,17 @@ namespace Entities
                 "<a href=\"${linkType}${link}\"" + nofollow + ">${content}</a>",
                 RegexOptions.Compiled);
 
+            // Replacing lists
+            // MUST do lists BEFORE bold...!
+            tmp = Regex.Replace(tmp,
+                "(?<begin>^\\*{1}[ ]{1})(?<content>.*$)(?<end>$)\\n",
+                "<li>${content}</li>",
+                RegexOptions.Compiled | RegexOptions.Multiline);
+            tmp = Regex.Replace(tmp,
+                "(?<content>\\<li\\>{1}.+\\<\\/li\\>)",
+                "<ul>${content}</ul>",
+                RegexOptions.Compiled);
+
             // Replacing bolds
             tmp = Regex.Replace(tmp,
                 "(?<begin>\\*{1})(?<content>.+?)(?<end>\\*{1})",
@@ -182,19 +193,9 @@ namespace Entities
                 "<em>${content}</em>",
                 RegexOptions.Compiled);
 
-            // Replacing lists
-            tmp = Regex.Replace(tmp,
-                "(?<begin>\\*{1}[ ]{1})(?<content>.+)(?<end>[^*])",
-                "<li>${content}</li>",
-                RegexOptions.Compiled);
-            tmp = Regex.Replace(tmp,
-                "(?<content>\\<li\\>{1}.+\\<\\/li\\>)",
-                "<ul>${content}</ul>",
-                RegexOptions.Compiled);
-
             // Quoting
             tmp = Regex.Replace(tmp,
-                "(?<content>^&gt;.+$)",
+                "(?<content>^&gt;.*$)",
                 "<blockquote>${content}</blockquote>",
                 RegexOptions.Compiled | RegexOptions.Multiline).Replace("</blockquote>\n<blockquote>", "\n");
 

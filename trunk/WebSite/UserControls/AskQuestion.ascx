@@ -94,9 +94,9 @@ Link;
 
 _italic_
 
-* Listitem 1
-* Listitem 2
-* Listitem 3
+ * Listitem 1
+ * Listitem 2
+ * Listitem 3
 </pre>
 <p>
 2 x Carriage Return is opening a new paragraph

@@ -98,7 +98,7 @@ public partial class Item : System.Web.UI.Page
         Button btn = sender as Button;
         Panel pnl = btn.Parent as Panel;
         TextArea txt = Selector.SelectFirst<TextArea>(pnl);
-        new EffectFadeOut(pnl, 500).Render();
+        new EffectRollUp(pnl, 500).Render();
         int id = GetIdOfAnswer(pnl);
         QuizItem item = QuizItem.Find(id);
         item.Body = txt.Text;
@@ -197,21 +197,21 @@ public partial class Item : System.Web.UI.Page
             editQuestion.Visible = true;
             editTxt.Text = _question.Body;
             editHeader.Text = _question.Header;
-            new EffectFadeIn(editQuestion, 500)
+            new EffectRollDown(editQuestion, 500)
                 .ChainThese(new EffectFocusAndSelect(editTxt))
                 .Render();
             editQuestionBtn.Text = "Cancel edit";
         }
         else
         {
-            new EffectFadeOut(editQuestion, 500).Render();
+            new EffectRollUp(editQuestion, 500).Render();
             editQuestionBtn.Text = "Edit";
         }
     }
 
     protected void saveEdit_Click(object sender, EventArgs e)
     {
-        new EffectFadeOut(editQuestion, 500).Render();
+        new EffectRollUp(editQuestion, 500).Render();
         editQuestionBtn.Text = "Edit";
         _question.Body = editTxt.Text;
         _question.Header = editHeader.Text;
