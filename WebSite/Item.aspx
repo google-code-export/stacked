@@ -47,7 +47,7 @@
             ID="header" 
             Tag="h1" />
         <div class="tagsHeader">
-            <asp:Repeater runat="server" ID="repTags">
+            <asp:Repeater runat="server" ID="repTags" EnableViewState="false">
                 <ItemTemplate>
                     <a class="linkButton" href='<%#Eval("Name") + ".tag" %>'><%#Eval("Name") %> (<%#Eval("Item.Count") %>)</a>
                 </ItemTemplate>
@@ -166,7 +166,7 @@
         CssClass="answersWrapper"
         ID="answersWrapper">
 
-        <asp:Repeater runat="server" ID="answers">
+        <asp:Repeater runat="server" ID="answers" EnableViewState="false">
             <ItemTemplate>
                 <div class="answer">
                     <ra:HiddenField ID="HiddenField1" 
@@ -178,8 +178,8 @@
                     <ra:LinkButton 
                         runat="server" 
                         CssClass="editAnswerBtn" 
-                        Visible='<%# (bool)(Entities.Operator.Current != null && Entities.Operator.Current.CanEditAnswer) %>'
-                        OnClick="EditQuestionBtnClick"
+                        Visible='<%# (bool)(Entities.Operator.Current != null && (Entities.Operator.Current.ID == (int)(Eval("CreatedBy.ID")) || Entities.Operator.Current.CanEditAnswer)) %>'
+                        OnClick="EditAnswerBtnClick"
                         Text="Edit" />
                     <ra:LinkButton 
                         runat="server" 
@@ -229,12 +229,16 @@
                         runat="server" 
                         Visible="false" 
                         CssClass="editAnswer">
-                        <ra:TextArea 
-                            runat="server" />
-                        <ra:Button 
-                            runat="server" 
-                            OnClick="SaveAnswer"
-                            Text="Save" />
+                        <div class="editAnswerDiv">
+                            <ra:TextArea 
+                                CssClass="editAnswerTxt"
+                                runat="server" />
+                            <ra:Button 
+                                runat="server" 
+                                OnClick="SaveAnswer"
+                                CssClass="saveEditedAnswer"
+                                Text="Save" />
+                        </div>
                     </ra:Panel>
                     <ra:Panel 
                         runat="server" 
@@ -284,7 +288,12 @@
             ID="btnSubmit" 
             OnClick="btnSubmit_Click"
             CssClass="answerQuestionBtn"
-            Text="Answer" />
+            Text="Answer">
+            <ra:BehaviorUpdater 
+                runat="server" 
+                ID="obscurerAnswerQuestion" 
+                Delay="200" />
+        </ra:Button>
     </ra:Panel>
 
 </asp:Content>

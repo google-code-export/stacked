@@ -50,18 +50,26 @@ public partial class Item : System.Web.UI.Page
         base.OnPreRender(e);
     }
 
-    protected void EditQuestionBtnClick(object sender, EventArgs e)
+    protected void EditAnswerBtnClick(object sender, EventArgs e)
     {
         LinkButton btn = sender as LinkButton;
         Panel editAnswer = SelectorHelpers.FindFirstByCssClass<Panel>(btn.Parent, "editAnswer");
-        TextArea text = Selector.SelectFirst<TextArea>(editAnswer);
-        int id = GetIdOfAnswer(btn);
+        if (!editAnswer.Visible || editAnswer.Style["display"] == "none")
+        {
+            TextArea text = Selector.SelectFirst<TextArea>(editAnswer);
+            int id = GetIdOfAnswer(btn);
 
-        text.Text = QuizItem.Find(id).Body;
-        editAnswer.Visible = true;
-        new EffectFadeIn(editAnswer, 500)
-            .ChainThese(new EffectFocusAndSelect(text))
-            .Render();
+            text.Text = QuizItem.Find(id).Body;
+            editAnswer.Visible = true;
+            new EffectRollDown(editAnswer, 500)
+                .ChainThese(new EffectFocusAndSelect(text))
+                .Render();
+        }
+        else
+        {
+            new EffectRollUp(editAnswer, 500)
+                .Render();
+        }
     }
 
     protected void SaveAnswer(object sender, EventArgs e)
