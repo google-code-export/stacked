@@ -5,11 +5,20 @@ using Ra.Widgets;
 using Ra.Extensions;
 using System.Drawing;
 using Ra;
+using Castle.ActiveRecord;
 
 public partial class _Default : System.Web.UI.Page
 {
     private Operator _questionsForOperator;
     private Tag _questionsForTag;
+    private SessionScope _session;
+
+    protected override void OnPreInit(EventArgs e)
+    {
+        _session = new SessionScope();
+        base.OnPreInit(e);
+    }
+
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -32,6 +41,12 @@ public partial class _Default : System.Web.UI.Page
         }
         CreateBehaviorsForTabViews();
     }
+
+    protected override void OnPreRender(EventArgs e)
+    {
+        base.OnPreRender(e);
+        _session.Dispose();
+    }
 
     protected void tabContent_ActiveTabViewChanged(object sender, EventArgs e)
     {

@@ -2,6 +2,7 @@
 using Castle.ActiveRecord;
 using NHibernate.Expression;
 using System.Collections.Generic;
+using System.Web;
 
 namespace Entities
 {
@@ -54,8 +55,15 @@ namespace Entities
             set { _quizItem = value; }
         }
 
+        public override void Delete()
+        {
+            HttpContext.Current.Cache.Remove("quizScore_" + this.QuizItem.ID);
+            base.Delete();
+        }
+
         public override void Save()
         {
+            HttpContext.Current.Cache.Remove("quizScore_" + this.QuizItem.ID);
             if (VotedBy == null)
                 throw new ApplicationException("You must login or create an account to vote");
             if (VotedBy.ID == QuizItem.CreatedBy.ID)

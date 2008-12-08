@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Castle.ActiveRecord.Queries;
 using System;
 using System.Collections;
+using System.Web;
+using System.Web.Caching;
 
 namespace Entities
 {
@@ -16,29 +18,29 @@ namespace Entities
         private DateTime _created;
 
         [PrimaryKey]
-        public int Id
+        public virtual int Id
         {
             get { return _id; }
             set { _id = value; }
         }
 
         [Property]
-        public DateTime Created
+        public virtual DateTime Created
         {
             get { return _created; }
             set { _created = value; }
         }
 
         [Property]
-        public string Name
+        public virtual string Name
         {
             get { return _name; }
             set { _name = value; }
         }
 
         [HasAndBelongsToMany(typeof(QuizItem), 
-            Table="QuizItemTag", ColumnKey="TagId", ColumnRef="QuizItemId", Inverse=true)]
-        public IList Item
+            Table="QuizItemTag", ColumnKey="TagId", ColumnRef="QuizItemId", Inverse=true, Lazy=true)]
+        public virtual IList Item
         {
             get { return _quizItem; }
             set { _quizItem = value; }
@@ -52,6 +54,26 @@ namespace Entities
                 Created = DateTime.Now;
             }
             base.Save();
+        }
+
+        public int NumberOfOccurencies
+        {
+            get
+            {
+                // Checking cache...
+                if (HttpContext.Current.Cache["tagCount_" + this.Name] != null)
+                    return (int)HttpContext.Current.Cache["tagCount_" + this.Name];
+
+                // Cache miss
+                int retVal = Item.Count;
+                HttpContext.Current.Cache.Insert(
+                    "tagCount_" + this.Name, 
+                    retVal, 
+                    null, 
+                    DateTime.Now.AddMinutes(5), 
+                    Cache.NoSlidingExpiration);
+                return retVal;
+            }
         }
     }
 }

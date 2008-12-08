@@ -261,7 +261,12 @@ namespace Entities
             creds += (numberOfFavoritesForQuestions * 20);
 
             // Adding to cache
-            HttpContext.Current.Cache.Insert("operatorCreds" + this.ID, creds, null, DateTime.Now.AddMinutes(5), Cache.NoSlidingExpiration);
+            HttpContext.Current.Cache.Insert(
+                "operatorCreds" + this.ID, 
+                creds, 
+                null, 
+                DateTime.Now.AddMinutes(5), 
+                Cache.NoSlidingExpiration);
             return creds;
         }
 

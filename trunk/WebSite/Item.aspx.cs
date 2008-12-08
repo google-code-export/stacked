@@ -5,10 +5,18 @@ using Ra.Widgets;
 using Ra;
 using RaSelector;
 using Utilities;
+using Castle.ActiveRecord;
 
 public partial class Item : System.Web.UI.Page
 {
     private QuizItem _question;
+    private SessionScope _session;
+
+    protected override void OnPreInit(EventArgs e)
+    {
+        _session = new SessionScope();
+        base.OnPreInit(e);
+    }
 
     protected override void OnInit(EventArgs e)
     {
@@ -18,6 +26,15 @@ public partial class Item : System.Web.UI.Page
         SetCssClassForFavorite();
         DataBindTags();
         base.OnInit(e);
+    }
+
+    protected override void OnLoad(EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            DataBindAnswers();
+        }
+        base.OnLoad(e);
     }
 
     private void DataBindTags()
@@ -48,6 +65,8 @@ public partial class Item : System.Web.UI.Page
         quoteQuestion.Visible = Operator.Current != null;
         changeOrdering.Visible = _question.Children.Count > 1;
         base.OnPreRender(e);
+
+        _session.Dispose();
     }
 
     protected void EditAnswerBtnClick(object sender, EventArgs e)
@@ -56,6 +75,7 @@ public partial class Item : System.Web.UI.Page
         Panel editAnswer = SelectorHelpers.FindFirstByCssClass<Panel>(btn.Parent, "editAnswer");
         if (!editAnswer.Visible || editAnswer.Style["display"] == "none")
         {
+            btn.Text = "Cancel edit";
             TextArea text = Selector.SelectFirst<TextArea>(editAnswer);
             int id = GetIdOfAnswer(btn);
 
@@ -67,6 +87,7 @@ public partial class Item : System.Web.UI.Page
         }
         else
         {
+            btn.Text = "Edit";
             new EffectRollUp(editAnswer, 500)
                 .Render();
         }
@@ -257,15 +278,6 @@ public partial class Item : System.Web.UI.Page
         }
     }
 
-    protected override void OnLoad(EventArgs e)
-    {
-        if (!IsPostBack)
-        {
-            DataBindAnswers();
-        }
-        base.OnLoad(e);
-    }
-
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         // Saving question...
@@ -292,6 +304,7 @@ public partial class Item : System.Web.UI.Page
         Panel tmp = SelectorHelpers.FindFirstByCssClass<Panel>(btn.Parent, "viewComments");
         if (!tmp.Visible || tmp.Style["display"] == "none")
         {
+            btn.Text = "Close " + btn.Text;
             tmp.Visible = true;
             tmp.ReRender();
 
@@ -307,6 +320,7 @@ public partial class Item : System.Web.UI.Page
         }
         else
         {
+            btn.Text = btn.Text.Replace("Close ", "");
             new EffectRollUp(tmp, 500)
                 .Render();
         }

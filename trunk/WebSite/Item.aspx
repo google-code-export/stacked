@@ -47,9 +47,12 @@
             ID="header" 
             Tag="h1" />
         <div class="tagsHeader">
-            <asp:Repeater runat="server" ID="repTags" EnableViewState="false">
+            <asp:Repeater 
+                runat="server" 
+                ID="repTags" 
+                EnableViewState="false">
                 <ItemTemplate>
-                    <a class="linkButton" href='<%#Eval("Name") + ".tag" %>'><%#Eval("Name") %> (<%#Eval("Item.Count") %>)</a>
+                    <a class="linkButton" href='<%#Eval("Name") + ".tag" %>'><%#Eval("Name") %> (<%#Eval("NumberOfOccurencies")%>)</a>
                 </ItemTemplate>
             </asp:Repeater>
         </div>
@@ -166,13 +169,15 @@
         CssClass="answersWrapper"
         ID="answersWrapper">
 
-        <asp:Repeater runat="server" ID="answers" EnableViewState="false">
+        <asp:Repeater 
+            runat="server" 
+            ID="answers">
             <ItemTemplate>
                 <div class="answer">
-                    <ra:HiddenField ID="HiddenField1" 
+                    <ra:HiddenField 
                         runat="server" 
                         Value='<%#Eval("Id") %>' />
-                    <a class="linkAnswer" href='<%# "#" + Eval("ID") %>' name='<%#Eval("ID") %>'>
+                    <a class="linkAnswer" href='<%# "#" + Eval("Id") %>' name='<%#Eval("Id") %>'>
                         link
                     </a>
                     <ra:LinkButton 
@@ -185,7 +190,7 @@
                         runat="server" 
                         OnClick="DeleteQuestionBtnClick"
                         CssClass="deleteAnswerBtn"
-                        Visible='<%# (bool)(Entities.Operator.Current != null && Entities.Operator.Current.CanDeleteAnswer) %>'
+                        Visible='<%# (bool)(Entities.Operator.Current != null && (Entities.Operator.Current.ID == (int)(Eval("CreatedBy.ID")) || Entities.Operator.Current.CanEditAnswer)) %>'
                         Text="Delete..." />
                     <a class="linkButton answeredBy" href='<%#Eval("CreatedBy.Username") + ".user" %>'>
                         <%#Eval("CreatedBy.FriendlyName")%> - <%#Eval("CreatedBy.CalculateCreds")%> creds
@@ -219,7 +224,7 @@
                         runat="server" 
                         CssClass="comments" 
                         OnClick="ViewComments"
-                        Text='<%# "Comments [" + Eval("Children.Count") + "]"%>'>
+                        Text='<%# "Comments [" + Eval("ChildrenCount") + "]"%>'>
                         <ra:BehaviorUpdater 
                             Delay="400" 
                             runat="server" 
@@ -237,14 +242,17 @@
                                 runat="server" 
                                 OnClick="SaveAnswer"
                                 CssClass="saveEditedAnswer"
-                                Text="Save" />
+                                Text="Save">
+                                <ra:BehaviorUpdater runat="server" Delay="200" />
+                            </ra:Button>
                         </div>
                     </ra:Panel>
                     <ra:Panel 
                         runat="server" 
                         Visible="false"
                         CssClass="viewComments">
-                        <asp:Repeater runat="server">
+                        <asp:Repeater 
+                            runat="server">
                             <ItemTemplate>
                                 <div class="oneComment">
                                     <%#Eval("BodyFormated") %>
@@ -265,7 +273,9 @@
                                 runat="server" 
                                 Text="Save" 
                                 CssClass="submitComment"
-                                OnClick="SaveComment" />
+                                OnClick="SaveComment">
+                                <ra:BehaviorUpdater runat="server" Delay="200" />
+                            </ra:Button>
                         </div>
                     </ra:Panel>
                 </div>
