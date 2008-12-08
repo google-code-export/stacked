@@ -2,7 +2,7 @@
     ValidateRequest="false"
     Language="C#" 
     MasterPageFile="~/MasterPage.master" 
-    AutoEventWireup="true" 
+    AutoEventWireup="true"
     CodeFile="Item.aspx.cs" 
     Inherits="Item" 
     Title="Untitled Page" %>
