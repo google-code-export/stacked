@@ -21,7 +21,10 @@ public partial class Item : System.Web.UI.Page
     protected override void OnInit(EventArgs e)
     {
         GetQuestion();
-        FillOutContent();
+        if (!AjaxManager.Instance.IsCallback)
+        {
+            FillOutContent();
+        }
         SetCssClassIfCurrentOperatorHasVoted();
         SetCssClassForFavorite();
         DataBindTags();

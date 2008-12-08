@@ -9,6 +9,7 @@ using Castle.ActiveRecord.Queries;
 using System.Collections;
 using Utilities;
 using System.Web.Caching;
+using Ra;
 
 namespace Entities
 {
@@ -227,6 +228,56 @@ namespace Entities
     <param name=""allowscriptaccess"" value=""always""></param>
     <embed src=""http://www.youtube.com/v/${content}&hl=en&fs=1"" type=""application/x-shockwave-flash"" allowscriptaccess=""always"" allowfullscreen=""true"" width=""425"" height=""344""></embed>
 </object>",
+                RegexOptions.Compiled);
+
+            // Google maps
+            tmp = Regex.Replace(tmp,
+                "(?<begin>\\[gmaps[ ]+)(?<content1>[^,]+)[,]{1}(?<content2>[^,]+),{1}[ ]+(?<message>.*)(?<end>\\])",
+                string.Format(@"
+<script src=""http://maps.google.com/maps?file=api&amp;v=2&amp;key={0}""
+      type=""text/javascript""></script>
+    <script type=""text/javascript"">
+
+    //<![CDATA[
+
+      function createMarker(point,html) {{
+        var marker = new GMarker(point);
+        GEvent.addListener(marker, ""click"", function() {{
+          marker.openInfoWindowHtml(html);
+        }});
+        return marker;
+      }}
+
+    function loadGMaps() {{
+      if (GBrowserIsCompatible()) {{
+        var map = new GMap2(document.getElementById(""GMapContent""));
+        map.addControl(new GLargeMapControl());
+        map.addControl(new GMapTypeControl());
+        map.setCenter(new GLatLng(${{content1}}, ${{content2}}), 15);
+        var point = new GLatLng(${{content1}}, ${{content2}});
+        var marker = createMarker(point, ""${{message}}"");
+        map.addOverlay(marker);
+      }}
+    }}
+(function() {{
+if( {1} ) {{
+  if (window.addEventListener) {{
+    window.addEventListener('load', function() {{
+      loadGMaps();
+      Ra.extend(document.body, Ra.Element.prototype);
+      document.body.observe('unload', GUnload);
+  }}, false);
+  }} else {{
+    window.attachEvent('onload', RAInitialize);
+  }}
+}} else {{
+  loadGMaps();
+}}
+}})();
+    //]]>
+    </script>
+    <div id=""GMapContent"" style=""width:750px;height:400px""></div>
+", Settings.GMapsAPIKey, (!AjaxManager.Instance.IsCallback).ToString().ToLower()),
                 RegexOptions.Compiled);
             return tmp;
         }

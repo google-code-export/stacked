@@ -100,6 +100,10 @@ _italic_
 
 [youtube xxx]
 YouTube video xxx == ID
+
+[gmaps x y]
+GMaps x == longitude
+y == latitude
 </pre>
 <p>
 2 x Carriage Return is opening a new paragraph
