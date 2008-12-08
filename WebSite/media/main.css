@@ -180,7 +180,7 @@ input[type=button] { font-size:123.1%; }
 .answerDiv { position:relative; }
 .tagsHeader { position:absolute; bottom:2px; right:2px; }
 .tagsHeader .linkButton { display:inline; }
-.errPanel { position:fixed; top:0px; left:0px; font-size:123.1%; background-color:#f00; border:dashed 5px Black; width:500px; padding:50px; }
+.errPanel { position:fixed; top:0px; left:0px; font-size:123.1%; background-color:#f00; border:dashed 5px Black; width:500px; padding:50px; z-index:6000; }
 .star { float:left; width:40px; }
 .starFavored { background:Transparent url(sprite.png) no-repeat 0 -72px; height:31px; width:32px; display:block; }
 .starNone { background:Transparent url(sprite.png) no-repeat 0 -102px; height:31px; width:32px; display:block; }

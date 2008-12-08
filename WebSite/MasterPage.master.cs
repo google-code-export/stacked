@@ -5,6 +5,7 @@ using Ra.Extensions;
 using System.Web;
 using Utilities;
 using Ra;
+using Castle.ActiveRecord;
 
 public partial class MasterPage : System.Web.UI.MasterPage
 {

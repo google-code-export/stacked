@@ -8,6 +8,7 @@ using System.Configuration;
 using Castle.ActiveRecord.Queries;
 using System.Collections;
 using Utilities;
+using System.Web.Caching;
 
 namespace Entities
 {
@@ -29,71 +30,71 @@ namespace Entities
         public enum OrderAnswersBy { Newest, Oldest, MostVotes, Determine };
 
         [PrimaryKey]
-        public int ID
+        public virtual int ID
         {
             get { return _id; }
             set { _id = value; }
         }
 
         [Property]
-        public int Views
+        public virtual int Views
         {
             get { return _views; }
             set { _views = value; }
         }
 
         [Property(Unique = true)]
-        public string Url
+        public virtual string Url
         {
             get { return _url; }
             set { _url = value; }
         }
 
         [BelongsTo("FK_CreatedBy")]
-        public Operator CreatedBy
+        public virtual Operator CreatedBy
         {
             get { return _createdBy; }
             set { _createdBy = value; }
         }
 
         [BelongsTo("FK_Parent")]
-        public QuizItem Parent
+        public virtual QuizItem Parent
         {
             get { return _parent; }
             set { _parent = value; }
         }
 
-        [HasMany(typeof(QuizItem))]
-        public IList Children
+        [HasMany(typeof(QuizItem), Lazy=true)]
+        public virtual IList Children
         {
             get { return _children; }
             set { _children = value; }
         }
 
         [Property]
-        public DateTime Created
+        public virtual DateTime Created
         {
             get { return _created; }
             set { _created = value; }
         }
 
         [Property(Length=150)]
-        public string Header
+        public virtual string Header
         {
             get { return _header; }
             set { _header = value; }
         }
 
         [Property(ColumnType = "StringClob", SqlType = "TEXT")]
-        public string Body
+        public virtual string Body
         {
             get { return _body; }
             set { _body = value; }
         }
 
         [HasAndBelongsToMany(typeof(Tag),
-            Table = "QuizItemTag", ColumnRef = "TagId", ColumnKey = "QuizItemId")]
-        public IList Tags
+            Table = "QuizItemTag", ColumnRef = "TagId", ColumnKey = "QuizItemId", Lazy=true)]
+        public virtual IList Tags
         {
             get { return _tags; }
             set { _tags = value; }
@@ -524,10 +525,37 @@ and f.FK_Question = this_.ID)", oper.ID)));
             base.Save();
         }
 
+        public int ChildrenCount
+        {
+            get
+            {
+                // Checking cache...
+                if (HttpContext.Current.Cache["quizChildCount_" + this.ID] != null)
+                    return (int)HttpContext.Current.Cache["quizChildCount_" + this.ID];
+                int count = Count(Expression.Eq("Parent", this));
+                HttpContext.Current.Cache.Insert(
+                    "quizChildCount_" + this.ID,
+                    count,
+                    null,
+                    DateTime.Now.AddMinutes(5),
+                    Cache.NoSlidingExpiration);
+                return count;
+            }
+        }
+
         public int GetScore()
         {
+            // Checking cache...
+            if (HttpContext.Current.Cache["quizScore_" + this.ID] != null)
+                return (int)HttpContext.Current.Cache["quizScore_" + this.ID];
             int plus = Vote.Count(Expression.Eq("QuizItem", this), Expression.Eq("Score", 1));
             int minus = Vote.Count(Expression.Eq("QuizItem", this), Expression.Eq("Score", -1));
+            HttpContext.Current.Cache.Insert(
+                "quizScore_" + this.ID,
+                plus - minus,
+                null,
+                DateTime.Now.AddMinutes(5),
+                Cache.NoSlidingExpiration);
             return plus - minus;
         }
 
