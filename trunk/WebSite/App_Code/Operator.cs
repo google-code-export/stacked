@@ -4,6 +4,8 @@ using NHibernate.Expression;
 using System.Web;
 using System.Web.Caching;
 using Utilities;
+using System.Text;
+using System.Security.Cryptography;
 
 namespace Entities
 {
@@ -13,6 +15,7 @@ namespace Entities
         private int _id;
         private DateTime _created;
         private string _username;
+        private string _email;
         private string _friendlyName;
         private string _password;
         private bool _isAdmin;
@@ -43,6 +46,13 @@ namespace Entities
         {
             get { return _username; }
             set { _username = value; }
+        }
+
+        [Property]
+        public string Email
+        {
+            get { return _email; }
+            set { _email = value; }
         }
 
         [Property]
@@ -209,6 +219,27 @@ namespace Entities
                 }
             }
             return false;
+        }
+
+        public string Gravatar
+        {
+            get
+            {
+                return string.Format("http://www.gravatar.com/avatar/{0}?s=32&d=identicon", MD5Hash(this.Email));
+            }
+        }
+
+        private string MD5Hash(string email)
+        {
+            StringBuilder emailHash = new StringBuilder();
+            MD5 md5 = MD5.Create();
+            byte[] emailBuffer = Encoding.ASCII.GetBytes(email);
+            byte[] hash = md5.ComputeHash(emailBuffer);
+
+            foreach (byte hashByte in hash)
+                emailHash.Append(hashByte.ToString("x2"));
+
+            return emailHash.ToString();
         }
 
         public int CalculateCreds

@@ -128,10 +128,10 @@
             ID="body" 
             CssClass="questionContent"
             Tag="div" />
-        <a 
-            runat="server" 
-            id="askedBy" 
-            class="linkButton operatorAsked" />
+        <a runat="server" id="askedBy" class="linkButton answeredBy">
+            <img id="imgGravatar" alt="" runat="server" style="float:left;margin-right:5px;" width="32" height="32" />
+            <ra:Label runat="server" id="askedByLabel" style="float:right;" />
+        </a>
         <ra:LinkButton 
             runat="server" 
             ID="changeOrdering"
@@ -196,7 +196,11 @@
                         Visible='<%# (bool)(Entities.Operator.Current != null && (Entities.Operator.Current.ID == (int)(Eval("CreatedBy.ID")) || Entities.Operator.Current.CanEditAnswer)) %>'
                         Text="Delete..." />
                     <a class="linkButton answeredBy" href='<%#Eval("CreatedBy.Username") + ".user" %>'>
-                        <%#Eval("CreatedBy.FriendlyName")%> - <%#Eval("CreatedBy.CalculateCreds")%> creds
+                        <img alt="" runat="server" style="float:left;margin-right:5px;" width="32" height="32" src='<%# Eval("CreatedBy.Gravatar") %>' />
+                        <span style="float:right;">
+                            <%#Eval("CreatedBy.FriendlyName")%> <br />
+                            <%#Eval("CreatedBy.CalculateCreds")%> creds
+                        </span>
                     </a>
                     <div class="answerDate">
                         <%#GetTime((DateTime)Eval("Created")) %>
@@ -259,13 +263,14 @@
                             <ItemTemplate>
                                 <div class="oneComment">
                                     <%#Eval("BodyFormated") %>
-                                    <div class="commentedByWho">
-                                        <a
-                                            href='<%#Eval("CreatedBy.Username") + ".user" %>'>
-                                            <%#Eval("CreatedBy.FriendlyName") %>
+                                        <a class="linkButton answeredBy" href='<%#Eval("CreatedBy.Username") + ".user" %>'>
+                                            <img alt="" runat="server" style="float:left;margin-right:5px;" width="32" height="32" src='<%# Eval("CreatedBy.Gravatar") %>' />
+                                            <span style="float:right;">
+                                                <%#Eval("CreatedBy.FriendlyName")%> <br />
+                                                <%#Eval("CreatedBy.CalculateCreds")%> creds
+                                            </span>
                                         </a>
                                     </div>
-                                </div>
                             </ItemTemplate>
                         </asp:Repeater>
                         <div class="commentSubmit">

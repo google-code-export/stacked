@@ -97,7 +97,7 @@ input[type=button] { font-size:123.1%; }
 .logo img:hover { border-top:solid 2px #ddd; border-left:solid 2px #ddd; border-right:solid 2px #aaa; border-bottom:solid 2px #aaa; }
 .infoLabel { }
 .loginPnl { position:absolute; top:15px; right:45px; border:dotted 1px Black; width:200px; padding:15px; }
-.linkButton { display:block; border:solid 1px #999; background-color:#f0f0f0; color:#33d; font-size:108%; padding:5px 10px 5px 10px; margin:2px; position:relative; }
+.linkButton { display:block; border:solid 1px #999; background-color:#f0f0f0; color:#33d; font-size:108%; padding:5px; margin:2px; position:relative; }
 .linkButton:hover { text-decoration:none; }
 .profileName { position:absolute; top:2px; right:2px; font-size:0.7em; color:#999; }
 .search { position:absolute; top:15px; right:290px; }

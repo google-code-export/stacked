@@ -188,8 +188,9 @@ public partial class Item : System.Web.UI.Page
         whenPosted.Text = GetTime(_question.Created);
         body.Text = _question.BodyFormated;
         count.Text = _question.GetScore().ToString();
-        askedBy.InnerHtml = _question.CreatedBy.FriendlyName + " - " + _question.CreatedBy.GetCreds() + " creds";
         askedBy.HRef = _question.CreatedBy.Username + ".user";
+        askedByLabel.Text = _question.CreatedBy.FriendlyName + " <br /> " + _question.CreatedBy.GetCreds() + " creds";
+        imgGravatar.Src = _question.CreatedBy.Gravatar;
         Title = _question.Header;
     }
 

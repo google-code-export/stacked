@@ -46,7 +46,8 @@ public partial class _Default : System.Web.UI.Page
     {
         base.OnPreRender(e);
         _session.Dispose();
-    }
+    }
+
 
     protected void tabContent_ActiveTabViewChanged(object sender, EventArgs e)
     {

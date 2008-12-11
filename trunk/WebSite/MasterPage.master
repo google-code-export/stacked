@@ -165,8 +165,17 @@
                         <td>
                             <ra:TextBox 
                                 runat="server" 
-                                OnEscPressed="changeFriendlyName_EscPressed"
+                                OnEscPressed="changeProfile_EscPressed"
                                 ID="changeFriendlyName" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>
+                            <ra:TextBox 
+                                runat="server" 
+                                OnEscPressed="changeProfile_EscPressed"
+                                ID="changeEmail" />
                         </td>
                     </tr>
                     <tr>

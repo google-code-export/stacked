@@ -62,6 +62,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
     {
         profileWindow.Visible = true;
         changeFriendlyName.Text = Operator.Current.FriendlyName;
+        changeEmail.Text = Operator.Current.Email;
         changeFriendlyName.Select();
         changeFriendlyName.Focus();
     }
@@ -69,11 +70,12 @@ public partial class MasterPage : System.Web.UI.MasterPage
     protected void saveProfile_Click(object sender, EventArgs e)
     {
         Operator.Current.FriendlyName = changeFriendlyName.Text;
+        Operator.Current.Email = changeEmail.Text;
         Operator.Current.Save();
         profileWindow.Visible = false;
     }
 
-    protected void changeFriendlyName_EscPressed(object sender, EventArgs e)
+    protected void changeProfile_EscPressed(object sender, EventArgs e)
     {
         profileWindow.Visible = false;
     }
