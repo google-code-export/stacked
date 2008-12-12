@@ -158,36 +158,40 @@
             Visible="false"
             style="position:absolute;top:100px;left:100px;width:400px;z-index:5000;"
             ID="profileWindow">
-            <div style="padding:15px;height:70px;position:relative;">
+            <div style="padding:15px;height:100px;position:relative;">
                 <table>
                     <tr>
-                        <td>Friendly Name</td>
+                        <td style="min-width:90px;">Friendly Name:</td>
                         <td>
                             <ra:TextBox 
                                 runat="server" 
                                 OnEscPressed="changeProfile_EscPressed"
                                 ID="changeFriendlyName" />
                         </td>
+                        <td rowspan="2">
+                            <ra:Image id="imgGravatar" AlternateText="Gravatar" runat="server" style="width:64px;height:64px;" />
+                        </td>
                     </tr>
                     <tr>
-                        <td>Email</td>
+                        <td>Email:</td>
                         <td>
                             <ra:TextBox 
                                 runat="server" 
-                                OnEscPressed="changeProfile_EscPressed"
+                                OnEscPressed="changeProfile_EscPressed" 
+                                OnKeyUp="changeEmail_KeyUp" 
                                 ID="changeEmail" />
                         </td>
                     </tr>
                     <tr>
                         <td colspan="2" class="infoSmallText">
-                            Changes won't show up before you navigate away from this page...
+                            Changes will not show up until you navigate away from this page.
                         </td>
                     </tr>
                 </table>
                 <ra:Button 
                     runat="server" 
                     ID="saveProfile" 
-                    style="position:absolute;bottom:5px;right:5px;"
+                    style="position:absolute;bottom:5px;right:20px;"
                     OnClick="saveProfile_Click"
                     Text="Save" />
             </div>

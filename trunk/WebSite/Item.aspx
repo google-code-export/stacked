@@ -129,8 +129,8 @@
             CssClass="questionContent"
             Tag="div" />
         <a runat="server" id="askedBy" class="linkButton answeredBy">
-            <img id="imgGravatar" alt="" runat="server" style="float:left;margin-right:5px;" width="32" height="32" />
-            <ra:Label runat="server" id="askedByLabel" style="float:right;" />
+            <img id="imgGravatar" alt="Gravatar" runat="server" style="float:left;margin-right:5px;" width="32" height="32" />
+            <ra:Label runat="server" id="askedByLabel" />
         </a>
         <ra:LinkButton 
             runat="server" 
@@ -196,8 +196,8 @@
                         Visible='<%# (bool)(Entities.Operator.Current != null && (Entities.Operator.Current.ID == (int)(Eval("CreatedBy.ID")) || Entities.Operator.Current.CanEditAnswer)) %>'
                         Text="Delete..." />
                     <a class="linkButton answeredBy" href='<%#Eval("CreatedBy.Username") + ".user" %>'>
-                        <img alt="" runat="server" style="float:left;margin-right:5px;" width="32" height="32" src='<%# Eval("CreatedBy.Gravatar") %>' />
-                        <span style="float:right;">
+                        <img alt="Gravatar" runat="server" style="float:left;margin-right:5px;" width="32" height="32" src='<%# Eval("CreatedBy.Gravatar") %>' />
+                        <span>
                             <%#Eval("CreatedBy.FriendlyName")%> <br />
                             <%#Eval("CreatedBy.CalculateCreds")%> creds
                         </span>
@@ -264,8 +264,8 @@
                                 <div class="oneComment">
                                     <%#Eval("BodyFormated") %>
                                         <a class="linkButton answeredBy" href='<%#Eval("CreatedBy.Username") + ".user" %>'>
-                                            <img alt="" runat="server" style="float:left;margin-right:5px;" width="32" height="32" src='<%# Eval("CreatedBy.Gravatar") %>' />
-                                            <span style="float:right;">
+                                            <img alt="Gravatar" runat="server" style="float:left;margin-right:5px;" width="32" height="32" src='<%# Eval("CreatedBy.Gravatar") %>' />
+                                            <span>
                                                 <%#Eval("CreatedBy.FriendlyName")%> <br />
                                                 <%#Eval("CreatedBy.CalculateCreds")%> creds
                                             </span>
