@@ -6,6 +6,8 @@ using System.Web;
 using Utilities;
 using Ra;
 using Castle.ActiveRecord;
+using System.Text;
+using System.Security.Cryptography;
 
 public partial class MasterPage : System.Web.UI.MasterPage
 {
@@ -63,8 +65,22 @@ public partial class MasterPage : System.Web.UI.MasterPage
         profileWindow.Visible = true;
         changeFriendlyName.Text = Operator.Current.FriendlyName;
         changeEmail.Text = Operator.Current.Email;
+        imgGravatar.ImageUrl = Operator.Current.Gravatar.Replace("s=32", "s=64");
         changeFriendlyName.Select();
         changeFriendlyName.Focus();
+    }
+
+    protected void changeEmail_KeyUp(object sender, EventArgs e)
+    {
+        StringBuilder emailHash = new StringBuilder();
+        MD5 md5 = MD5.Create();
+        byte[] emailBuffer = Encoding.ASCII.GetBytes(changeEmail.Text);
+        byte[] hash = md5.ComputeHash(emailBuffer);
+
+        foreach (byte hashByte in hash)
+            emailHash.Append(hashByte.ToString("x2"));
+
+        imgGravatar.ImageUrl = string.Format("http://www.gravatar.com/avatar/{0}?s=64&d=identicon", emailHash.ToString());
     }
 
     protected void saveProfile_Click(object sender, EventArgs e)
