@@ -231,6 +231,9 @@ namespace Entities
 
         private string MD5Hash(string email)
         {
+            if (string.IsNullOrEmpty(email))
+                return string.Empty;
+
             StringBuilder emailHash = new StringBuilder();
             MD5 md5 = MD5.Create();
             byte[] emailBuffer = Encoding.ASCII.GetBytes(email);
