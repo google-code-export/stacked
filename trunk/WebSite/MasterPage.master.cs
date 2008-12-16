@@ -72,6 +72,9 @@ public partial class MasterPage : System.Web.UI.MasterPage
 
     protected void changeEmail_KeyUp(object sender, EventArgs e)
     {
+        if (string.IsNullOrEmpty(changeEmail.Text))
+            return;
+
         StringBuilder emailHash = new StringBuilder();
         MD5 md5 = MD5.Create();
         byte[] emailBuffer = Encoding.ASCII.GetBytes(changeEmail.Text);
