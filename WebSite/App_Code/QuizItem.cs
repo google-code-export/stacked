@@ -307,9 +307,9 @@ if( {1} ) {{
                         SimpleQuery<QuizItem> retVal = new SimpleQuery<QuizItem>(QueryLanguage.Sql,
                             @"select this_.* from QuizItems this_
 where this_.FK_Parent is null 
-order by (select Created from QuizItems q2 
+order by (select max(Created) from QuizItems q2 
     where this_.ID = q2.ID or q2.FK_Parent = this_.ID 
-    order by Created desc limit 0,1) desc
+    ) desc
 ");
                         retVal.SetQueryRange(20);
                         retVal.AddSqlReturnDefinition(typeof(QuizItem), "this_");
@@ -355,9 +355,9 @@ and exists(select * from QuizItemTag qt
     and exists(select * from Tags t 
         where t.Id = qt.TagId 
         and t.Name='{0}'))
-order by (select Created from QuizItems q2 
+order by (select max(Created) from QuizItems q2 
     where this_.ID = q2.ID or q2.FK_Parent = this_.ID 
-    order by Created desc limit 0,1) desc
+    ) desc
 ", tag.Name.Replace("\n", "").Replace("\r", "").Replace("'", "")));
                         retVal.SetQueryRange(20);
                         retVal.AddSqlReturnDefinition(typeof(QuizItem), "this_");
@@ -418,9 +418,9 @@ exists(select * from QuizItemTag qt
                             string.Format(@"select this_.* from QuizItems this_
 where this_.FK_Parent is null 
 and this_.FK_CreatedBy = {0}
-order by (select Created from QuizItems q2 
+order by (select max(Created) from QuizItems q2 
     where this_.ID = q2.ID or q2.FK_Parent = this_.ID 
-    order by Created desc limit 0,1) desc
+    ) desc
 ", oper.ID));
                         retVal.SetQueryRange(20);
                         retVal.AddSqlReturnDefinition(typeof(QuizItem), "this_");

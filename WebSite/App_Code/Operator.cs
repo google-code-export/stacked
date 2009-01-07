@@ -13,7 +13,7 @@ namespace Entities
     public class Operator : ActiveRecordBase<Operator>
     {
         private int _id;
-        private DateTime _created;
+        private DateTime? _created;
         private string _username;
         private string _email;
         private string _friendlyName;
@@ -35,7 +35,7 @@ namespace Entities
         }
 
         [Property]
-        public DateTime Created
+        public DateTime? Created
         {
             get { return _created; }
             set { _created = value; }
