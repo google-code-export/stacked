@@ -129,7 +129,7 @@
         </ra:Panel>
     </div>
 
-    <ra:BehaviorObscurable runat="server" ID="obscurer" />
+    <ra:BehaviorObscurable runat="server" ID="obscurer" ZIndex="4000" />
 </ext:Window>
 
 

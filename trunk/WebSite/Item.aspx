@@ -104,7 +104,7 @@
             OnClick="quoteQuestion_Click"
             CssClass="quoteQuestionBtn"
             Visible="false" 
-            Text="Quote..." />
+            Text="Quote" />
         <ra:LinkButton 
             runat="server" 
             ID="editQuestionBtn" 
@@ -118,20 +118,21 @@
             OnClick="deleteQuestion_Click"
             CssClass="deleteQuestionBtn"
             Visible="false" 
-            Text="Delete..." />
+            Text="Delete" />
         <ra:Label 
             runat="server" 
             CssClass="whenPosted"
             ID="whenPosted" />
+        <a runat="server" id="askedBy" class="linkButton askedBy">
+            <img id="imgGravatar" alt="Pic" runat="server" style="float:left;margin-right:5px;" width="32" height="32" />
+            <ra:Label runat="server" id="askedByLabel" style="float:left;margin-right:5px;" Tag="div" />
+        </a>
         <ra:Label 
             runat="server" 
             ID="body" 
             CssClass="questionContent"
             Tag="div" />
-        <a runat="server" id="askedBy" class="linkButton answeredBy">
-            <img id="imgGravatar" alt="Gravatar" runat="server" style="float:left;margin-right:5px;" width="32" height="32" />
-            <ra:Label runat="server" id="askedByLabel" />
-        </a>
+        
         <ra:LinkButton 
             runat="server" 
             ID="changeOrdering"
@@ -163,6 +164,12 @@
                     CssClass="saveEditedQuestion"
                     OnClick="saveEdit_Click"
                     Text="Save" />
+                <ra:Button 
+                    runat="server" 
+                    ID="cancelEdit" 
+                    CssClass="cancelEditedQuestion"
+                    OnClick="cancelEdit_Click"
+                    Text="Cancel" />
             </div>
         </ra:Panel>
     </div>
@@ -180,9 +187,7 @@
                     <ra:HiddenField 
                         runat="server" 
                         Value='<%#Eval("Id") %>' />
-                    <a class="linkAnswer" href='<%# "#" + Eval("Id") %>' name='<%#Eval("Id") %>'>
-                        link
-                    </a>
+                    <a class="linkAnswer" href='<%# "#" + Eval("Id") %>' name='<%#Eval("Id") %>'>Link</a>
                     <ra:LinkButton 
                         runat="server" 
                         CssClass="editAnswerBtn" 
@@ -194,17 +199,17 @@
                         OnClick="DeleteQuestionBtnClick"
                         CssClass="deleteAnswerBtn"
                         Visible='<%# (bool)(Entities.Operator.Current != null && (Entities.Operator.Current.ID == (int)(Eval("CreatedBy.ID")) || Entities.Operator.Current.CanEditAnswer)) %>'
-                        Text="Delete..." />
-                    <a class="linkButton answeredBy" href='<%#Eval("CreatedBy.Username") + ".user" %>'>
-                        <img alt="Gravatar" runat="server" style="float:left;margin-right:5px;" width="32" height="32" src='<%# Eval("CreatedBy.Gravatar") %>' />
-                        <span>
-                            <%#Eval("CreatedBy.FriendlyName")%> <br />
-                            <%#Eval("CreatedBy.CalculateCreds")%> creds
-                        </span>
-                    </a>
+                        Text="Delete" />
                     <div class="answerDate">
                         <%#GetTime((DateTime)Eval("Created")) %>
                     </div>
+                    <a class="linkButton answeredBy" href='<%# Eval("CreatedBy.Username") + ".user" %>'>
+                        <img id="Img1" alt="Pic" runat="server" style="float:left;margin-right:5px;" width="32" height="32" src='<%# Eval("CreatedBy.Gravatar") %>' />
+                        <div style="float:left;margin-right:5px;">
+                            <%#Eval("CreatedBy.FriendlyName")%> <br />
+                            <%#Eval("CreatedBy.CalculateCreds")%> creds
+                        </div>
+                    </a>
                     <ra:Panel runat="server" CssClass="vote voteAnswer">
                         <ra:HiddenField 
                             runat="server" 
@@ -252,6 +257,12 @@
                                 Text="Save">
                                 <ra:BehaviorUpdater runat="server" Delay="200" />
                             </ra:Button>
+                            <ra:Button 
+                                ID="cancelEditAnswer" 
+                                runat="server" 
+                                OnClick="cancelEditAnswer_Click"
+                                CssClass="cancelEditedAnswer"
+                                Text="Cancel" />
                         </div>
                     </ra:Panel>
                     <ra:Panel 
@@ -262,15 +273,11 @@
                             runat="server">
                             <ItemTemplate>
                                 <div class="oneComment">
-                                    <%#Eval("BodyFormated") %>
-                                        <a class="linkButton answeredBy" href='<%#Eval("CreatedBy.Username") + ".user" %>'>
-                                            <img alt="Gravatar" runat="server" style="float:left;margin-right:5px;" width="32" height="32" src='<%# Eval("CreatedBy.Gravatar") %>' />
-                                            <span>
-                                                <%#Eval("CreatedBy.FriendlyName")%> <br />
-                                                <%#Eval("CreatedBy.CalculateCreds")%> creds
-                                            </span>
-                                        </a>
-                                    </div>
+                                    <%# Eval("BodyFormated") %> -- 
+                                    <a href='<%# Eval("CreatedBy.Username") + ".user" %>'>
+                                        <span><%# Eval("CreatedBy.FriendlyName") %></span>
+                                    </a>
+                                </div>
                             </ItemTemplate>
                         </asp:Repeater>
                         <div class="commentSubmit">
@@ -279,7 +286,7 @@
                                 CssClass="commentTxt" />
                             <ra:Button 
                                 runat="server" 
-                                Text="Save" 
+                                Text="Submit Comment" 
                                 CssClass="submitComment"
                                 OnClick="SaveComment">
                                 <ra:BehaviorUpdater runat="server" Delay="200" />
@@ -306,7 +313,7 @@
             ID="btnSubmit" 
             OnClick="btnSubmit_Click"
             CssClass="answerQuestionBtn"
-            Text="Answer">
+            Text="Submit Answer">
             <ra:BehaviorUpdater 
                 runat="server" 
                 ID="obscurerAnswerQuestion" 

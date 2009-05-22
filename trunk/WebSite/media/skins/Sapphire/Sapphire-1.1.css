@@ -1,0 +1,288 @@
+/*
+Copyright (c) 2008, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 2.5.2
+*/
+
+/* Reset CSS */
+html{color:#000;background:#FFF;}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}
+table{border-collapse:collapse;border-spacing:0;}
+fieldset,img{border:0;}
+address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}
+li{list-style:none;}
+caption,th{text-align:left;}
+h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}
+q:before,q:after{content:'';}
+abbr,acronym {border:0;font-variant:normal;}
+sup {vertical-align:text-top;}
+sub {vertical-align:text-bottom;}
+input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}
+input,textarea,select{*font-size:100%;}
+legend{color:#000;}
+body {font:13px/1.231 arial,helvetica,clean,sans-serif;*font-size:small;*font:x-small;}
+table {font-size:inherit;font:100%;}
+pre,code,kbd,samp,tt{font-family:monospace;*font-size:108%;line-height:100%;}
+body{text-align:center;}
+
+
+/* Grid CSS */
+
+#ft{clear:both;}
+#doc,#doc2,#doc3,#doc4,.yui-t1,.yui-t2,.yui-t3,.yui-t4,.yui-t5,.yui-t6,.yui-t7{margin:auto;text-align:left;width:57.69em;*width:56.25em;min-width:750px;}
+#doc2{width:73.076em;*width:71.25em;}
+#doc3{margin:auto 10px;width:auto;}
+#doc4{width:74.923em;*width:73.05em;}
+.yui-b{position:relative;}
+.yui-b{_position:static;}
+#yui-main .yui-b{position:static;}
+#yui-main{width:100%;}
+.yui-t1 #yui-main,.yui-t2 #yui-main,.yui-t3 #yui-main{float:right;margin-left:-25em;}
+.yui-t4 #yui-main,.yui-t5 #yui-main,.yui-t6 #yui-main{float:left;margin-right:-25em;}
+.yui-t1 .yui-b{float:left;width:12.30769em;*width:12.00em;}
+.yui-t1 #yui-main .yui-b{margin-left:13.30769em;*margin-left:13.05em;}
+.yui-t2 .yui-b{float:left;width:13.8461em;*width:13.50em;}
+.yui-t2 #yui-main .yui-b{margin-left:14.8461em;*margin-left:14.55em;}
+.yui-t3 .yui-b{float:left;width:23.0769em;*width:22.50em;}
+.yui-t3 #yui-main .yui-b{margin-left:24.0769em;*margin-left:23.62em;}
+.yui-t4 .yui-b{float:right;width:13.8456em;*width:13.50em;}
+.yui-t4 #yui-main .yui-b{margin-right:14.8456em;*margin-right:14.55em;}
+.yui-t5 .yui-b{float:right;width:18.4615em;*width:18.00em;}
+.yui-t5 #yui-main .yui-b{margin-right:19.4615em;*margin-right:19.125em;}
+.yui-t6 .yui-b{float:right;width:23.0769em;*width:22.50em;}
+.yui-t6 #yui-main .yui-b{margin-right:24.0769em;*margin-right:23.62em;}
+.yui-t7 #yui-main .yui-b{display:block;margin:0 0 1em 0;}
+#yui-main .yui-b{float:none;width:auto;}
+.yui-gb .yui-u,.yui-g .yui-gb .yui-u,.yui-gb .yui-g,.yui-gb .yui-gb,.yui-gb .yui-gc,.yui-gb .yui-gd,.yui-gb .yui-ge,.yui-gb .yui-gf,.yui-gc .yui-u,.yui-gc .yui-g,.yui-gd .yui-u{float:left;}
+.yui-g .yui-u,.yui-g .yui-g,.yui-g .yui-gb,.yui-g .yui-gc,.yui-g .yui-gd,.yui-g .yui-ge,.yui-g .yui-gf,.yui-gc .yui-u,.yui-gd .yui-g,.yui-g .yui-gc .yui-u,.yui-ge .yui-u,.yui-ge .yui-g,.yui-gf .yui-g,.yui-gf .yui-u{float:right;}
+.yui-g div.first,.yui-gb div.first,.yui-gc div.first,.yui-gd div.first,.yui-ge div.first,.yui-gf div.first,.yui-g .yui-gc div.first,.yui-g .yui-ge div.first,.yui-gc div.first div.first{float:left;}
+.yui-g .yui-u,.yui-g .yui-g,.yui-g .yui-gb,.yui-g .yui-gc,.yui-g .yui-gd,.yui-g .yui-ge,.yui-g .yui-gf{width:49.1%;}
+.yui-gb .yui-u,.yui-g .yui-gb .yui-u,.yui-gb .yui-g,.yui-gb .yui-gb,.yui-gb .yui-gc,.yui-gb .yui-gd,.yui-gb .yui-ge,.yui-gb .yui-gf,.yui-gc .yui-u,.yui-gc .yui-g,.yui-gd .yui-u{width:32%;margin-left:1.99%;}
+.yui-gb .yui-u{*margin-left:1.9%;*width:31.9%;}
+.yui-gc div.first,.yui-gd .yui-u{width:66%;}
+.yui-gd div.first{width:32%;}
+.yui-ge div.first,.yui-gf .yui-u{width:74.2%;}
+.yui-ge .yui-u,.yui-gf div.first{width:24%;}
+.yui-g .yui-gb div.first,.yui-gb div.first,.yui-gc div.first,.yui-gd div.first{margin-left:0;}
+.yui-g .yui-g .yui-u,.yui-gb .yui-g .yui-u,.yui-gc .yui-g .yui-u,.yui-gd .yui-g .yui-u,.yui-ge .yui-g .yui-u,.yui-gf .yui-g .yui-u{width:49%;*width:48.1%;*margin-left:0;}
+.yui-g .yui-gb div.first,.yui-gb .yui-gb div.first{*margin-right:0;*width:32%;_width:31.7%;}
+.yui-g .yui-gc div.first,.yui-gd .yui-g{width:66%;}
+.yui-gb .yui-g div.first{*margin-right:4%;_margin-right:1.3%;}
+.yui-gb .yui-gc div.first,.yui-gb .yui-gd div.first{*margin-right:0;}
+.yui-gb .yui-gb .yui-u,.yui-gb .yui-gc .yui-u{*margin-left:1.8%;_margin-left:4%;}
+.yui-g .yui-gb .yui-u{_margin-left:1.0%;}
+.yui-gb .yui-gd .yui-u{*width:66%;_width:61.2%;}
+.yui-gb .yui-gd div.first{*width:31%;_width:29.5%;}
+.yui-g .yui-gc .yui-u,.yui-gb .yui-gc .yui-u{width:32%;_float:right;margin-right:0;_margin-left:0;}
+.yui-gb .yui-gc div.first{width:66%;*float:left;*margin-left:0;}
+.yui-gb .yui-ge .yui-u,.yui-gb .yui-gf .yui-u{margin:0;}
+.yui-gb .yui-gb .yui-u{_margin-left:.7%;}
+.yui-gb .yui-g div.first,.yui-gb .yui-gb div.first{*margin-left:0;}
+.yui-gc .yui-g .yui-u,.yui-gd .yui-g .yui-u{*width:48.1%;*margin-left:0;}
+.yui-gb .yui-gd div.first{width:32%;}
+.yui-g .yui-gd div.first{_width:29.9%;}
+.yui-ge .yui-g{width:24%;}
+.yui-gf .yui-g{width:74.2%;}
+.yui-gb .yui-ge div.yui-u,.yui-gb .yui-gf div.yui-u{float:right;}
+.yui-gb .yui-ge div.first,.yui-gb .yui-gf div.first{float:left;}
+.yui-gb .yui-ge .yui-u,.yui-gb .yui-gf div.first{*width:24%;_width:20%;}
+.yui-gb .yui-ge div.first,.yui-gb .yui-gf .yui-u{*width:73.5%;_width:65.5%;}
+.yui-ge div.first .yui-gd .yui-u{width:65%;}
+.yui-ge div.first .yui-gd div.first{width:32%;}
+#bd:after,.yui-g:after,.yui-gb:after,.yui-gc:after,.yui-gd:after,.yui-ge:after,.yui-gf:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+#bd,.yui-g,.yui-gb,.yui-gc,.yui-gd,.yui-ge,.yui-gf{zoom:1;}
+
+
+/* Base CSS */
+
+h1{font-size:138.5%;}
+h2{font-size:123.1%;}
+h3{font-size:108%;}
+h1,h2,h3{margin:1em 0;}
+h1,h2,h3,h4,h5,h6,strong{font-weight:bold;}
+abbr,acronym{border-bottom:1px dotted #000;cursor:help;}
+em{font-style:italic;}
+dl dd{margin-left:1em;}
+th,td{border:1px solid #000;padding:.5em;}
+th{font-weight:bold;text-align:center;}
+caption{margin-bottom:.5em;text-align:center;}
+p,fieldset,table,pre{margin-bottom:1em;}
+input[type=text],input[type=password],textarea{width:12.25em;*width:11.9em;}
+
+
+
+
+/*
+ * Copyright (c) 2006 Sébastien Gruhier (http://xilinus.com, http://itseb.com) 
+ * MIT license - Skin for PWC Window. Used as basis for Window in Ra-Ajax
+ * Modified by Thomas Hansen (thomas@ra-ajax.org) to meet the needs of Ra-Ajax
+ */
+.window				{ display:block; }
+.window_nw			{ background: transparent url(window-sprite.png) no-repeat 0 0; padding-left:10px; position:relative; }
+.window_ne			{ background: transparent url(window-sprite.png) no-repeat right 0; padding-right:10px; }
+.window_n			{ background: transparent url(window-h-sprite.png) repeat-x 0 0; overflow:hidden; height:25px; }
+.window_title		{ font-size:0.8em; position:absolute; top:5px; color:#333; -moz-user-select:none; -khtml-user-select: none; user-select: none; cursor:move; width:100%; }
+.window_close		{ width:23px; height:16px; line-height:16px; background:transparent url(window-sprite.png) no-repeat -10px 0; position:absolute; top:0px; right:0px; }
+.window_close:hover	{ background-color:transparent; background-position:-10px -16px; }
+.window_prev		{ width:23px; height:16px; background:transparent url(window-sprite.png) no-repeat -10px -32px; position:absolute; top:3px; right:35px; }
+.window_next		{ width:23px; height:16px; background:transparent url(window-sprite.png) no-repeat -10px -48px; position:absolute; top:3px; right:18px; }
+.window_prev:hover	{ background-color:#ccb; }
+.window_next:hover	{ background-color:#ccb; }
+.window_body		{ overflow:hidden; position:relative; }
+.window_w			{ background: transparent url(window-v-sprite.png) repeat-y 0 0; padding-left:7px; }
+.window_e			{ background: transparent url(window-v-sprite.png) repeat-y right 0; padding-right:7px; }
+.window_content		{ background-color:#fafaff; border-style:solid; border-width:1px; border-left-color:#999; border-top-color:#999; border-right-color:#aaa; border-bottom-color:#aaa; }
+.window_sw			{ background: transparent url(window-sprite.png) no-repeat 0 -25px; padding-left:5px; }
+.window_se			{ background: transparent url(window-sprite.png) no-repeat right -25px; padding-right:5px; }
+.window_s			{ background: transparent url(window-h-sprite.png) repeat-x 0 -25px; height:7px; }
+
+
+/*
+Copyright (c) 2008, Thomas Hansen
+Code licensed under LGPL3
+http://ra-ajax.org
+*/
+
+
+/* Calendar specific CSS */
+
+.calendar				{ display:block; }
+.calendar_nw			{ background: transparent url(window-sprite.png) no-repeat 0 0; padding-left:10px; position:relative; }
+.calendar_ne			{ background: transparent url(window-sprite.png) no-repeat right 0; padding-right:10px; }
+.calendar_n				{ background: transparent url(window-h-sprite.png) repeat-x 0 0; overflow:hidden; height:25px; }
+.calendar_title			{ font-size:0.8em; position:absolute; top:5px; color:#333; width:100%; }
+.calendar_close			{ width:23px; height:16px; line-height:16px; background:transparent url(window-sprite.png) no-repeat -10px 0; position:absolute; top:0px; right:0px; }
+.calendar_close:hover	{ background-color:transparent; background-position:-10px -16px; }
+.calendar_body			{ overflow:hidden; position:relative; }
+.calendar_w				{ background: transparent url(window-v-sprite.png) repeat-y 0 0; padding-left:7px; }
+.calendar_e				{ background: transparent url(window-v-sprite.png) repeat-y right 0; padding-right:7px; }
+.calendar_content		{ background-color:#fafaff; border-style:solid; border-width:1px; border-left-color:#999; border-top-color:#999; border-right-color:#aaa; border-bottom-color:#aaa; font-size:0.7em; }
+.calendar_sw			{ background: transparent url(window-sprite.png) no-repeat 0 -25px; padding-left:5px; }
+.calendar_se			{ background: transparent url(window-sprite.png) no-repeat right -25px; padding-right:5px; }
+.calendar_s				{ background: transparent url(window-h-sprite.png) repeat-x 0 -25px; height:7px; }
+
+.calendar select				{ border:none; margin:0 5px 0 5px; background-color:Transparent; color:#00f; }
+.calendar table					{ border-collapse:collapse; margin:0; }
+.calendar table tr td			{ border:none; padding:0; }
+.calendar table tr.weekdays td	{ color:#333; padding:2px; }
+.calendar table tr td.weekno	{ color:#333; }
+.calendar a						{ display:block; text-decoration:none; color:#00f; margin:1px; border:solid 1px Transparent; background-color:Transparent; }
+.calendar a:hover				{ border:solid 1px #99f; }
+.calendar a.offMonth			{ color:#99d; }
+.calendar a.selected			{ background-color:#eef; border:solid 1px #999; }
+.calendar .holidayOnVenus a		{ color:#0f0; }
+.calendar_content table			{ text-align:center; margin-left:auto; margin-right:auto; }
+
+
+/* TabControl styles */
+
+.tab { width:95%; }
+.tab .tab-header { margin-bottom:-1px; }
+.tab .tab-header ul { }
+.tab .tab-header ul li { display:inline; padding-right:2px; }
+.tab .tab-header ul li.first { margin-left:3px; }
+.tab .tab-header ul li a { text-decoration:none; color:#777; padding:5px; }
+.tab .tab-header ul li a:hover { color:#00f; background-color:Transparent; }
+.tab .tab-header ul li.active  a { text-decoration:none; color:#000; padding:5px; }
+.tab .tab-header ul li.tab-disabled a { color:#faa; cursor:default; }
+.tab .tab-header ul li.tab-disabled a:hover { color:#f99; }
+.tab .tab-header ul li span { display:inline-block; *height:18px; padding-top:5px; }
+.tab .tab-header ul li span.left { background:url('tab-sprite.png') no-repeat; width:10px; border-bottom:solid 1px #648CE8; }
+.tab .tab-header ul li span.center { background:url('tab-h-sprite.png') repeat-x; border-bottom:solid 1px #648CE8; }
+.tab .tab-header ul li span.right { background:url('tab-sprite.png') no-repeat -10px 0; width:10px; border-bottom:solid 1px #648CE8; }
+.tab .tab-header ul li.active a { cursor:default; }
+.tab .tab-header ul li.active a:hover { color:inherit; }
+.tab .tab-header ul li.active span.left { background:url('tab-sprite.png') no-repeat; border-bottom:solid 1px #fff; }
+.tab .tab-header ul li.active span.center { background:url('tab-h-sprite.png') repeat-x; border-bottom:solid 1px #fff; }
+.tab .tab-header ul li.active span.right { background:url('tab-sprite.png') no-repeat -10px 0; border-bottom:solid 1px #fff; }
+.tab .content { padding:5px; background-color:#fdfdfd; border:solid 1px #648CE8; }
+
+
+/* Accordion */
+
+.accordion {}
+.accordion .body { overflow:hidden; background-color:#fdfdfd; font-size:small; }
+.accordion .body-content { padding:5px; border-left:solid 1px #CCD1FF; border-right:solid 1px #CCD1FF; border-bottom:solid 1px #CCD1FF; }
+.accordion .accordion-header { background: transparent url(window-h-sprite.png) repeat-x 0 0; }
+.accordion .accordion-header a { text-decoration:none; padding:5px; display:block; color:#333; font-size:0.8em; }
+.accordion .accordion-header a:hover { background: transparent url(window-h-sprite.png) repeat-x 0 0; color:#00f; }
+
+
+/* TreeView */
+
+/* The TreeView control uses images from YUI which are BSD licensed and we distribute
+ * them just like Yahoo under the BSD license terms... :)
+ */
+
+.tree { background-color:#fff; border:solid 1px #CCD1FF; padding:5px; font-size:0.9em; }
+.tree input { margin-right:8px; }
+.tree .item { cursor:pointer; line-height:16px; }
+.tree .item:hover { background-color:#ddf; }
+.tree .item:hover ul { background-color:#fff; }
+.tree .selected { background-color:#bbf; }
+.tree .selected ul { background-color:#fafafa; }
+.tree .selected:hover { background-color:#d0d0f0; }
+.tree .spacer { padding-left:16px; *display:inline-block; *height:16px; }
+.tree .icon { background:url(tree-sprites.png) no-repeat; }
+.tree .expanded .icon { background-position: 0px 0px; }
+.tree .collapsed .icon { background-position: -16px 0px; }
+.tree .no-childs .icon { background-position: -16px 0px; }
+.tree .lines { background:url(tree-sprites.png) no-repeat -96px 0px; }
+.tree .linesElbow { background:url(tree-sprites.png) no-repeat -80px 0px; }
+.tree .expanded .leaf { background:url(tree-sprites.png) no-repeat -48px 0px; }
+.tree .expanded .no-leaf { background:url(tree-sprites.png) no-repeat -128px 0px; }
+.tree .collapsed .leaf { background:url(tree-sprites.png) no-repeat -32px 0px; }
+.tree .collapsed .no-leaf { background:url(tree-sprites.png) no-repeat -112px 0px; }
+.tree .no-childs .leaf { background:url(tree-sprites.png) no-repeat -64px 0px; }
+.tree .no-childs .no-leaf { background:url(tree-sprites.png) no-repeat -80px 0px; }
+
+/* Custom "icon" classes used in sample */
+
+/*
+ * Remove these for efficiency, both in CSS file and in tree-sprites.png for your own application...
+ */
+.tree .jquery .icon { background-position:-176px 0px; }
+.tree .mootools .icon { background-position:-144px 0px; }
+.tree .prototype .icon { background-position:-160px 0px; }
+
+
+/* Menu */
+
+.menu { background: transparent url(window-h-sprite.png) repeat-x 0 0; width:100%; position:relative; line-height:22px; height:28px; }
+.menu ul { display:inline; }
+.menu .item { cursor:pointer; color:#333; font-size:0.8em; margin:5px; }
+.menu .item:hover { color:#00f; }
+.menu .top { display:inline; padding:2px; position:relative; }
+.menu .menu-dropper { border:solid 1px #648CE8; background-color:#BDC8FD; position:absolute; left:0px; width:150px; *top:24px; }
+.menu .menu-dropper .drop-item { display:block; color:#333; padding-left:15px; padding:5px; }
+.menu .menu-dropper .drop-item:hover { color:#66f; background-color:#cDd8Ff; }
+.menu .menu-dropper .sub-dropper { left: 150px; top:-1px; }
+
+
+/* AutoCompleter CSS class */
+
+.auto { background-color:#fff; border:solid 1px #CCD1FF; padding:5px; height:20px; width:200px; overflow:visible; }
+.auto-text { display:block; }
+.auto-items { position:absolute; border:solid 1px #CCD1FF; background-color:#fff; width:170px; padding:5px; }
+.auto-item { border:solid 1px Transparent; cursor:pointer; }
+.auto-item:hover { border-top:solid 1px #CCD1FF; border-bottom:solid 1px #CCD1FF; background-color:#fafaff; }
+
+
+/* Extended Button */
+.button { border:none 0; background-color:Transparent; }
+.button .bLeft { background:url('window-sprite.png') no-repeat 0 0; 
+padding-left:7px; display:block; height:32px; }
+.button .bCenter { background:url('window-h-sprite.png') repeat-x 0 0; 
+display:block; height:32px; padding-top:7px; }
+.button .bRight { background:url('window-sprite.png') no-repeat right top; 
+padding-right:7px; display:block; height:32px; }
+
+
+/* Window-LIGHT...! */
+
+.wnd-light { border:solid 1px #CCD1FF; background-color:#fff; }
+.wnd-light-head { border-bottom:solid 1px #CCD1FF; background-color:#fff; padding:5px; cursor:move; -moz-user-select:none; font-style:bold; }
+.wnd-light-close { font-size:0.8em; position:absolute; right:5px; top:5px; }
+
+

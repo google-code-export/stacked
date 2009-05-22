@@ -1,0 +1,252 @@
+/*
+Copyright (c) 2008, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 2.5.2
+*/
+
+/* Reset CSS */
+html{color:#000;background:#FFF;}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}
+table{border-collapse:collapse;border-spacing:0;}
+fieldset,img{border:0;}
+address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}
+li{list-style:none;}
+caption,th{text-align:left;}
+h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}
+q:before,q:after{content:'';}
+abbr,acronym {border:0;font-variant:normal;}
+sup {vertical-align:text-top;}
+sub {vertical-align:text-bottom;}
+input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}
+input,textarea,select{*font-size:100%;}
+legend{color:#000;}
+body {font:13px/1.231 arial,helvetica,clean,sans-serif;*font-size:small;*font:x-small;}
+table {font-size:inherit;font:100%;}
+pre,code,kbd,samp,tt{font-family:monospace;*font-size:108%;line-height:100%;}
+
+
+/* Base CSS */
+
+h1{font-size:138.5%;}
+h2{font-size:123.1%;}
+h3{font-size:108%;}
+h1,h2,h3{margin:0;}
+h1,h2,h3,h4,h5,h6,strong{font-weight:bold;}
+abbr,acronym{border-bottom:1px dotted #000;cursor:help;}
+em{font-style:italic;}
+dl dd{margin-left:1em;}
+th,td{border:1px solid #000;padding:.5em;}
+th{font-weight:bold;text-align:center;}
+caption{margin-bottom:.5em;text-align:center;}
+p,fieldset,table,pre{margin-bottom:1em;}
+input[type=text],input[type=password],textarea{width:12.25em;*width:11.9em;}
+
+
+
+
+/*
+ * Copyright (c) 2006 Sébastien Gruhier (http://xilinus.com, http://itseb.com) 
+ * MIT license - Skin for PWC Window. Used as basis for Window in Ra-Ajax
+ * Modified by Thomas Hansen (thomas@ra-ajax.org) to meet the needs of Ra-Ajax
+ */
+.window				{ display:block; }
+.window_nw			{ background: transparent url(window-sprite.png) no-repeat 0 0; padding-left:10px; position:relative; }
+.window_ne			{ background: transparent url(window-sprite.png) no-repeat right 0; padding-right:10px; }
+.window_n			{ background: transparent url(window-h-sprite.png) repeat-x 0 0; overflow:hidden; height:25px; }
+.window_title		{ font-size:0.8em; position:absolute; top:5px; color:#333; -moz-user-select:none; -khtml-user-select: none; user-select: none; cursor:move; width:100%; }
+.window_close		{ width:23px; height:16px; line-height:16px; background:transparent url(window-sprite.png) no-repeat -10px 0; position:absolute; top:0px; right:0px; }
+.window_close:hover	{ background-color:transparent; background-position:-10px -16px; }
+.window_prev		{ width:23px; height:16px; background:transparent url(window-sprite.png) no-repeat -10px -32px; position:absolute; top:3px; right:35px; }
+.window_next		{ width:23px; height:16px; background:transparent url(window-sprite.png) no-repeat -10px -48px; position:absolute; top:3px; right:18px; }
+.window_body		{ overflow:hidden; position:relative; }
+.window_w			{ background: transparent url(window-v-sprite.png) repeat-y 0 0; padding-left:7px; }
+.window_e			{ background: transparent url(window-v-sprite.png) repeat-y right 0; padding-right:7px; }
+.window_content		{ background-color:#fefefe; border-style:solid; border-width:1px; border-left-color:#999; border-top-color:#999; border-right-color:#aaa; border-bottom-color:#aaa; }
+.window_sw			{ background: transparent url(window-sprite.png) no-repeat 0 -25px; padding-left:5px; }
+.window_se			{ background: transparent url(window-sprite.png) no-repeat right -25px; padding-right:5px; }
+.window_s			{ background: transparent url(window-h-sprite.png) repeat-x 0 -25px; height:7px; }
+
+
+/*
+Copyright (c) 2008, Thomas Hansen
+Code licensed under LGPL3
+http://ra-ajax.org
+*/
+
+
+/* WebPart specific CSS */
+
+.webpart { border:solid 1px #666; max-height:100%; overflow:hidden; }
+.webpart .header { border-bottom:solid 1px #666; background:transparent url(window-h-sprite.png) repeat-x 0 -1px; position:relative; }
+.webpart .header .caption { padding:3px; line-height:23px; }
+
+.webpart .header .toggle,
+.webpart .header .toggled,
+.webpart .header .maximize,
+.webpart .header .maximized,
+.webpart .header .close
+{
+	position:absolute; top:1px; width:12px; display:block; 
+	text-decoration:none;
+	background-image:url(window-sprite.png);
+	background-repeat:no-repeat;
+	background-color:Transparent;
+	-moz-user-select:none;
+	-khtml-user-select:none;
+	user-select:none;
+}
+
+.webpart .header .toggle { right:33px;  background-position:-16px -64px; }
+.webpart .header .toggle:hover { right:33px; background-position:-16px -128px; }
+.webpart .header .toggled { right:33px; background-position:-16px -80px; }
+.webpart .header .toggled:hover { right:33px; background-position:-16px -144px; }
+.webpart .header .maximize { right:17px; background-position:-16px -96px; }
+.webpart .header .maximize:hover { right:17px; background-position:-16px -160px; }
+.webpart .header .maximized { right:17px; background-position:-16px -112px; }
+.webpart .header .maximized:hover { right:17px; background-position:-16px -176px; }
+.webpart .header .close { right:1px; background-position:-15px -1px; }
+.webpart .header .close:hover { right:1px; background-position:-15px -17px; }
+
+.webpart .content { padding:0; overflow:hidden; }
+.webpart .content div { padding:5px; }
+
+/* Calendar specific CSS */
+
+.calendar				{ display:block; }
+.calendar_nw			{ background: transparent url(window-sprite.png) no-repeat 0 0; padding-left:10px; position:relative; }
+.calendar_ne			{ background: transparent url(window-sprite.png) no-repeat right 0; padding-right:10px; }
+.calendar_n				{ background: transparent url(window-h-sprite.png) repeat-x 0 0; overflow:hidden; height:25px; }
+.calendar_title			{ font-size:0.8em; position:absolute; top:5px; color:#333; width:100%; }
+.calendar_close			{ width:23px; height:16px; line-height:16px; background:transparent url(window-sprite.png) no-repeat -10px 0; position:absolute; top:0px; right:0px; }
+.calendar_close:hover	{ background-color:transparent; background-position:-10px -16px; }
+.calendar_body			{ overflow:hidden; position:relative; }
+.calendar_w				{ background: transparent url(window-v-sprite.png) repeat-y 0 0; padding-left:7px; }
+.calendar_e				{ background: transparent url(window-v-sprite.png) repeat-y right 0; padding-right:7px; }
+.calendar_content		{ background-color:#fefefe; border-style:solid; border-width:1px; border-left-color:#999; border-top-color:#999; border-right-color:#aaa; border-bottom-color:#aaa; font-size:0.7em; }
+.calendar_sw			{ background: transparent url(window-sprite.png) no-repeat 0 -25px; padding-left:5px; }
+.calendar_se			{ background: transparent url(window-sprite.png) no-repeat right -25px; padding-right:5px; }
+.calendar_s				{ background: transparent url(window-h-sprite.png) repeat-x 0 -25px; height:7px; }
+
+.calendar select				{ border:none; margin:0 5px 0 5px; background-color:Transparent; color:#00f; }
+.calendar table					{ border-collapse:collapse; margin:0; }
+.calendar table tr td			{ border:none; padding:0; }
+.calendar table tr.weekdays td	{ color:#333; padding:2px; }
+.calendar table tr td.weekno	{ color:#333; }
+.calendar a						{ display:block; text-decoration:none; color:#00f; margin:1px; border:solid 1px Transparent; background-color:Transparent; }
+.calendar a:hover				{ border:solid 1px #99f; }
+.calendar a.offMonth			{ color:#99d; }
+.calendar a.selected			{ background-color:#eef; border:solid 1px #999; }
+.calendar .holidayOnVenus a		{ color:#0f0; }
+.calendar_content table			{ text-align:center; margin-left:auto; margin-right:auto; }
+.calendar .hour					{ display:inline; width:20px; margin-right:5px; }
+.calendar .minutes				{ display:inline; width:20px; }
+
+/* TabControl styles */
+
+.tab { width:95%; }
+.tab .tab-header { margin-bottom:-1px; }
+.tab .tab-header ul { }
+.tab .tab-header ul li { display:inline; padding-right:2px; }
+.tab .tab-header ul li.first { margin-left:3px; }
+.tab .tab-header ul li a { text-decoration:none; color:#777; padding:5px; }
+.tab .tab-header ul li a:hover { color:#00f; background-color:Transparent; }
+.tab .tab-header ul li.tab-disabled a { color:#faa; cursor:default; }
+.tab .tab-header ul li.tab-disabled a:hover { color:#f99; }
+.tab .tab-header ul li.active  a { text-decoration:none; color:#000; padding:5px; }
+.tab .tab-header ul li span { display:inline-block; *height:18px; padding-top:5px; }
+.tab .tab-header ul li span.left { background:url('tab-sprite.png') no-repeat; width:10px; border-bottom:solid 1px #d0d0d0; }
+.tab .tab-header ul li span.center { background:url('tab-h-sprite.png') repeat-x; border-bottom:solid 1px #d0d0d0; }
+.tab .tab-header ul li span.right { background:url('tab-sprite.png') no-repeat -10px 0; width:10px; border-bottom:solid 1px #d0d0d0; }
+.tab .tab-header ul li.active a { cursor:default; }
+.tab .tab-header ul li.active a:hover { color:inherit; }
+.tab .tab-header ul li.active span.left { background:url('tab-sprite.png') no-repeat; border-bottom:solid 1px #fff; }
+.tab .tab-header ul li.active span.center { background:url('tab-h-sprite.png') repeat-x; border-bottom:solid 1px #fff; }
+.tab .tab-header ul li.active span.right { background:url('tab-sprite.png') no-repeat -10px 0; border-bottom:solid 1px #fff; }
+.tab .content { padding:5px; background-color:#fdfdfd; border:solid 1px #d0d0d0; }
+
+
+/* Accordion */
+
+.accordion {}
+.accordion .body { overflow:hidden; background-color:#fdfdfd; font-size:small; }
+.accordion .body-content { padding:5px; border-left:solid 1px #CCD1FF; border-right:solid 1px #CCD1FF; border-bottom:solid 1px #CCD1FF; }
+.accordion .accordion-header { background: transparent url(window-h-sprite.png) repeat-x 0 0; }
+.accordion .accordion-header a { text-decoration:none; padding:5px; display:block; color:#333; font-size:0.8em; }
+.accordion .accordion-header a:hover { background: transparent url(window-h-sprite.png) repeat-x 0 0; color:#00f; }
+
+
+/* TreeView */
+
+/* The TreeView control uses images from YUI which are BSD licensed and we distribute
+ * them just like Yahoo under the BSD license terms... :)
+ */
+
+.tree { background-color:#fff; border:solid 1px #CCD1FF; padding:5px; font-size:0.9em; }
+.tree input { margin-right:8px; }
+.tree .item { cursor:pointer; line-height:16px; }
+.tree .item:hover { background-color:#ddf; }
+.tree .item:hover ul { background-color:#fff; }
+.tree .selected { background-color:#bbf; }
+.tree .selected ul { background-color:#fafafa; }
+.tree .selected:hover { background-color:#d0d0f0; }
+.tree .spacer { padding-left:16px; *display:inline-block; *height:16px; }
+.tree .icon { background:url(tree-sprites.png) no-repeat; }
+.tree .expanded .icon { background-position: 0px 0px; }
+.tree .collapsed .icon { background-position: -16px 0px; }
+.tree .no-childs .icon { background-position: -16px 0px; }
+.tree .lines { background:url(tree-sprites.png) no-repeat -96px 0px; }
+.tree .linesElbow { background:url(tree-sprites.png) no-repeat -80px 0px; }
+.tree .expanded .leaf { background:url(tree-sprites.png) no-repeat -48px 0px; }
+.tree .expanded .no-leaf { background:url(tree-sprites.png) no-repeat -128px 0px; }
+.tree .collapsed .leaf { background:url(tree-sprites.png) no-repeat -32px 0px; }
+.tree .collapsed .no-leaf { background:url(tree-sprites.png) no-repeat -112px 0px; }
+.tree .no-childs .leaf { background:url(tree-sprites.png) no-repeat -64px 0px; }
+.tree .no-childs .no-leaf { background:url(tree-sprites.png) no-repeat -80px 0px; }
+
+/* Custom "icon" classes used in sample */
+
+/*
+ * Remove these for efficiency, both in CSS file and in tree-sprites.png for your own application...
+ */
+.tree .jquery .icon { background-position:-176px 0px; }
+.tree .mootools .icon { background-position:-144px 0px; }
+.tree .prototype .icon { background-position:-160px 0px; }
+
+
+/* Menu */
+
+.menu { background: transparent url(window-h-sprite.png) repeat-x 0 0; width:100%; position:relative; line-height:22px; height:28px; }
+.menu ul { display:inline; }
+.menu .item { cursor:pointer; color:#333; font-size:0.8em; margin:5px; }
+.menu .item:hover { color:#00f; }
+.menu .top { display:inline; padding:2px; position:relative; }
+.menu .menu-dropper { border:solid 1px #648CE8; background-color:#BDC8FD; position:absolute; left:0px; width:150px; *top:24px; }
+.menu .menu-dropper .drop-item { display:block; color:#333; padding-left:15px; padding:5px; }
+.menu .menu-dropper .drop-item:hover { color:#66f; background-color:#cDd8Ff; }
+.menu .menu-dropper .sub-dropper { left: 150px; top:-1px; }
+
+
+/* AutoCompleter CSS class */
+
+.auto { background-color:#fff; border:solid 1px #CCD1FF; padding:5px; height:20px; width:200px; overflow:visible; }
+.auto-text { display:block; }
+.auto-items { position:absolute; border:solid 1px #CCD1FF; background-color:#fff; width:170px; padding:5px; }
+.auto-item { border:solid 1px Transparent; cursor:pointer; }
+.auto-item:hover { border-top:solid 1px #CCD1FF; border-bottom:solid 1px #CCD1FF; background-color:#fafaff; }
+
+
+/* Extended Button */
+.button { width:auto; padding:0; border:none 0; background-color:Transparent; }
+.button .bLeft { background:url('window-sprite.png') no-repeat 0 0; padding-left:7px; display:block; height:32px; }
+.button .bCenter { background:url('window-h-sprite.png') repeat-x 0 0; display:block; height:32px; padding-top:7px; }
+.button .bRight { background:url('window-sprite.png') no-repeat right top; padding-right:7px; display:block; height:32px; }
+
+
+/* Window-LIGHT...! */
+
+.wnd-light { border:solid 1px #CCD1FF; background-color:#fff; }
+.wnd-light-head { border-bottom:solid 1px #CCD1FF; background-color:#fff; padding:5px; cursor:move; -moz-user-select:none; font-style:bold; }
+.wnd-light-close { font-size:0.8em; position:absolute; right:5px; top:5px; }
+
+
