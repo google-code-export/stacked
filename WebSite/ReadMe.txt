@@ -1,19 +1,18 @@
 ﻿
 
-*********************************************************************************************
+************************************************************************************************
 
-          Stacked - an Open Source implementation of a Question/Answer system
-          Inspired from StackOverflow.com.
+               Stacked is an Open Source implementation of a Question/Answer system 
+                                inspired by StackOverflow.com
 
-*********************************************************************************************
+************************************************************************************************
 
-Stacked is a GPL licensed Question/Answer system ideal for websites that needs some sort
-of question/answer system modeled after StackOverflow.com.
+Stacked is an open source, GPL licensed, Question/Answer system ideal for websites that need 
+some sort of question/answer system modeled after StackOverflow.com.
 
-Stacked is GPL and Open Source.
-
-Stacked works on Mono and Microsoft ASP.NET. You probably use any database you wish, or at least those
-supported by ActiveRecord, but only MySQL and MS SQL are currently actively being supported and tested.
+Stacked works on Mono and Microsoft ASP.NET. You can probably use any database system you wish, 
+or at least those supported by ActiveRecord, but only MySQL and MS SQL are currently actively 
+supported and tested.
 
 Developers behind Stacked are
  * Kariem Ali - kariem@ra-ajax.org

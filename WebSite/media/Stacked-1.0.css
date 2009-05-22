@@ -1,0 +1,984 @@
+﻿
+
+table, tr, td
+{
+	border:0;
+}
+
+.tab
+{
+	width: 100%;
+}
+
+.auto
+{
+	background-color: #fff;
+	border: dotted 1px Black;
+	padding: 15px;
+	height: 20px;
+	width: 200px;
+	overflow: visible;
+}
+
+.auto input[type=text]
+{
+	display: block;
+	width: 175px;
+	background: url(magnifier.png) no-repeat scroll 0 0;
+	border: solid 1px #999;
+	padding-left: 20px;
+}
+
+.auto-items
+{
+	position: absolute;
+	border: solid 1px #CCD1FF;
+	background-color: #fff;
+	width: 187px;
+	padding: 5px;
+	margin: 0;
+}
+
+.auto-item
+{
+	border: solid 1px Transparent;
+	cursor: pointer;
+}
+
+.auto li
+{
+	list-style-type: none;
+}
+
+.auto a
+{
+	display: block;
+	margin: 2px 2px 2px 2px;
+	background-color: #eee;
+	padding: 5px;
+	border: dotted 1px #999;
+	font-size: 80%;
+}
+
+.auto a:hover
+{
+	text-decoration: none;
+}
+
+
+.auto-item:hover
+{
+	border-top: solid 1px #CCD1FF;
+	border-bottom: solid 1px #CCD1FF;
+	background-color: #fafaff;
+}
+
+/* Custom fields - classes for MasterPage */
+.mainContent
+{
+	margin: 0px auto 25px auto;
+	width: 100%;
+	position: relative;
+}
+
+.logo
+{
+	position: absolute;
+	top: 15px;
+	left: 0px;
+}
+
+.logo:hover
+{
+	background-color: inherit;
+}
+
+.logo img
+{
+	border: solid 2px Transparent;
+}
+
+.logo img:hover
+{
+	border-top: solid 2px #ddd;
+	border-left: solid 2px #ddd;
+	border-right: solid 2px #aaa;
+	border-bottom: solid 2px #aaa;
+}
+
+.infoLabel
+{
+}
+
+.loginPnl
+{
+	position: absolute;
+	top: 15px;
+	right: 45px;
+	border: dotted 1px Black;
+	width: 200px;
+	padding: 15px;
+}
+
+.linkButton
+{
+	display: block;
+	border: solid 1px #999;
+	background-color: #f0f0f0;
+	color: #33d;
+	font-size: 108%;
+	padding: 5px 5px 3px 5px;
+	margin: 2px;
+	position: relative;
+}
+
+.linkButton:hover
+{
+	text-decoration: none;
+}
+
+.profileName
+{
+	position: absolute;
+	top: 2px;
+	right: 2px;
+	font-size: 0.7em;
+	color: #999;
+}
+
+.search
+{
+	position: absolute;
+	top: 15px;
+	right: 290px;
+}
+
+.found
+{
+	color: #ea0;
+}
+
+.search .auto-items
+{
+	z-index: 5000;
+}
+
+.contentPlaceHolder
+{
+	padding-top: 150px;
+	margin-bottom: 90px;
+}
+
+.infoSmallText
+{
+	font-size: 0.8em;
+	font-style: italic;
+	color: #999;
+}
+
+/* Default.aspx */
+.lblCountUsers
+{
+	margin: 10px 0px 25px 0px;
+	font-size: 123.1%;
+	display: block;
+}
+
+/* ItemGrid.ascx */
+.list-item
+{
+	border: dotted 1px #999;
+	padding: 15px 10px 15px 10px;
+	margin: 10px 0px 10px 0px;
+}
+
+.list-header
+{
+	font-size: 138.5%;
+	overflow: auto;
+}
+
+.header-item
+{
+	position: relative;
+	background-color: #ddd;
+	padding: 10px;
+	margin: 0px 5px 0px 5px;
+	float: left;
+	text-align: center;
+}
+
+.item
+{
+	font-size: 108%;
+	overflow: auto;
+	line-height: 25px;
+}
+
+.content-item
+{
+	position: relative;
+	background-color: #f5f5f5;
+	padding: 10px;
+	margin: 0px 5px 0px 5px;
+	float: left;
+	text-align: center;
+}
+
+.score
+{
+	width: 60px;
+}
+
+.answers-count
+{
+	width: 70px;
+}
+
+.item .score
+{
+	font-size: 128.1%;
+}
+
+.really-bad
+{
+	background-color: #f00;
+}
+
+.bad
+{
+	background-color: #e99;
+}
+
+.neutral
+{
+}
+
+.good
+{
+	background-color: #9e9;
+}
+
+.great
+{
+	background-color: #3f3;
+}
+
+.item .answers-count
+{
+	font-size: 128.1%;
+}
+
+.date
+{
+	width: 80px;
+}
+
+.operator
+{
+	width: 150px;
+}
+
+.question
+{
+	width: 450px;
+}
+
+.item .date
+{
+	font-size: 0.7em;
+}
+
+.item .operator
+{
+	padding: 0px;
+	width: 170px;
+	font-size: 0.9em;
+	text-align: left;
+}
+
+.item a
+{
+	display: block;
+	padding: 10px;
+}
+
+.item a:hover
+{
+	text-decoration: none;
+}
+
+.item .question
+{
+	padding: 0px;
+	text-align: left;
+	width: 470px;
+	font-size: 0.9em;
+}
+
+.item .viewCount
+{
+	position: absolute;
+	top: 0px;
+	right: 5px;
+	color: #999;
+	font-size: 0.9em;
+}
+
+.item .tags
+{
+	position: absolute;
+	bottom: 0px;
+	right: 5px;
+	color: #999;
+	font-size: 0.9em;
+}
+
+/* Login.ascx */
+.loginWindow
+{
+	width: 400px;
+	top: 10px;
+	right: 10px;
+	position: absolute;
+	z-index: 5000;
+}
+
+.loginDiv
+{
+	position: relative;
+	height: 160px;
+}
+
+.openIdWrapper
+{
+	padding: 25px;
+	padding-top: 40px;
+}
+
+.openIdBtn
+{
+	display: block;
+	width: 100px;
+	font-size: 0.8em;
+	position: absolute;
+	bottom: 2px;
+	left: 2px;
+}
+
+.whatsOpenId
+{
+	display: block;
+	width: 100px;
+	font-size: 0.8em;
+	position: absolute;
+	bottom: 2px;
+	right: 2px;
+}
+
+.publicTerminalOpenID
+{
+	padding: 10px 10px 10px 0px;
+	display: block;
+}
+
+.errLbl
+{
+	color: Red;
+	font-size: 0.9em;
+	font-style: italic;
+}
+
+.loginTable
+{
+	margin: 15px auto 0px auto;
+}
+
+.loginNativeBtn
+{
+	position: absolute;
+	bottom: 2px;
+	right: 2px;
+}
+
+
+/* Register.ascx */
+.registerWindow
+{
+	width: 350px;
+	top: 10px;
+	right: 10px;
+	position: absolute;
+	z-index: 5000;
+}
+
+.registerDiv
+{
+	position: relative;
+	height: 170px;
+}
+
+.registerTable
+{
+	margin: 5px auto 5px auto;
+}
+
+.infoOpenId
+{
+	color: #4a4;
+	font-style: italic;
+	font-size: 0.9em;
+}
+
+.loginBtn
+{
+	position: absolute;
+	right: 2px;
+	bottom: 2px;
+}
+
+
+/* AskQuestion.ascx */
+.askQuestionWindow
+{
+	width: 600px;
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	z-index: 5000;
+}
+
+.askQuestion
+{
+	overflow: auto;
+	min-height: 500px;
+}
+
+.askQuestionLeft
+{
+	float: left;
+	width: 55%;
+	padding: 15px;
+	height: 330px;
+}
+
+.actionButtons
+{
+}
+
+.actionButton
+{
+	display: inline;
+	font-size: 0.9em;
+}
+
+.askQuestionLeft input[type=text]
+{
+	width: 300px;
+	margin: 15px 15px 0 15px;
+}
+
+.askQuestionLeft textarea
+{
+	width: 300px;
+	margin: 15px 15px 0 15px;
+	height: 200px;
+}
+
+.tagsAuto
+{
+	width: 270px;
+	margin: 15px 15px 0 15px;
+	padding: 15px;
+}
+
+.tagsAuto .auto-items
+{
+	width: 260px;
+}
+
+.tagsAuto li
+{
+	margin: 10px;
+	padding: 10px;
+	background-color: #ddf;
+	cursor: pointer;
+}
+
+.tagsAuto li:hover
+{
+	background-color: #bbf;
+}
+
+.tagsAuto input[type=text]
+{
+	margin: 0;
+	width: 250px;
+}
+
+.questionSubmit
+{
+	position: absolute;
+	bottom: 12px;
+	right: 12px;
+	font-size: 1.4em;
+}
+
+.legend
+{
+	font-size: 0.9em;
+}
+
+.quizContent
+{
+	clear: both;
+	margin-left: 15px;
+	width: 80%;
+	overflow: auto;
+}
+
+
+/* Item.aspx (view single question) */
+.wndDelete
+{
+	width: 300px;
+	position: absolute;
+	top: 100px;
+	left: 100px;
+	z-index: 5000;
+}
+
+.divDelete
+{
+	padding: 70px;
+}
+
+.answerDiv
+{
+	position: relative;
+}
+
+.itemHeader
+{
+	margin-bottom: 8px;
+}
+
+.tagsHeader
+{
+	padding-bottom: 5px;
+}
+
+.tagButton
+{
+	display: inline;
+	color: #999;
+	font-size: 0.9em;
+	padding: 3px 5px 3px 5px;
+	margin: 0;
+}
+
+.errPanel
+{
+	background-color: #44DD66;
+	border: 1px solid Black;
+	font-size: 123.1%;
+	padding: 5px;
+	position: fixed;
+	top: 0;
+	width: 93%;
+	z-index: 6000;
+}
+
+.star
+{
+	float: left;
+	margin-left: 50px;
+	margin-top: 10px;
+	width: 24px;
+}
+
+.starFavored
+{
+	background: url(icons/star.png) no-repeat 0 0;
+	height: 16px;
+	width: 16px;
+	display: block;
+}
+
+.starNone
+{
+	background: url(icons/empty_star.png) no-repeat 0 0;
+	height: 16px;
+	width: 16px;
+	display: block;
+}
+
+.numberOfFavorites
+{
+	margin-left: 5px;
+	color: #999;
+	font-size: 0.9em;
+}
+
+.vote
+{
+	float: left;
+	width: 16px;
+	line-height: 15px;
+}
+
+.vote a
+{
+	color: #fff;
+}
+
+.up
+{
+	background: url(icons/vote_up.png) no-repeat 0 0;
+	height: 16px;
+	width: 16px;
+	display: block;
+}
+
+.down
+{
+	background: url(icons/vote_down.png) no-repeat 0 0;
+	height: 16px;
+	width: 16px;
+	display: block;
+}
+
+.votes
+{
+	font-size: 1.3em;
+	width: 16px;
+	text-align: center;
+	display: block;
+}
+
+.questionStart
+{
+	float: left;
+	margin: 0 0 0 10px;
+	border-left: dotted 1px #999;
+	padding: 35px 0 15px 15px;
+	position: relative;
+	width: 710px;
+}
+
+.operatorAsked
+{
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	margin: 0 -41px 0 0;
+	display: inline;
+}
+
+.quoteQuestionBtn
+{
+	position: absolute;
+	top: 0px;
+	left: 18px;
+	color: #999;
+	font-size: 0.9em;
+	padding: 5px;
+	padding: 5px 5px 5px 18px;
+	background: transparent url(icons/page_copy.png) no-repeat scroll 0 3px;
+}
+
+.editQuestionBtn
+{
+	position: absolute;
+	top: 0px;
+	left: 90px;
+	color: #999;
+	font-size: 0.9em;
+	padding: 5px 5px 5px 18px;
+	background: transparent url(icons/pencil.png) no-repeat scroll 0 3px;
+}
+
+.deleteQuestionBtn
+{
+	position: absolute;
+	top: 0px;
+	left: 150px;
+	color: #999;
+	font-size: 0.9em;
+	padding: 5px 5px 5px 18px;
+	background: transparent url(icons/cross.png) no-repeat scroll 0 4px;
+}
+
+.whenPosted
+{
+	position: absolute;
+	top: 0px;
+	left: 318px;
+	color: #999;
+	font-size: 0.9em;
+	padding: 5px 5px 5px 18px;
+	background: transparent url(icons/date.png) no-repeat scroll 0 4px;
+}
+
+.questionContent
+{
+	font-size: 123.1%;
+	text-align: justify;
+	margin-top: 20px;
+}
+
+.changeOrdering
+{
+	position: absolute;
+	bottom: 0px;
+	margin-bottom: -15px;
+	left: 5px;
+	color: #999;
+	font-size: 0.9em;
+	padding: 5px;
+}
+
+.editQuestionDiv
+{
+	margin: 15px 15px 15px 15px;
+	background-color: #fafffa;
+	position: relative;
+	padding: 15px 15px 35px 15px;
+}
+
+.editQuestion
+{
+	overflow: hidden;
+	width: 750px;
+}
+
+.editHeader
+{
+	color: #00f;
+	cursor: pointer;
+	font-size: 1.2em;
+	margin-bottom: 5px;
+}
+
+.editQuestionText
+{
+	width: 100%;
+	height: 160px;
+	padding: 0px;
+}
+
+.saveEditedQuestion
+{
+	position: absolute;
+	bottom: 5px;
+	right: 70px;
+}
+
+.cancelEditedQuestion
+{
+	position: absolute;
+	bottom: 5px;
+	right: 10px;
+}
+
+.answersWrapper
+{
+	margin: 25px 25px 25px 115px;
+}
+
+.answer
+{
+	padding: 25px 14px 10px 25px;
+	border: 1px dashed #999;
+	margin-bottom: 25px;
+	width: 677px;
+	background-color: #fafafa;
+	position: relative;
+}
+
+.linkAnswer
+{
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	color: #999;
+	padding: 5px 5px 5px 18px;
+	background: transparent url(icons/world_link.png) no-repeat scroll 0 4px;
+}
+
+.editAnswerBtn
+{
+	position: absolute;
+	top: 5px;
+	left: 70px;
+	color: #999;
+	padding: 5px 5px 5px 18px;
+	background: transparent url(icons/pencil.png) no-repeat scroll 0 3px;
+}
+
+.deleteAnswerBtn
+{
+	position: absolute;
+	top: 5px;
+	left: 130px;
+	color: #999;
+	padding: 5px 5px 5px 18px;
+	background: transparent url(icons/cross.png) no-repeat scroll 0 4px;
+}
+
+.answerDate
+{
+	position: absolute;
+	top: 5px;
+	left: 305px;
+	color: #999;
+	padding: 5px 5px 5px 18px;
+	background: transparent url(icons/date.png) no-repeat scroll 0 4px;
+}
+
+.answeredBy
+{
+	/* display:inline; position:absolute; top:5px; right:5px; */
+	position: absolute;
+	right: 5px;
+	top: 5px;
+}
+
+.askedBy
+{
+	/* display:inline; position:absolute; top:5px; right:5px; */
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+.commentBy
+{
+	/* display:inline; position:absolute; top:5px; right:5px; */
+	display: table;
+}
+
+.voteAnswer
+{
+	margin: 25px 0 0 -15px;
+}
+
+.answerContent
+{
+	margin: 35px 0px 35px 10px;
+	font-size: 123.1%;
+	text-align: justify;
+}
+
+.editAnswer
+{
+	background-color: #fafffa;
+	position: relative;
+	overflow: hidden;
+	margin-bottom:22px;
+}
+
+.editAnswerDiv
+{
+	padding: 25px 25px 20px 25px;
+	margin: 15px;
+}
+
+.editAnswerTxt
+{
+	width: 100%;
+	height: 150px;
+	margin: 0px auto 0px auto;
+}
+
+.saveEditedAnswer
+{
+	position: absolute;
+	bottom: 5px;
+	right: 95px;
+}
+
+.cancelEditedAnswer
+{
+	position: absolute;
+	bottom: 5px;
+	right: 35px;
+}
+
+.comments
+{
+	position: absolute;
+	right: 5px;
+	bottom: 5px;
+	border: 2px;
+	color: #999;
+	padding: 5px 5px 5px 20px;
+	background: transparent url(icons/comments.png) no-repeat scroll 2px 6px;
+}
+
+.viewComments
+{
+	overflow: hidden;
+}
+
+.oneComment
+{
+	background: transparent url(icons/comment.png) no-repeat scroll 100% 100%;
+	border: dotted 1px #ddd;
+	width: 550px;
+	margin: 15px auto 0 auto;
+	padding: 10px;
+	position: relative;
+}
+
+.commentedByWho
+{
+	position: absolute;
+	top: 5px;
+	right: 0px;
+}
+
+.commentedByWho a
+{
+	padding: 5px;
+}
+
+.commentSubmit
+{
+	width: 570px;
+	margin: 15px auto 30px auto;
+	position: relative;
+	padding: 0;
+}
+
+.commentTxt
+{
+	height: 50px;
+	width: 568px;
+	margin-bottom: 35px;
+}
+
+.submitComment
+{
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+}
+
+.answerQuestion
+{
+	margin: 25px 25px 25px 115px;
+}
+
+.answerBody
+{
+	width: 716px;
+	height: 160px;
+	margin-bottom: 35px;
+}
+
+.answerQuestionBtn
+{
+	position: relative;
+	right: 105px;
+}
