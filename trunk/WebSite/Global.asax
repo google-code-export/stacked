@@ -52,16 +52,16 @@
 
     void Application_EndRequest(object sender, EventArgs e)
     {
-        if (Request.Path.ToLowerInvariant().EndsWith("webresource.axd") &&
-            HttpContext.Current.Response.ContentType.ToLowerInvariant() == "text/javascript")
-        {
-            HttpContext.Current.Response.Cache.VaryByHeaders["Accept-Encoding"] = true;
-            HttpContext.Current.Response.Cache.SetExpires(DateTime.Now.AddYears(3));
-            HttpContext.Current.Response.Cache.SetCacheability(HttpCacheability.Public);
-            HttpContext.Current.Response.Cache.SetValidUntilExpires(false);
+        //if (Request.Path.ToLowerInvariant().EndsWith("webresource.axd") &&
+        //    HttpContext.Current.Response.ContentType.ToLowerInvariant() == "text/javascript")
+        //{
+        //    HttpContext.Current.Response.Cache.VaryByHeaders["Accept-Encoding"] = true;
+        //    HttpContext.Current.Response.Cache.SetExpires(DateTime.Now.AddYears(3));
+        //    HttpContext.Current.Response.Cache.SetCacheability(HttpCacheability.Public);
+        //    HttpContext.Current.Response.Cache.SetValidUntilExpires(false);
 
-            HttpContext.Current.Response.AppendHeader("Content-Encoding", "gzip");
-        }
+        //    HttpContext.Current.Response.AppendHeader("Content-Encoding", "gzip");
+        //}
     }
 
     void Session_Start(object sender, EventArgs e) 
