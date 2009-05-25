@@ -24,7 +24,7 @@ table, tr, td
 {
 	display: block;
 	width: 175px;
-	background: url(magnifier.png) no-repeat scroll 0 0;
+	background: url(icons/magnifier.png) no-repeat scroll 0 0;
 	border: solid 1px #999;
 	padding-left: 20px;
 }
@@ -79,6 +79,7 @@ table, tr, td
 	margin: 0px auto 25px auto;
 	width: 100%;
 	position: relative;
+	min-height: 700px;
 }
 
 .logo
