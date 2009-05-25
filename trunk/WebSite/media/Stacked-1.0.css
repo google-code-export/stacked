@@ -586,7 +586,7 @@ table, tr, td
 	padding: 5px;
 	position: fixed;
 	top: 0;
-	width: 93%;
+	width: 78%;
 	z-index: 6000;
 }
 
@@ -633,20 +633,33 @@ table, tr, td
 	color: #fff;
 }
 
-.up
+.up, .down, .upVoted, .downVoted 
 {
-	background: url(icons/vote_up.png) no-repeat 0 0;
 	height: 16px;
 	width: 16px;
-	display: block;
+	display: block;	
+	background-repeat: no-repeat;
+	background-position: 0 0;
+}
+
+.up
+{
+	background-image: url(icons/vote_up.png);
 }
 
 .down
 {
-	background: url(icons/vote_down.png) no-repeat 0 0;
-	height: 16px;
-	width: 16px;
-	display: block;
+	background-image: url(icons/vote_down.png);
+}
+
+.upVoted
+{
+	background-image: url(icons/voted_up.png);
+}
+
+.downVoted
+{
+	background-image: url(icons/voted_down.png);
 }
 
 .votes
