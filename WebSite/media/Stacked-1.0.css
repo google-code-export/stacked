@@ -131,6 +131,7 @@ table, tr, td
 	padding: 5px 5px 3px 5px;
 	margin: 2px;
 	position: relative;
+	min-height: 18px;
 }
 
 .linkButton:hover
@@ -910,6 +911,7 @@ table, tr, td
 	position: absolute;
 	bottom: 5px;
 	right: 95px;
+	width: 60px;
 }
 
 .cancelEditedAnswer
@@ -917,6 +919,7 @@ table, tr, td
 	position: absolute;
 	bottom: 5px;
 	right: 35px;
+	width: 60px;
 }
 
 .comments
