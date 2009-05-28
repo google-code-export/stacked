@@ -153,8 +153,7 @@ namespace Samples
             logouBtn.Visible = true;
             askQuestion.Visible = true;
             goToProfile.Visible = true;
-            goToProfile.Text = "Profile";
-            goToProfile.Text += "<span class=\"profileName\">" + Operator.Current.FriendlyName + "</span>";
+            goToProfile.Text = Operator.Current.FriendlyName;
             logouBtn.Text = "Logout";
         }
 

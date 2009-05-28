@@ -61,25 +61,22 @@
                     <div id="pageContent">
                         <ra:Panel runat="server" ID="cntWrp">
                             <div class="mainContent">
-                                <a id="A1" href="~/" runat="server" class="logo">
-                                    <img src="media/stacked.jpg" alt="Stacked logo" />
-                                </a>
                                 <ra:Label runat="server" ID="infoLabel" Visible="false" CssClass="infoLabel" />
                                 <ext:Timer runat="server" ID="infoTimer" OnTick="infoTimer_Tick" Enabled="false"
                                     Duration="5000" />
                                 <uc3:Register ID="register" OnUserRegistered="register_UserRegistered" runat="server" />
                                 <uc2:AskQuestion ID="ask" OnQuestionAsked="ask_QuestionAsked" runat="server" />
                                 <ra:Panel runat="server" ID="loginPnl" CssClass="loginPnl">
-                                    <ra:LinkButton runat="server" ID="goToProfile" CssClass="linkButton" Visible="false"
-                                        OnClick="goToProfile_Click" />
-                                    <ra:LinkButton runat="server" ID="loginBtn" CssClass="linkButton" OnClick="loginBtn_Click"
+                                    <ra:LinkButton runat="server" ID="goToProfile" CssClass="linkButton profileButton" Visible="false"
+                                        OnClick="goToProfile_Click" Tooltip="Edit Profile" />
+                                    <ra:LinkButton runat="server" ID="askQuestion" CssClass="linkButton askQuestionButton" Visible="false"
+                                        OnClick="askQuestion_Click" Text="Ask" Tooltip="Ask a Question" />
+                                    <ra:LinkButton runat="server" ID="loginBtn" CssClass="linkButton loginButton" OnClick="loginBtn_Click"
                                         Tooltip="You an use OpenID to login" Text="Login" />
-                                    <ra:LinkButton runat="server" ID="registerBtn" CssClass="linkButton" Tooltip="If you don't want to register you can Login with OpenID by clicking the 'Login' button"
+                                    <ra:LinkButton runat="server" ID="registerBtn" CssClass="linkButton registerButton" Tooltip="If you don't want to register you can Login with OpenID by clicking the 'Login' button"
                                         OnClick="registerBtn_Click" Text="Register" />
-                                    <ra:LinkButton runat="server" ID="logouBtn" CssClass="linkButton" Visible="false"
-                                        OnClick="logouBtn_Click" Text="Logout" />
-                                    <ra:LinkButton runat="server" ID="askQuestion" CssClass="linkButton" Visible="false"
-                                        OnClick="askQuestion_Click" Text="Ask question" />
+                                    <ra:LinkButton runat="server" ID="logouBtn" CssClass="linkButton logoutButton" Visible="false"
+                                        OnClick="logouBtn_Click" Text="Logout" Tooltip="Logout" />
                                 </ra:Panel>
                                 <div class="search">
                                     <ext:AutoCompleter runat="server" ID="auto" CssClass="auto" AccessKey="S" Tooltip="Search - Keyboard shortcut; ALT+SHIFT+S"

@@ -12,31 +12,22 @@ table, tr, td
 
 .auto
 {
-	background-color: #fff;
-	border: dotted 1px Black;
-	padding: 15px;
-	height: 20px;
-	width: 200px;
-	overflow: visible;
+	width: 300px;
+	height: 15px;
 }
 
 .auto input[type=text]
 {
 	display: block;
-	width: 175px;
+	width: 278px;
 	background: url(icons/magnifier.png) no-repeat scroll 0 0;
-	border: solid 1px #999;
+	border: 0;
 	padding-left: 20px;
 }
 
 .auto-items
 {
-	position: absolute;
-	border: solid 1px #CCD1FF;
-	background-color: #fff;
-	width: 187px;
-	padding: 5px;
-	margin: 0;
+	width: 288px;
 }
 
 .auto-item
@@ -56,8 +47,7 @@ table, tr, td
 	margin: 2px 2px 2px 2px;
 	background-color: #eee;
 	padding: 5px;
-	border: dotted 1px #999;
-	font-size: 80%;
+	border: 1px dashed #999;
 }
 
 .auto a:hover
@@ -85,7 +75,6 @@ table, tr, td
 .logo
 {
 	position: absolute;
-	top: 15px;
 	left: 0px;
 }
 
@@ -113,20 +102,17 @@ table, tr, td
 
 .loginPnl
 {
-	position: absolute;
-	top: 15px;
-	right: 45px;
-	border: dotted 1px Black;
-	width: 200px;
-	padding: 15px;
+	float: left;
+	margin-top: 6px;
 }
+
 
 .linkButton
 {
 	display: block;
-	border: solid 1px #999;
+	border: 1px solid #CCD1FF;
 	background-color: #f0f0f0;
-	color: #33d;
+	color: #32c;
 	font-size: 108%;
 	padding: 5px 5px 3px 5px;
 	margin: 2px;
@@ -134,30 +120,54 @@ table, tr, td
 	min-height: 18px;
 }
 
+.profileButton, .logoutButton, 
+.askQuestionButton, .loginButton, .registerButton
+{
+	display: inline;
+	padding-left:25px;
+	background-position:3px 5px;
+	background-repeat:no-repeat;
+	background-attachment:scroll;
+}
+
+.profileButton
+{
+	background-image:url(icons/user.png);
+}
+
+.logoutButton
+{
+	background-image:url(icons/door_out.png);
+}
+
+.askQuestionButton
+{
+	background-image:url(icons/user_comment.png);
+}
+
+.loginButton
+{
+	background-image: url(icons/door_in.png);
+}
+
+.registerButton 
+{
+	background-image: url(icons/application_form_edit.png);
+}
+
 .linkButton:hover
 {
 	text-decoration: none;
 }
 
-.profileName
-{
-	position: absolute;
-	top: 2px;
-	right: 2px;
-	font-size: 0.7em;
-	color: #999;
-}
-
 .search
 {
-	position: absolute;
-	top: 15px;
-	right: 290px;
+	float: right;
 }
 
 .found
 {
-	color: #ea0;
+	color: #e50;
 }
 
 .search .auto-items
@@ -167,7 +177,7 @@ table, tr, td
 
 .contentPlaceHolder
 {
-	padding-top: 150px;
+	padding-top: 50px;
 	margin-bottom: 90px;
 }
 
@@ -489,9 +499,8 @@ table, tr, td
 
 .tagsAuto
 {
-	width: 270px;
+	width: 290px;
 	margin: 15px 15px 0 15px;
-	padding: 15px;
 }
 
 .tagsAuto .auto-items
@@ -698,8 +707,8 @@ table, tr, td
 	color: #999;
 	font-size: 0.9em;
 	padding: 5px;
-	padding: 5px 5px 5px 18px;
-	background: transparent url(icons/page_copy.png) no-repeat scroll 0 3px;
+	padding: 3px 3px 3px 20px;
+	background: transparent url(icons/page_copy.png) no-repeat scroll 2px 1px;
 }
 
 .editQuestionBtn
@@ -709,8 +718,8 @@ table, tr, td
 	left: 90px;
 	color: #999;
 	font-size: 0.9em;
-	padding: 5px 5px 5px 18px;
-	background: transparent url(icons/pencil.png) no-repeat scroll 0 3px;
+	padding: 3px 3px 3px 20px;
+	background: transparent url(icons/pencil.png) no-repeat scroll 2px 1px;
 }
 
 .deleteQuestionBtn
@@ -720,8 +729,8 @@ table, tr, td
 	left: 150px;
 	color: #999;
 	font-size: 0.9em;
-	padding: 5px 5px 5px 18px;
-	background: transparent url(icons/cross.png) no-repeat scroll 0 4px;
+	padding: 3px 3px 3px 20px;
+	background: transparent url(icons/cross.png) no-repeat scroll 2px 2px;
 }
 
 .whenPosted
@@ -731,8 +740,8 @@ table, tr, td
 	left: 318px;
 	color: #999;
 	font-size: 0.9em;
-	padding: 5px 5px 5px 18px;
-	background: transparent url(icons/date.png) no-repeat scroll 0 4px;
+	padding: 3px 3px 3px 20px;
+	background: transparent url(icons/date.png) no-repeat scroll 2px 1px;
 }
 
 .questionContent
@@ -817,8 +826,8 @@ table, tr, td
 	top: 5px;
 	left: 5px;
 	color: #999;
-	padding: 5px 5px 5px 18px;
-	background: transparent url(icons/world_link.png) no-repeat scroll 0 4px;
+	padding: 3px 3px 3px 20px;
+	background: transparent url(icons/world_link.png) no-repeat scroll 2px 2px;
 }
 
 .editAnswerBtn
@@ -827,8 +836,8 @@ table, tr, td
 	top: 5px;
 	left: 70px;
 	color: #999;
-	padding: 5px 5px 5px 18px;
-	background: transparent url(icons/pencil.png) no-repeat scroll 0 3px;
+	padding: 3px 3px 3px 20px;
+	background: transparent url(icons/pencil.png) no-repeat scroll 2px 2px;
 }
 
 .deleteAnswerBtn
@@ -837,8 +846,8 @@ table, tr, td
 	top: 5px;
 	left: 130px;
 	color: #999;
-	padding: 5px 5px 5px 18px;
-	background: transparent url(icons/cross.png) no-repeat scroll 0 4px;
+	padding: 3px 3px 3px 20px;
+	background: transparent url(icons/cross.png) no-repeat scroll 2px 3px;
 }
 
 .answerDate
@@ -847,8 +856,8 @@ table, tr, td
 	top: 5px;
 	left: 305px;
 	color: #999;
-	padding: 5px 5px 5px 18px;
-	background: transparent url(icons/date.png) no-repeat scroll 0 4px;
+	padding: 3px 3px 3px 20px;
+	background: transparent url(icons/date.png) no-repeat scroll 2px 2px;
 }
 
 .answeredBy
