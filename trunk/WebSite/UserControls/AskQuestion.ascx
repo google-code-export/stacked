@@ -17,7 +17,7 @@
 <ext:Window 
     runat="server" 
     ID="wndAsk" 
-    Caption="Ask a question..."
+    Caption="Ask A Question"
     Visible="false" 
     CssClass="window askQuestionWindow">
     <div class="askQuestion">

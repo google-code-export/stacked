@@ -24,7 +24,7 @@
     ID="login" 
     CssClass="window loginWindow" 
     Visible="false" 
-    Caption="Please login">
+    Caption="Login">
 
     <div class="loginDiv">
         <ra:Panel 
@@ -32,48 +32,49 @@
             DefaultWidget="Button1"
             CssClass="openIdWrapper"
             ID="openIdWrapper">
+            <ra:LinkButton 
+                runat="server" 
+                ID="whatsOpenID" 
+                CssClass="whatsOpenId"
+                OnClick="whatsOpenID_Click"
+                Text="OpenID"
+                Tooltip="What is OpenID?" />: 
             <openId:OpenIdTextBox 
                 runat="server" 
                 OnLoggedIn="openIdTxt_LoggedIn" 
                 OnFailed="openIdTxt_Failed" 
-                Text="user.someOpenId.com"
-                ID="openIdTxt" />
+                ID="openIdTxt" 
+                CssClass="openIDLoginTextBox" />
             <asp:Button 
                 runat="server" 
                 ID="Button1" 
-                Text="Login with OpenID" 
+                Text="Login" 
                 OnClick="login_Click" />
-            <ra:LinkButton 
-                runat="server" 
-                ID="btnNoOpenId" 
-                CssClass="linkButton openIdBtn"
-                OnClick="btnNoOpenId_Click" 
-                AccessKey="I" 
-                Tooltip="Keyboard shortcut SHIFT+ALT+I"
-                Text="I don't use OpenID" />
-            <ra:LinkButton 
-                runat="server" 
-                ID="whatsOpenID" 
-                CssClass="linkButton whatsOpenId"
-                OnClick="whatsOpenID_Click"
-                Text="What is 'OpenID'...?" />
             <br />
             <ra:CheckBox 
                 runat="server" 
-                Text="Public terminal"
+                Text="Public Computer?"
                 CssClass="publicTerminalOpenID" 
-                Tooltip="Mark this checkbox if you're NOT on a computer you own yourself!"
+                Tooltip="Check this if you're using a public computer"
                 ID="publicTerminalOpenID" />
             <ra:Label 
                 runat="server" 
                 CssClass="errLbl"
                 ID="errLblOpenId" />
+            <ra:LinkButton 
+                runat="server" 
+                ID="btnNoOpenId" 
+                OnClick="btnNoOpenId_Click" 
+                AccessKey="I" 
+                Tooltip="Keyboard shortcut SHIFT+ALT+I"
+                Text="No OpenID"
+                Style="position:absolute; bottom:2px; right:2px;" />
         </ra:Panel>
         <ra:Panel 
             runat="server" 
             DefaultWidget="loginBtn"
             ID="nativeWrapper">
-            <table class="loginTable">
+            <table style="width:100%;">
                 <tr>
                     <td>Username: </td>
                     <td>
@@ -94,13 +95,27 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>&nbsp;</td>
                     <td>
                         <ra:CheckBox 
                             runat="server" 
-                            Text="Public terminal?"
-                            Tooltip="Mark this checkbox if you're NOT on a computer you own yourself!"
+                            Text="Public Computer?"
+                            Tooltip="Check this if you're using a public computer"
                             ID="publicTerminale" />
+                    </td>
+                    <td>
+                        <ra:Button 
+                            runat="server" 
+                            ID="loginBtn" 
+                            CssClass="loginNativeBtn"
+                            OnClick="loginBtn_Click"
+                            Text="Login" />
+                        <ra:LinkButton 
+                            runat="server" 
+                            ID="useOpenID" 
+                            OnClick="useOpenID_Click" 
+                            AccessKey="D"
+                            Tooltip="Keyboard shortcut SHIFT+ALT+D"
+                            Text="Login using OpenID" />
                     </td>
                 </tr>
                 <tr>
@@ -111,21 +126,12 @@
                             ID="lblErr" />
                     </td>
                 </tr>
+                <tr>
+                    <td colspan="2" style="text-align:right;">
+                        
+                    </td>
+                </tr>
             </table>
-            <ra:LinkButton 
-                runat="server" 
-                ID="useOpenID" 
-                CssClass="linkButton openIdBtn"
-                OnClick="useOpenID_Click" 
-                AccessKey="D"
-                Tooltip="Keyboard shortcut SHIFT+ALT+D"
-                Text="I want to use OpenID" />
-            <ra:Button 
-                runat="server" 
-                ID="loginBtn" 
-                CssClass="loginNativeBtn"
-                OnClick="loginBtn_Click"
-                Text="Login" />
         </ra:Panel>
     </div>
 
@@ -138,10 +144,10 @@
     ID="wndWhatIsOpenID" 
     CssClass="window" 
     Visible="false" 
-    style="width:800px;top:50px;right:50px;position:absolute;z-index:5005;"
+    style="width:800px;top:30px;left:5px;position:absolute;z-index:5005;"
     Caption="What is OpenID...?">
     <div style="padding:15px;height:400px;overflow:auto;background:Transparent url(media/openidnet_logo.gif) no-repeat;">
-        <h1>What is OpenID...?</h1>
+        <h1>What is OpenID?</h1>
         <p>
             Snippet from the <a target="_blank" href="http://openid.net/what/">OpenID.net</a> website...
         </p>
@@ -189,7 +195,7 @@
             Check out a more extensive list of OpenID providers at <a target="_blank" href="http://openid.net/get/">the OpenID.net website</a>...
         </p>
         <p style="padding-bottom:50px;">
-            <em>Read more about OpenID at the <a target="_blank" href="http://openid.net/what/">OpenID.net website</a>...</em>
+            <em>Read more about OpenID at the <a target="_blank" href="http://openid.net/what/">OpenID.net website</a></em>
         </p>
     </div>
     <ra:BehaviorObscurable runat="server" ID="obscurerWhat" />

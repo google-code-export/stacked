@@ -5,7 +5,7 @@
     AutoEventWireup="true" 
     CodeFile="Default.aspx.cs" 
     Inherits="_Default" 
-    Title="Stacked - Questions and Answer done right!" %>
+    Title="Stacked - Q&amp;A Done Right!" %>
 
 <%@ Register 
     Assembly="Ra" 
