@@ -120,7 +120,7 @@ table, tr, td
 	min-height: 18px;
 }
 
-.profileButton, .logoutButton, 
+.profileButton, .logoutButton, .questionsButton, 
 .askQuestionButton, .loginButton, .registerButton
 {
 	display: inline;
@@ -153,6 +153,11 @@ table, tr, td
 .registerButton 
 {
 	background-image: url(icons/application_form_edit.png);
+}
+
+.questionsButton 
+{
+	background-image: url(icons/house.png);
 }
 
 .linkButton:hover
@@ -349,9 +354,9 @@ table, tr, td
 /* Login.ascx */
 .loginWindow
 {
-	width: 400px;
-	top: 10px;
-	right: 10px;
+	width: 350px;
+	top: 30px;
+	left: 5px;
 	position: absolute;
 	z-index: 5000;
 }
@@ -359,38 +364,28 @@ table, tr, td
 .loginDiv
 {
 	position: relative;
-	height: 160px;
+	height: 140px;
 }
 
 .openIdWrapper
 {
-	padding: 25px;
-	padding-top: 40px;
+	padding: 10px;
 }
 
-.openIdBtn
+.openIDLoginTextBox
 {
-	display: block;
-	width: 100px;
-	font-size: 0.8em;
-	position: absolute;
-	bottom: 2px;
-	left: 2px;
+	padding: 3px;
+	margin: 3px;
 }
 
 .whatsOpenId
 {
-	display: block;
 	width: 100px;
-	font-size: 0.8em;
-	position: absolute;
-	bottom: 2px;
-	right: 2px;
 }
 
 .publicTerminalOpenID
 {
-	padding: 10px 10px 10px 0px;
+	padding: 10px 10px 10px 5px;
 	display: block;
 }
 
@@ -401,25 +396,12 @@ table, tr, td
 	font-style: italic;
 }
 
-.loginTable
-{
-	margin: 15px auto 0px auto;
-}
-
-.loginNativeBtn
-{
-	position: absolute;
-	bottom: 2px;
-	right: 2px;
-}
-
-
 /* Register.ascx */
 .registerWindow
 {
 	width: 350px;
-	top: 10px;
-	right: 10px;
+	top: 30px;
+	left: 5px;
 	position: absolute;
 	z-index: 5000;
 }
@@ -455,8 +437,8 @@ table, tr, td
 {
 	width: 600px;
 	position: absolute;
-	top: 10px;
-	left: 10px;
+	top: 30px;
+	left: 5px;
 	z-index: 5000;
 }
 

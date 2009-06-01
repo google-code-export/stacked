@@ -9,7 +9,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Stacked - Questions and Answer done right!</title>
+    <title>Stacked - Q&amp;A Done Right!</title>
     <link href="media/skins/steel/Steel-1.1.css" rel="stylesheet" type="text/css" />
     <link href="media/MainStyles-1.0.css" rel="stylesheet" type="text/css" />
     <link href="media/Stacked-1.0.css" rel="stylesheet" type="text/css" />
@@ -67,16 +67,18 @@
                                 <uc3:Register ID="register" OnUserRegistered="register_UserRegistered" runat="server" />
                                 <uc2:AskQuestion ID="ask" OnQuestionAsked="ask_QuestionAsked" runat="server" />
                                 <ra:Panel runat="server" ID="loginPnl" CssClass="loginPnl">
-                                    <ra:LinkButton runat="server" ID="goToProfile" CssClass="linkButton profileButton" Visible="false"
-                                        OnClick="goToProfile_Click" Tooltip="Edit Profile" />
-                                    <ra:LinkButton runat="server" ID="askQuestion" CssClass="linkButton askQuestionButton" Visible="false"
-                                        OnClick="askQuestion_Click" Text="Ask" Tooltip="Ask a Question" />
                                     <ra:LinkButton runat="server" ID="loginBtn" CssClass="linkButton loginButton" OnClick="loginBtn_Click"
                                         Tooltip="You an use OpenID to login" Text="Login" />
                                     <ra:LinkButton runat="server" ID="registerBtn" CssClass="linkButton registerButton" Tooltip="If you don't want to register you can Login with OpenID by clicking the 'Login' button"
                                         OnClick="registerBtn_Click" Text="Register" />
-                                    <ra:LinkButton runat="server" ID="logouBtn" CssClass="linkButton logoutButton" Visible="false"
-                                        OnClick="logouBtn_Click" Text="Logout" Tooltip="Logout" />
+                                    <ra:LinkButton runat="server" ID="goToQuestions" CssClass="linkButton questionsButton"
+                                        OnCLick="goToQuestions_Click" Text="Questions" Tooltip="Go To Questions" />
+                                    <ra:LinkButton runat="server" ID="askQuestion" CssClass="linkButton askQuestionButton" Visible="false"
+                                        OnClick="askQuestion_Click" Text="Ask" Tooltip="Ask a Question" />
+                                    <ra:LinkButton runat="server" ID="goToProfile" CssClass="linkButton profileButton" Visible="false"
+                                        OnClick="goToProfile_Click" Tooltip="Edit Profile" />
+                                    <ra:LinkButton runat="server" ID="logoutBtn" CssClass="linkButton logoutButton" Visible="false"
+                                        OnClick="logoutBtn_Click" Text="Logout" Tooltip="Logout" />
                                 </ra:Panel>
                                 <div class="search">
                                     <ext:AutoCompleter runat="server" ID="auto" CssClass="auto" AccessKey="S" Tooltip="Search - Keyboard shortcut; ALT+SHIFT+S"
@@ -87,10 +89,10 @@
                                 </div>
                                 <uc1:Login ID="login" OnLoggedIn="login_LoggedIn" runat="server" />
                             </div>
-                            <ext:Window runat="server" CssClass="window" Caption="Edit your profile" DefaultWidget="saveProfile"
-                                Visible="false" style="position: absolute; top: 100px; left: 100px; width: 400px;
+                            <ext:Window runat="server" CssClass="window" Caption="Edit Your Profile" DefaultWidget="saveProfile"
+                                Visible="false" style="position: absolute; top: 195px; left: 20px; width: 400px;
                                 z-index: 6000;" ID="profileWindow">
-                                <div style="padding: 15px; height: 100px; position: relative;">
+                                <div style="padding:10px; height:100px; position:relative;">
                                     <table>
                                         <tr>
                                             <td style="min-width: 90px;">

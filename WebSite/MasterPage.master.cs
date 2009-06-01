@@ -69,6 +69,7 @@ namespace Samples
         {
             Operator.Current.FriendlyName = changeFriendlyName.Text;
             Operator.Current.Email = changeEmail.Text;
+            goToProfile.Text = Operator.Current.FriendlyName;
             Operator.Current.Save();
             profileWindow.Visible = false;
         }
@@ -150,22 +151,27 @@ namespace Samples
         {
             loginBtn.Visible = false;
             registerBtn.Visible = false;
-            logouBtn.Visible = true;
+            logoutBtn.Visible = true;
             askQuestion.Visible = true;
             goToProfile.Visible = true;
             goToProfile.Text = Operator.Current.FriendlyName;
-            logouBtn.Text = "Logout";
+            logoutBtn.Text = "Logout";
         }
 
-        protected void logouBtn_Click(object sender, EventArgs e)
+        protected void logoutBtn_Click(object sender, EventArgs e)
         {
             Operator.Logout();
             loginBtn.Visible = true;
             registerBtn.Visible = true;
             goToProfile.Visible = false;
-            logouBtn.Visible = false;
+            logoutBtn.Visible = false;
             askQuestion.Visible = false;
             new EffectHighlight(loginPnl, 500).Render();
+        }
+
+        protected void goToQuestions_Click(object sender, EventArgs e)
+        {
+            Ra.AjaxManager.Instance.Redirect("~");
         }
     }
 }

@@ -29,7 +29,7 @@ public partial class UserControls_Register : System.Web.UI.UserControl
         }
         else if (password.Text != repeatPassword.Text)
         {
-            ShowError("Passwords doesn't match");
+            ShowError("Passwords do not match");
         }
         else if (password.Text.Trim().Length < 4)
         {

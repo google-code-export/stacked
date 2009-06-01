@@ -20,7 +20,7 @@
     CssClass="window registerWindow" 
     DefaultWidget="registerBtn"
     Visible="false" 
-    Caption="Register new profile">
+    Caption="Register">
     <div class="registerDiv">
         <table class="registerTable">
             <tr>
