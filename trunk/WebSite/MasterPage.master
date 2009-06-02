@@ -42,11 +42,11 @@
                         </ra:Label>
                         <ra:Label ID="Label3" runat="server" Tag="li" style="opacity: 0.7;">
                             <ra:BehaviorUnveiler ID="BehaviorUnveiler8" runat="server" MinOpacity="0.7" MaxOpacity="1" />
-                            <a href="http://ra-ajax.org/Support.aspx">Support</a>
+                            <a href="http://ra-ajax.org/Support.aspx">Help</a>
                         </ra:Label>
                         <ra:Label ID="Label4" runat="server" Tag="li" style="opacity: 0.7;">
                             <ra:BehaviorUnveiler ID="BehaviorUnveiler9" runat="server" MinOpacity="0.7" MaxOpacity="1" />
-                            <a href="http://ra-ajax.org/Testimonials.aspx">Testimonials</a>
+                            <a href="http://ra-ajax.org/Testimonials.aspx">Kudos</a>
                         </ra:Label>
                         <ra:Label ID="Label5" runat="server" Tag="li" style="opacity: 0.7;">
                             <ra:BehaviorUnveiler ID="BehaviorUnveiler10" runat="server" MinOpacity="0.7" MaxOpacity="1" />
@@ -71,8 +71,7 @@
                                         Tooltip="You an use OpenID to login" Text="Login" />
                                     <ra:LinkButton runat="server" ID="registerBtn" CssClass="linkButton registerButton" Tooltip="If you don't want to register you can Login with OpenID by clicking the 'Login' button"
                                         OnClick="registerBtn_Click" Text="Register" />
-                                    <ra:LinkButton runat="server" ID="goToQuestions" CssClass="linkButton questionsButton"
-                                        OnCLick="goToQuestions_Click" Text="Questions" Tooltip="Go To Questions" />
+                                    <a href="Default.aspx" class="linkButton questionsButton" title="Go To Questions">Questions</a>
                                     <ra:LinkButton runat="server" ID="askQuestion" CssClass="linkButton askQuestionButton" Visible="false"
                                         OnClick="askQuestion_Click" Text="Ask" Tooltip="Ask a Question" />
                                     <ra:LinkButton runat="server" ID="goToProfile" CssClass="linkButton profileButton" Visible="false"
@@ -134,7 +133,7 @@
                         Hansen</a>.
                     <br />
                     All text is licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">
-                        CC Share-Alike</a>. All inline code is MIT licensed. Ra-Ajax is LGPL licensed.
+                        CC Share-Alike</a>. Ra-Ajax is GPL licensed.
                     <br />
                     Some of the icons are created by <a href="http://www.famfamfam.com/">FamFamFam</a>.
                 </p>

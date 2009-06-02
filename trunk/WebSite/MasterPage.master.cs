@@ -168,10 +168,5 @@ namespace Samples
             askQuestion.Visible = false;
             new EffectHighlight(loginPnl, 500).Render();
         }
-
-        protected void goToQuestions_Click(object sender, EventArgs e)
-        {
-            Ra.AjaxManager.Instance.Redirect("~");
-        }
     }
 }
