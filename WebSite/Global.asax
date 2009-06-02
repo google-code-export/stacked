@@ -62,6 +62,11 @@
 
         //    HttpContext.Current.Response.AppendHeader("Content-Encoding", "gzip");
         //}
+        //else if (Request.Path.ToLowerInvariant().EndsWith(".css") &&
+        //    HttpContext.Current.Response.ContentType.ToLowerInvariant() == "text/css")
+        //{
+        //    HttpContext.Current.Response.AppendHeader("Content-Encoding", "gzip");
+        //}
     }
 
     void Session_Start(object sender, EventArgs e) 
