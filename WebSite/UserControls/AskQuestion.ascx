@@ -4,24 +4,14 @@
     CodeFile="AskQuestion.ascx.cs" 
     Inherits="UserControls_AskQuestion" %>
 
-<%@ Register 
-    Assembly="Ra" 
-    Namespace="Ra.Widgets" 
-    TagPrefix="ra" %>
-
-<%@ Register 
-    Assembly="Extensions" 
-    Namespace="Ra.Extensions" 
-    TagPrefix="ext" %>
-
-<ext:Window 
+<ra:Window 
     runat="server" 
     ID="wndAsk" 
     Caption="Ask A Question"
     Visible="false" 
     CssClass="window askQuestionWindow">
     <div class="askQuestion">
-        <ext:Timer 
+        <ra:Timer 
             runat="server" 
             ID="timerUpdatePreview" 
             Enabled="true" 
@@ -73,7 +63,7 @@
                 OnEscPressed="EscPressed"
                 ID="body" />
             <br />Tags (space sperated):
-            <ext:AutoCompleter 
+            <ra:AutoCompleter 
                 runat="server" 
                 ID="tags" 
                 CssClass="auto tagsAuto" 
@@ -131,7 +121,7 @@ All HTML will be escaped
             Tag="div" />
     </div>
     <ra:BehaviorObscurable runat="server" ID="obscurerAsk" />
-</ext:Window>
+</ra:Window>
 
 
 

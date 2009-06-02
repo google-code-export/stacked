@@ -8,16 +8,6 @@
     Title="Stacked - Q&amp;A Done Right!" %>
 
 <%@ Register 
-    Assembly="Ra" 
-    Namespace="Ra.Widgets" 
-    TagPrefix="ra" %>
-
-<%@ Register 
-    Assembly="Extensions" 
-    Namespace="Ra.Extensions" 
-    TagPrefix="ext" %>
-
-<%@ Register 
     src="UserControls/ItemGrid.ascx" 
     tagname="ItemGrid" 
     tagprefix="uc1" %>
@@ -27,13 +17,13 @@
     ContentPlaceHolderID="body" 
     Runat="Server">
 
-    <ext:TabControl 
+    <ra:TabControl 
         runat="server" 
         ID="tab" 
         OnActiveTabViewChanged="tabContent_ActiveTabViewChanged"
         CssClass="tab">
 
-        <ext:TabView 
+        <ra:TabView 
             Caption="Recently answered" 
             runat="server" 
             ID="tabLateAct" 
@@ -43,9 +33,9 @@
                 ID="gridLateAct" 
                 runat="server" />
 
-        </ext:TabView>
+        </ra:TabView>
 
-        <ext:TabView 
+        <ra:TabView 
             Caption="Recently asked" 
             runat="server" 
             ID="tabNew" 
@@ -55,9 +45,9 @@
                 ID="gridNew" 
                 runat="server" />
 
-        </ext:TabView>
+        </ra:TabView>
 
-        <ext:TabView 
+        <ra:TabView 
             Caption="Most answers" 
             runat="server" 
             ID="tabMost" 
@@ -67,9 +57,9 @@
                 ID="gridMost" 
                 runat="server" />
 
-        </ext:TabView>
+        </ra:TabView>
 
-        <ext:TabView 
+        <ra:TabView 
             Caption="Unanswered" 
             runat="server" 
             ID="tabUn" 
@@ -79,9 +69,9 @@
                 ID="gridUn" 
                 runat="server" />
 
-        </ext:TabView>
+        </ra:TabView>
 
-    </ext:TabControl>
+    </ra:TabControl>
     <asp:Label 
         runat="server" 
         ID="lblCount" 

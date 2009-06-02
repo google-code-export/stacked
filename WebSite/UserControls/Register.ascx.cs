@@ -2,6 +2,7 @@
 using Entities;
 using NHibernate.Expression;
 using Ra.Widgets;
+using Ra.Effects;
 
 public partial class UserControls_Register : System.Web.UI.UserControl
 {

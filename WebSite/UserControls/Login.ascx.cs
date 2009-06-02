@@ -1,6 +1,7 @@
 ﻿using System;
 using Entities;
 using Ra.Widgets;
+using Ra.Effects;
 using Utilities;
 
 public partial class UserControls_Login : System.Web.UI.UserControl

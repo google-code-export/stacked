@@ -7,22 +7,12 @@
     Inherits="Item" 
     Title="Untitled Page" %>
 
-<%@ Register 
-    Assembly="Ra" 
-    Namespace="Ra.Widgets" 
-    TagPrefix="ra" %>
-
-<%@ Register 
-    Assembly="Extensions" 
-    Namespace="Ra.Extensions" 
-    TagPrefix="ext" %>
-
 <asp:Content 
     ID="cnt" 
     ContentPlaceHolderID="body" 
     Runat="Server">
 
-    <ext:Window 
+    <ra:Window 
         runat="server" 
         ID="wndDelete" 
         Caption="You SURE? There's no rollback for this..."
@@ -38,7 +28,7 @@
         <ra:BehaviorObscurable 
             runat="server" 
             ID="deleteObscurer" />
-    </ext:Window>
+    </ra:Window>
 
 
     <div class="answerDiv">
@@ -63,7 +53,7 @@
         ID="errorLabel" 
         Visible="false"
         CssClass="errPanel" />
-    <ext:Timer 
+    <ra:Timer 
         runat="server" 
         ID="timerRemoveError" 
         Enabled="false" 
@@ -152,7 +142,7 @@
             CssClass="editQuestion"
             ID="editQuestion">
             <div class="editQuestionDiv">
-                <ext:InPlaceEdit 
+                <ra:InPlaceEdit 
                     runat="server" 
                     CssClass="editHeader"
                     ID="editHeader" />

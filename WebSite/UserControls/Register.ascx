@@ -4,17 +4,7 @@
     CodeFile="Register.ascx.cs" 
     Inherits="UserControls_Register" %>
 
-<%@ Register 
-    Assembly="Ra" 
-    Namespace="Ra.Widgets" 
-    TagPrefix="ra" %>
-
-<%@ Register 
-    Assembly="Extensions" 
-    Namespace="Ra.Extensions" 
-    TagPrefix="ext" %>
-
-<ext:Window 
+<ra:Window 
     runat="server" 
     ID="register" 
     CssClass="window registerWindow" 
@@ -72,7 +62,7 @@
             Text="Register" />
     </div>
     <ra:BehaviorObscurable runat="server" ID="obscurer" />
-</ext:Window>
+</ra:Window>
 
 
 
