@@ -453,17 +453,20 @@ table, tr, td
 	float: left;
 	width: 55%;
 	padding: 15px;
-	height: 330px;
+	height: 410px;
 }
 
 .actionButtons
 {
+	margin-top: 10px;
+	margin-left: 15px;
 }
 
 .actionButton
 {
 	display: inline;
 	font-size: 0.9em;
+	padding: 5px 5px 0px 5px;
 }
 
 .askQuestionLeft input[type=text]
@@ -475,8 +478,9 @@ table, tr, td
 .askQuestionLeft textarea
 {
 	width: 300px;
-	margin: 15px 15px 0 15px;
+	margin: 5px 15px 0 15px;
 	height: 200px;
+	border: 1px solid #CCD1FF;
 }
 
 .tagsAuto
@@ -507,6 +511,7 @@ table, tr, td
 {
 	margin: 0;
 	width: 250px;
+	background-image: url(icons/tag_blue.png);
 }
 
 .questionSubmit
@@ -515,6 +520,7 @@ table, tr, td
 	bottom: 12px;
 	right: 12px;
 	font-size: 1.4em;
+	width: 100px;
 }
 
 .legend
