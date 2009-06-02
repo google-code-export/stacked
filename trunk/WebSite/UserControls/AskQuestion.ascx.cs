@@ -26,8 +26,6 @@ public partial class UserControls_AskQuestion : System.Web.UI.UserControl
     public void ShowAskQuestion()
     {
         wndAsk.Visible = true;
-        header.Text = "Header of question";
-        header.Select();
         header.Focus();
     }
 
@@ -92,17 +90,17 @@ public partial class UserControls_AskQuestion : System.Web.UI.UserControl
 
     protected void Link(object sender, EventArgs e)
     {
-        body.Text += "[http://x.com some anchor text]";
+        body.Text += "[http://website.com link text]";
     }
 
     protected void Bold(object sender, EventArgs e)
     {
-        body.Text += "*some bold text*";
+        body.Text += "*bold text*";
     }
 
     protected void Italic(object sender, EventArgs e)
     {
-        body.Text += "_some italic text_";
+        body.Text += "_italic text_";
     }
 
     protected void List(object sender, EventArgs e)
@@ -112,7 +110,7 @@ public partial class UserControls_AskQuestion : System.Web.UI.UserControl
 
     protected void Code(object sender, EventArgs e)
     {
-        body.Text += "\r\n[code]\r\n    int x = foo();\r\n    bar(54);\r\n[/code]";
+        body.Text += "[code]\r\n    int x = foo();\r\n    bar(54);\r\n[/code]";
     }
 
     protected void EnterPressed(object sender, EventArgs e)

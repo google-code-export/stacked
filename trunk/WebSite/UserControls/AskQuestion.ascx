@@ -28,49 +28,51 @@
             Duration="5000" 
             OnTick="timerUpdatePreview_Tick" />
         <div class="askQuestionLeft">
+            <br />Question Title:
+            <ra:TextBox 
+                runat="server" 
+                OnEscPressed="EscPressed" 
+                OnEnterPressed="EnterPressed"
+                ID="header" 
+                Style="border: 1px solid #CCD1FF;" />
+            <br />Question:
             <div class="actionButtons">
-                Append; 
                 <ra:LinkButton 
                     runat="server" 
                     ID="appendLink" 
                     CssClass="linkButton actionButton" 
                     OnClick="Link"
-                    Text="Link" />
+                    Tooltip="Link"><img src="media/icons/link_add.png" alt="Link" /></ra:LinkButton>
                 <ra:LinkButton 
                     runat="server" 
                     ID="appendBold" 
                     CssClass="linkButton actionButton"
                     OnClick="Bold"
-                    Text="Bold" />
+                    Tooltip="Bold"><img src="media/icons/text_bold.png" alt="Bold" /></ra:LinkButton>
                 <ra:LinkButton 
                     runat="server" 
                     ID="appendItalic" 
                     CssClass="linkButton actionButton"
                     OnClick="Italic"
-                    Text="Italic" />
+                    Tooltip="Italic"><img src="media/icons/text_italic.png" alt="Italic" /></ra:LinkButton>
                 <ra:LinkButton 
                     runat="server" 
                     ID="appendList" 
                     CssClass="linkButton actionButton"
                     OnClick="List"
-                    Text="List" />
+                    Tooltip="List"><img src="media/icons/text_list_bullets.png" alt="List" /></ra:LinkButton>
                 <ra:LinkButton 
                     runat="server" 
                     ID="appendCode" 
                     CssClass="linkButton actionButton"
                     OnClick="Code"
-                    Text="Code" />
+                    Tooltip="Code"><img src="media/icons/script_code.png" alt="Code" /></ra:LinkButton>
             </div>
-            <ra:TextBox 
-                runat="server" 
-                OnEscPressed="EscPressed" 
-                OnEnterPressed="EnterPressed"
-                ID="header" />
-
             <ra:TextArea 
                 runat="server" 
                 OnEscPressed="EscPressed"
                 ID="body" />
+            <br />Tags (space sperated):
             <ext:AutoCompleter 
                 runat="server" 
                 ID="tags" 
@@ -85,10 +87,11 @@
                 OnClick="btnSubmit_Click"
                 Text="Ask" />
         </div>
-        <div class="askQuestionRight">
+        <div>
 <pre class="legend">
-Link;
-[http://x.com text]
+
+Link:
+[http://website.com text]
 
 *bold*
 
@@ -99,17 +102,17 @@ _italic_
  * Listitem 3
 
 [youtube xxx]
-YouTube video xxx == ID
+YouTube video xxx = ID
 
 [gmaps x y]
-GMaps x == longitude
-y == latitude
+GMaps x = longitude
+      y = latitude
 </pre>
 <p>
-2 x Carriage Return is opening a new paragraph
+2 x Carriage Return = new paragraph
 </p>
 <p>
-1 x Carriage Return is break; &lt;br /&gt;
+1 x Carriage Return = line break &lt;br /&gt;
 </p>
 <pre>
 [code]
