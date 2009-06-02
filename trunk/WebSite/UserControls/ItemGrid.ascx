@@ -4,16 +4,6 @@
     CodeFile="ItemGrid.ascx.cs" 
     Inherits="UserControls_ItemGrid" %>
 
-<%@ Register 
-    Assembly="Ra" 
-    Namespace="Ra.Widgets" 
-    TagPrefix="ra" %>
-
-<%@ Register 
-    Assembly="Extensions" 
-    Namespace="Ra.Extensions" 
-    TagPrefix="ext" %>
-
 <div class="list-item list-header">
     <div class="score header-item">
         Score

@@ -93,19 +93,16 @@
   </urlrewritingnet>
 
   <system.web>
+    <pages>
+      <controls>
+        <add assembly="Ra" namespace="Ra.Widgets" tagPrefix="ra" />
+        <add assembly="Ra" namespace="Ra.Behaviors" tagPrefix="ra" />
+        <add assembly="Ra.Extensions" namespace="Ra.Extensions.Widgets" tagPrefix="ra" />
+      </controls>
+    </pages>
     <httpModules>
       <add name="UrlRewriteModule" type="UrlRewritingNet.Web.UrlRewriteModule, UrlRewritingNet.UrlRewriter" />
     </httpModules>
-    <!--
-    <httpHandlers>
-      <add verb="*" path="*.gif" type="ResourceCacher.FarFutureExpires, ResourceCacher"/>
-      <add verb="*" path="*.png" type="ResourceCacher.FarFutureExpires, ResourceCacher"/>
-      <add verb="*" path="*.jpg" type="ResourceCacher.FarFutureExpires, ResourceCacher"/>
-      <add verb="*" path="*.jpeg" type="ResourceCacher.FarFutureExpires, ResourceCacher"/>
-      <add verb="*" path="*.css" type="ResourceCacher.FarFutureExpires, ResourceCacher"/>
-    </httpHandlers>
--->
-
     <compilation debug="true" />
     <authentication mode="Windows"/>
   </system.web>

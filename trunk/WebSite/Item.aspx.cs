@@ -3,9 +3,10 @@ using Entities;
 using NHibernate.Expression;
 using Ra.Widgets;
 using Ra;
-using RaSelector;
+using Ra.Selector;
 using Utilities;
 using Castle.ActiveRecord;
+using Ra.Effects;
 
 public partial class Item : System.Web.UI.Page
 {

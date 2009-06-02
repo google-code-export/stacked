@@ -2,6 +2,7 @@
 using Entities;
 using System.Collections.Generic;
 using Ra.Widgets;
+using Ra.Effects;
 
 public partial class UserControls_ItemGrid : System.Web.UI.UserControl
 {

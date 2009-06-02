@@ -5,21 +5,11 @@
     Inherits="UserControls_Login" %>
 
 <%@ Register 
-    Assembly="Ra" 
-    Namespace="Ra.Widgets" 
-    TagPrefix="ra" %>
-
-<%@ Register 
-    Assembly="Extensions" 
-    Namespace="Ra.Extensions" 
-    TagPrefix="ext" %>
-
-<%@ Register 
     Assembly="DotNetOpenId" 
     Namespace="DotNetOpenId.RelyingParty" 
     TagPrefix="openId" %>
 
-<ext:Window 
+<ra:Window 
     runat="server" 
     ID="login" 
     CssClass="window loginWindow" 
@@ -136,10 +126,10 @@
     </div>
 
     <ra:BehaviorObscurable runat="server" ID="obscurer" ZIndex="4000" />
-</ext:Window>
+</ra:Window>
 
 
-<ext:Window 
+<ra:Window 
     runat="server" 
     ID="wndWhatIsOpenID" 
     CssClass="window" 
@@ -199,6 +189,6 @@
         </p>
     </div>
     <ra:BehaviorObscurable runat="server" ID="obscurerWhat" />
-</ext:Window>
+</ra:Window>
 
 

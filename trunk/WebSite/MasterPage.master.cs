@@ -6,16 +6,17 @@
  */
 
 using System;
-using Ra.Widgets;
 using Entities;
-using Ra.Extensions;
 using System.Web;
 using Utilities;
-using Ra;
 using Castle.ActiveRecord;
 using System.Text;
 using System.Security.Cryptography;
 using System.IO;
+using Ra;
+using Ra.Widgets;
+using Ra.Effects;
+using Ra.Extensions.Widgets;
 
 namespace Samples
 {

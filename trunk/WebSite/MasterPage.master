@@ -1,7 +1,5 @@
 <%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="Samples.MasterPage" %>
 
-<%@ Register Assembly="Ra" Namespace="Ra.Widgets" TagPrefix="ra" %>
-<%@ Register Assembly="Extensions" Namespace="Ra.Extensions" TagPrefix="ext" %>
 <%@ Register Src="UserControls/Login.ascx" TagName="Login" TagPrefix="uc1" %>
 <%@ Register Src="UserControls/AskQuestion.ascx" TagName="AskQuestion" TagPrefix="uc2" %>
 <%@ Register Src="UserControls/Register.ascx" TagName="Register" TagPrefix="uc3" %>
@@ -62,7 +60,7 @@
                         <ra:Panel runat="server" ID="cntWrp">
                             <div class="mainContent">
                                 <ra:Label runat="server" ID="infoLabel" Visible="false" CssClass="infoLabel" />
-                                <ext:Timer runat="server" ID="infoTimer" OnTick="infoTimer_Tick" Enabled="false"
+                                <ra:Timer runat="server" ID="infoTimer" OnTick="infoTimer_Tick" Enabled="false"
                                     Duration="5000" />
                                 <uc3:Register ID="register" OnUserRegistered="register_UserRegistered" runat="server" />
                                 <uc2:AskQuestion ID="ask" OnQuestionAsked="ask_QuestionAsked" runat="server" />
@@ -80,7 +78,7 @@
                                         OnClick="logoutBtn_Click" Text="Logout" Tooltip="Logout" />
                                 </ra:Panel>
                                 <div class="search">
-                                    <ext:AutoCompleter runat="server" ID="auto" CssClass="auto" AccessKey="S" Tooltip="Search - Keyboard shortcut; ALT+SHIFT+S"
+                                    <ra:AutoCompleter runat="server" ID="auto" CssClass="auto" AccessKey="S" Tooltip="Search - Keyboard shortcut; ALT+SHIFT+S"
                                         OnRetrieveAutoCompleterItems="auto_RetrieveAutoCompleterItems" />
                                 </div>
                                 <div class="contentPlaceHolder">
@@ -88,7 +86,7 @@
                                 </div>
                                 <uc1:Login ID="login" OnLoggedIn="login_LoggedIn" runat="server" />
                             </div>
-                            <ext:Window runat="server" CssClass="window" Caption="Edit Your Profile" DefaultWidget="saveProfile"
+                            <ra:Window runat="server" CssClass="window" Caption="Edit Your Profile" DefaultWidget="saveProfile"
                                 Visible="false" style="position: absolute; top: 195px; left: 20px; width: 400px;
                                 z-index: 6000;" ID="profileWindow">
                                 <div style="padding:10px; height:100px; position:relative;">
@@ -124,7 +122,7 @@
                                         right: 20px;" OnClick="saveProfile_Click" Text="Save" />
                                 </div>
                                 <ra:BehaviorObscurable runat="server" ID="obscureProfile" ZIndex="5001" />
-                            </ext:Window>
+                            </ra:Window>
                         </ra:Panel>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 ﻿using System;
 using Entities;
-using Ra.Extensions;
+using Ra.Extensions.Widgets;
 using NHibernate.Expression;
 using System.Collections.Generic;
 

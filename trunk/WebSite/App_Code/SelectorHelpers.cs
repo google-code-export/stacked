@@ -1,6 +1,6 @@
 ﻿using System;
 using ASP = System.Web.UI;
-using RaSelector;
+using Ra.Selector;
 using Ra.Widgets;
 
 namespace Utilities
